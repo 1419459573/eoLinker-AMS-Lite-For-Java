@@ -1,0 +1,39 @@
+<div>
+    <div class="register-default ">
+        <header>
+            <p>
+                <label>{{'0300'|translate}}</label>
+            </p>
+        </header>
+        <article>
+            <form name="registerForm">
+                <ul>
+                    <li>
+                        <label>{{'0302'|translate}}</label>
+                        <input class="eo-input" name="username" data-ng-model="$ctrl.data.interaction.request.userName" type="text" placeholder="{{'0303'|translate}}" ng-pattern="/^[a-zA-Z][a-zA-Z0-9_]{3,64}$/" uib-popover='{{$ctrl.data.info.alert}}' popover-trigger="focus" popover-placement="right" ng-class="{'eo-input-error':registerForm.username.$invalid&&(registerForm.username.$dirty||$ctrl.data.info.template.submited)||$ctrl.data.info.unavailable}" data-ng-change="$ctrl.data.fun.check()" maxlength="64" required />
+                    </li>
+                    <li>
+                        <label>{{'0304'|translate}}</label>
+                        <input class="eo-input" name="password" type="text" ng-if="$ctrl.data.info.eye"  data-ng-model="$ctrl.data.interaction.request.userPassword" placeholder="{{'0304'|translate}}" ng-pattern="/^[\x21-\x7E]{6,32}$/" uib-popover="{{'0305'|translate}}" popover-placement="right" popover-trigger="focus" ng-class="{'eo-input-error':registerForm.password.$invalid&&(registerForm.password.$dirty||$ctrl.data.info.template.submited)}" required maxlength="32" />
+                        <input class="eo-input" name="password" type="password" ng-if="!$ctrl.data.info.eye"  data-ng-model="$ctrl.data.interaction.request.userPassword" placeholder="{{'0304'|translate}}" ng-pattern="/^[\x21-\x7E]{6,32}$/" uib-popover="{{'0305'|translate}}" popover-placement="right" popover-trigger="focus" ng-class="{'eo-input-error':registerForm.password.$invalid&&(registerForm.password.$dirty||$ctrl.data.info.template.submited)}" required maxlength="32" />
+                        <span class="icon-style"><a class="iconfont" data-ng-class="{'icon-attention':$ctrl.data.info.eye,'icon-attentionfill':!$ctrl.data.info.eye}" data-ng-click="$ctrl.data.fun.changeView()" ></a></span>
+                    </li>
+                    <li>
+                        <label>{{'0306'|translate}}</label>
+                        <input class="eo-input" name="userNickName" type="text"  data-ng-model="$ctrl.data.interaction.request.userNickName" placeholder="{{'0306'|translate}}" />
+                    </li>
+                    <li>
+                        <label></label>
+                        <button ng-class="{'eo-button-success':registerForm.$valid,'eo-button-default':registerForm.$invalid}" data-ng-click="$ctrl.data.fun.confirm()">{{'0307'|translate}}</button>
+                    </li>
+                    <li>
+                        {{'0308'|translate}}<a class="eo-link" ui-sref="register.protocol" target="view_window">{{'0309'|translate}}</a>{{'03021'|translate}}<a class="eo-link" ui-sref="register.protocol" target="view_window">{{'03010'|translate}}</a>
+                    </li>
+                </ul>
+            </form>
+            <div class="footer">{{'03011'|translate}}<a ui-sref="index" class="eo-link">{{'03012'|translate}}</a></div>
+        </article>
+    </div>
+    <eo-footer>
+    </eo-footer>
+</div>

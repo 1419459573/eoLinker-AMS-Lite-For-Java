@@ -1,0 +1,60 @@
+<!-- author：广州银云信息科技有限公司 -->
+<div class="database-list">
+    <header>
+        <ul class="title-ul" ng-if="$ctrl.powerObject.edit">
+            <li class="btn-group-li pull-left" >
+                <ul>
+                    <a class="eo-button-success common-btn" data-ng-click="$ctrl.data.fun.edit()">
+                        <span class="iconfont icon-tianjia"></span><span class="btn-name">{{'0101000'|translate}}</span>
+                    </a>
+                </ul>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article" ng-class="{'only-read-article':!$ctrl.powerObject.edit}">
+        <table>
+            <thead>
+                <tr>
+                    <th class="first-th">
+                        <label class="iconfont icon-keyicon1"></label>
+                    </th>
+                    <th class="sixth-th">{{'0101001'|translate}}</th>
+                    <th class="second-th">{{'0101002'|translate}}</th>
+                    <th class="third-th">{{'0101003'|translate}}</th>
+                    <th class="forth-th">{{'0101004'|translate}}</th>
+                    <th>{{'0101005'|translate}}</th>
+                    <th class="fifth-th">{{'0101006'|translate}}</th>
+                    <th class="seventh-th">{{'0101007'|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="item in $ctrl.data.interaction.response.query">
+                    <td>
+                        <label class="iconfont" ng-class="{'icon-keyicon1':!!item.isPrimaryKey}"></label>
+                    </td>
+                    <td class="field-null-td">
+                        <label class="iconfont" data-ng-class="{'icon-check':!!item.isNotNull}"></label>
+                    </td>
+                    <td>{{item.fieldName}}</td>
+                    <td>{{item.fieldType}}</td>
+                    <td>{{item.fieldLength}}</td>
+                    <td>{{item.defaultValue}}</td>
+                    <td class="field-desc-td">
+                        <button ng-class="{'eo-button-default':!!item.fieldDescription,'limit-btn':!item.fieldDescription}" data-ng-click="$ctrl.data.fun.value(item)" ng-disabled="!item.fieldDescription">{{!!item.fieldDescription?$ctrl.data.info.checkBtn:$ctrl.data.info.nullBtn}}</button>
+                    </td>
+                    <td>
+                        <div ng-if="$ctrl.powerObject.edit">
+                            <!--edit权限-->
+                            <a class="database-function-edit" data-ng-click="$ctrl.data.fun.edit({item:item})"><span class="iconfont icon-bianji"></span>{{'01010010'|translate}}</a>
+                            <a class="database-function-delete" data-ng-click="$ctrl.data.fun.delete({item:item,$index:$index})"><span class="iconfont icon-shanchu"></span>{{'01010011'|translate}}</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>

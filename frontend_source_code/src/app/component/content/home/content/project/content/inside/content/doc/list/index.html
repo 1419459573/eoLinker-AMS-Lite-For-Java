@@ -1,0 +1,66 @@
+<!-- //author：广州银云信息科技有限公司 -->
+<div class="home-project-inside-list home-project-inside-div">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li pull-left" ng-if="$ctrl.powerObject.edit">
+                <a class="eo-button-success common-btn" data-ng-click="$ctrl.data.fun.edit()">
+                    <span class="iconfont icon-tianjia"></span><span class="btn-name">{{'012100092'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.batch.default()" ng-if="!$ctrl.data.info.batch.disable">
+                    {{'01210022'|translate}}
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.info.batch.disable=false" ng-if="$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-close"></span><span class="btn-name">{{'01210023'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.batch.delete()" ng-if="$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-shanchu"></span><span class="btn-name">{{'01210024'|translate}}</span>
+                </a>
+            </li>
+            <li class="divide-li pull-left" ng-if="$ctrl.powerObject.edit"><span></span></li>
+            <li class="search-li pull-left">
+                <form name="searchForm">
+                    <ul class="search-function-ul">
+                        <li class="search-input-li">
+                            <input type="text" placeholder="{{'012100093'|translate}}" data-ng-model="$ctrl.data.interaction.request.tips" required>
+                        </li>
+                        <li class="search-btn-li">
+                            <button class="iconfont icon-sousuo" data-ng-click="$ctrl.data.fun.search()"></button>
+                        </li>
+                    </ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article" ng-class="{'only-read-article':!$ctrl.powerObject.edit}">
+        <table>
+            <thead>
+                <tr>
+                    <th>{{'012100094'|translate}}</th>
+                    <th>{{'012100095'|translate}}</th>
+                    <th>{{'012100096'|translate}}</th>
+                    <th ng-if="$ctrl.powerObject.edit">{{'012100097'|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="item in $ctrl.data.interaction.response.query" data-ng-click="$ctrl.data.fun.enter({item:item,$index:$index})" ng-class="{'elem-active':item.isClick&&$ctrl.data.info.batch.disable}">
+                    <td class="second-th">
+                        {{item.title}}
+                    </td>
+                    <td class="third-th">
+                        {{item.groupName}}
+                    </td>
+                    <td class="fifth-th">{{item.updateTime}}</td>
+                    <td class="sixth-th" ng-if="$ctrl.powerObject.edit">
+                        <!--edit权限-->
+                        <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.edit({item:item,$event:$event})" ng-if="!$ctrl.data.info.batch.disable"><span class="iconfont icon-bianji" ></span>{{'012100098'|translate}}</a>
+                        <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.delete({item:item,$index:$index,$event:$event})" ng-if="!$ctrl.data.info.batch.disable"><span class="iconfont icon-shanchu"></span>{{'012100099'|translate}}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>

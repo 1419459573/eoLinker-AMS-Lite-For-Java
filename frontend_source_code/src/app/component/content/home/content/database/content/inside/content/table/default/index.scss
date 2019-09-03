@@ -1,0 +1,164 @@
+database-table-list {
+    .database-list {
+        @extend %DATABASE-VIEW-STYLE;
+        header {
+            .title-ul {
+                @extend %COMMON-TITLE-UL;
+            }
+            .search-li {
+                @extend %SEARCH-UL;
+                right: 188px;
+            }
+        }
+        .first-level-article {
+            @extend %COMMON-CONTAINER-STYLE;
+            table {
+                .iconfont {
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+                .icon-keyicon1 {
+                    color: #f48932;
+                    cursor: pointer;
+                    font-size: 14px;
+                }
+                thead {
+                    font-weight: bold;
+                    @include eo-line(40px);
+                    th {
+                        font-weight: initial;
+                    }
+                    .first-th {
+                        text-align: left;
+                        text-indent: 10px;
+                        max-width: 34px;
+                        width: 34px;
+                    }
+                    .second-th {
+                        min-width: 200px;
+                        width: 23%;
+                    }
+                    .third-th {
+                        min-width: 50px;
+                        width: 13%;
+                    }
+                    .forth-th {
+                        min-width: 50px;
+                        width: 13%;
+                    }
+                    .fifth-th {
+                        min-width: 50px;
+                        width: 10%;
+                    }
+                    .sixth-th {
+                        min-width: 50px;
+                        width: 70px;
+                    }
+                }
+                tbody {
+                    table {
+                        width: 100%;
+                        background: #fff;
+                        font-size: 14px;
+                        border-spacing: 0;
+                        text-align: left;
+                        text-indent: 10px;
+                        table-layout: fixed;
+                        .iconfont {
+                            font-size: 14px;
+                            line-height: 20px;
+                            cursor: inherit;
+                        }
+                        thead {
+                            @include eo-line(40px);
+                        }
+                        tbody {
+                            tr:nth-child(odd) {
+                                background: #fafafa;
+                            }
+                            tr:nth-child(even) {
+                                background: #fff;
+                            }
+                            tr {
+                                @include eo-line(40px);
+                                td {
+                                    color: #666;}
+                                &:hover {
+                                    background: #f0f0f0;
+                                }
+                            }
+                            .hover-tr{
+                                cursor: pointer;
+                            }
+                            .elem-active {
+                                &:nth-child(odd),
+                                &:nth-child(even) {
+                                    background-color: #ffecb3;
+                                }
+                            }
+                        }
+                        td,th{
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                        .margin-left{
+                            margin-left:5px;
+                        }
+                    }
+                    .field-null-td {
+                        text-align: center;
+                        text-indent: 0;
+                    }
+                    .field-desc-td {
+                        .limit-btn {
+                            background: #fdfdfd;
+                            color: #ccc;
+                            border: 1px solid rgba(0, 0, 0, 0.06);
+                            cursor: default;
+                        }
+                        button {
+                            width: 50px;
+                            font-size: 13px;
+                            @include eo-line(25px, 20px);
+                            margin-top: 2px;
+                            margin-left: 2px;
+                        }
+                    }
+                    tr {
+                        @include eo-line(40px);
+                        th,
+                        td {
+                            cursor: default;
+                        }
+                        th {
+                            width: 36px;
+                            text-align: center;
+                            text-indent: 0;
+                        }
+                        td {
+                            color: #666;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            a {
+                                color: #666;
+                                .iconfont {
+                                    font-size: 14px;
+                                    color: #666;
+                                    padding: 5px;
+                                }
+                                &:hover {
+                                    color: #999;
+                                    .iconfont {
+                                        color: #999;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

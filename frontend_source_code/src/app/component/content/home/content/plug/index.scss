@@ -1,0 +1,5 @@
+.home-plug {
+    group-common-component .home-project-inside-group .group-ul, .home-group .group-ul{
+        @include eo-height(100%, 21px);
+    }
+}

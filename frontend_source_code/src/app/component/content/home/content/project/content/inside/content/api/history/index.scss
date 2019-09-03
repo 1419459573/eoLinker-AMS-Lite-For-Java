@@ -1,0 +1,106 @@
+home-project-inside-api-history {
+    .home-project-inside-history {
+        z-index: 0;
+        header {
+            .title-ul {
+                @extend %COMMON-TITLE-UL;
+                @extend %COMMON-MENU-LI;
+                .btn-group-li {
+                    .default-btn {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+        .first-level-article {
+            margin: 10px 10px 0 10px;
+            table {
+                width: 100%;
+                background: #fff;
+                font-size: 14px;
+                border-spacing: 0;
+                text-align: left;
+                text-indent: 10px;
+                table-layout: fixed;
+                border: 1px solid #e5e5e5;
+                border-radius: 3px;
+                .iconfont {
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+                thead {
+                    font-weight: bold;
+                    @include eo-line(40px);
+                    th {
+                        font-weight: initial;
+                    }
+                    .first-th {
+                        text-align: center;
+                        text-indent: 0;
+                        width: 50px;
+                    }
+                    .second-th {
+                        min-width: 200px;
+                        width: 15%;
+                    }
+                    .third-th {
+                        min-width: 220px;
+                        width: 13%;
+                    }
+                    .forth-th {
+                        min-width: 100px;
+                    }
+                    .fifth-th {
+                        min-width: 115px;
+                        width: 144px;
+                    }
+                }
+                tbody {
+                    tr:nth-child(odd) {
+                        background: #fafafa;
+                    }
+                    tr:nth-child(even) {
+                        background: #fff;
+                    }
+                    tr {
+                        @include eo-line(40px);
+                        th,
+                        td {
+                            cursor: default;
+                        }
+                        th {
+                            width: 36px;
+                            text-align: center;
+                            text-indent: 0;
+                        }
+                        td {
+                            color: #666;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                        td:nth-child(2) {
+                            .icon-circle {
+                                font-size: 12px;
+                                margin-right: 5px;
+                            }
+                            span {
+                                padding: 2px;
+                                border: 1px solid rgb(39, 107, 225);
+                                background-color: rgb(72, 128, 224);
+                                color: #fff;
+                                border-radius: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+            .warning-tips {
+                font-size: 13px;
+                color: #999;
+                margin-top: 10px;
+                margin-left: 5px;
+            }
+        }
+    }
+}

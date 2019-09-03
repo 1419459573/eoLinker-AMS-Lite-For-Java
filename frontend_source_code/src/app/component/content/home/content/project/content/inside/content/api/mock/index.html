@@ -1,0 +1,115 @@
+<div class="home-project-inside-mock home-project-inside-div">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li pull-left">
+                <a class="common-btn default-btn" ng-click="$ctrl.data.service.default.navbar.menu('list',$ctrl.data.interaction.request)">
+                    <span class="iconfont icon-xiangzuo"></span>{{'01210000'|translate}}
+                </a>
+            </li>
+            <li class="menu-li pull-left">
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('detail',$ctrl.data.interaction.request)">{{'01210001'|translate}}
+                    </a>
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('test',$ctrl.data.interaction.request)">{{'01210002'|translate}}
+                    </a>
+                <a class="pull-left  elem-active">mock
+                    </a>
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('history',$ctrl.data.interaction.request)">{{'012100058'|translate}}
+                    </a>
+            </li>
+            <li class="divide-li pull-left" ng-if="$ctrl.powerObject.edit"><span></span></li>
+            <li class="menu-li pull-left" style="margin-left: 5px;" ng-if="$ctrl.powerObject.edit&&$ctrl.data.interaction.request.groupID!=-2">
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('edit',$ctrl.data.interaction.request)">{{'01210004'|translate}}
+                    </a>
+            </li>
+            <li class="btn-li common-btn default-btn" ng-if="$ctrl.powerObject.edit">
+                <span class="iconfont icon-caidan"></span> {{'01210003'|translate}}
+                <div class="list-function-wrap">
+                    <ul class="nav-function" ng-if="$ctrl.data.interaction.request.groupID!=-2">
+                        <li ng-click="$ctrl.data.service.default.navbar.menu('copy',$ctrl.data.interaction.request)">
+                            <span class="iconfont icon-renwuguanli"></span>{{'01210005'|translate}}
+                        </li>
+                        <li ng-click="$ctrl.data.service.default.navbar.delete($ctrl.data.interaction.request)">
+                            <span class="iconfont icon-shanchu"></span>{{'01210006'|translate}}
+                        </li>
+                    </ul>
+                    <ul class="nav-function" ng-if="$ctrl.data.interaction.request.groupID==-2">
+                        <li ng-click="$ctrl.data.service.default.navbar.recover($ctrl.data.interaction.request)">
+                            <span class="iconfont icon-shuaxin"></span>{{'01210007'|translate}}
+                        </li>
+                        <li ng-click="$ctrl.data.service.default.navbar.deleteCompletely($ctrl.data.interaction.request)">
+                            <span class="iconfont icon-shanchu"></span>{{'01210008'|translate}}
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article" ng-if="$ctrl.data.interaction.response.mockInfo">
+        <div class="item-part mock-part">
+            <p class="title-p" ng-click="$ctrl.data.info.spreed.list=!$ctrl.data.info.spreed.list"><b>Mock</b>
+                <tip-directive input="<p>{{'012100067'|translate}}</p>"></tip-directive>
+                <a class="pull-right spreed-btn"><span class="iconfont " ng-class="{'icon-xiangxia':!$ctrl.data.info.spreed.list,'icon-xiangshang':$ctrl.data.info.spreed.list}"></span>{{$ctrl.data.info.spreed.list?$ctrl.data.info.filter.shrink:$ctrl.data.info.filter.open}}</a>
+            </p>
+            <table ng-show="$ctrl.data.info.spreed.list">
+                <thead>
+                    <tr>
+                        <td class="num-td">{{'012100068'|translate}}</td>
+                        <td class="param-name">{{'012100069'|translate}}</td>
+                        <td class="type-td">{{'012100070'|translate}}</td>
+                        <td class="param-desc">{{'012100071'|translate}}</td>
+                        <td>{{'012100072'|translate}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in $ctrl.data.interaction.response.mockInfo.mockRule | filter:$ctrl.data.fun.filterMock track by $index">
+                        <td>
+                            <label class="number-label">{{$index+1}}</label>
+                        </td>
+                        <th style="text-indent: {{item.paramLevel*10}}px" ng-switch="item.paramLevel">
+                            <span class="iconfont icon-xiangyou eo-status-default" style="font-size: 12px;" ng-switch-when=1></span>
+                            <span class="iconfont icon-xiangyou eo-status-success" style="font-size: 12px;" ng-switch-when=2></span>
+                            <span class="iconfont icon-xiangyou eo-status-warning" style="font-size: 12px;" ng-switch-when=3></span>
+                            <span class="iconfont icon-xiangyou eo-status-error" style="font-size: 12px;" ng-switch-when=4></span>
+                            <span class="iconfont icon-xiangyou eo-status-danger" style="font-size: 12px;" ng-switch-when=5></span>
+                            <span ng-if="item.paramLevel" class="iconfont icon-xiangyou eo-status-danger" style="font-size: 12px;" ng-switch-default></span>
+                            <span>{{item.paramKeyHtml}}</span>
+                        </th>
+                        <td>{{item.paramType=='0'?'[string]':item.paramType=='1'?'[file]':item.paramType=='2'?'[json]':item.paramType=='3'?'[int]':item.paramType=='4'?'[float]':item.paramType=='5'?'[double]':item.paramType=='6'?'[date]':item.paramType=='7'?'[datetime]':item.paramType=='8'?'[boolean]':item.paramType=='9'?'[byte]':item.paramType=='10'?'[short]':item.paramType=='11'?'[long]':item.paramType==12?"[array]":item.paramType==13?"[object]":"[number]"}}</td>
+                        <td>{{item.rule}}</td>
+                        <td>{{item.value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="item-part response-example-part">
+            <p class="title-p"  ng-click="$ctrl.data.info.spreed.review=!$ctrl.data.info.spreed.review"><b>{{'012100073'|translate}}</b>
+                <a class="pull-right spreed-btn"><span class="iconfont " ng-class="{'icon-xiangxia':!$ctrl.data.info.spreed.review,'icon-xiangshang':$ctrl.data.info.spreed.review}"></span>{{$ctrl.data.info.spreed.review?$ctrl.data.info.filter.shrink:$ctrl.data.info.filter.open}}</a>
+            </p>
+            <div ng-show="$ctrl.data.info.spreed.review">
+                <header>
+                    <ul>
+                        <li>
+                            <button class="eo-button-info change-type-btn send-format" arrange-format="apiResult_js" ng-model="$ctrl.data.interaction.response.mockInfo.mockResult"><span class="iconfont icon-magic"></span>{{'012100029'|translate}}</button>
+                        </li>
+                    </ul>
+                </header>
+                <article>
+                    <div class="copy-url-box">
+                        <ul>
+                            <li copy-directive copy-model="$ctrl.data.interaction.response.mockInfo.mockURL">
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <pre class="back-result-content " id="apiResult_js">
+                    </pre>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>

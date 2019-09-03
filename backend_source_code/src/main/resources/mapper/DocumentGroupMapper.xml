@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.DocumentGroupMapper">
+	
+	<insert id="addDocumentGroup" parameterType="DocumentGroup" useGeneratedKeys="true" keyProperty="groupID">
+		INSERT INTO
+		eo_project_document_group(groupID,projectID,groupName,parentGroupID,isChild) VALUES(#{groupID},#{projectID},#{groupName},0,0)
+	</insert>
+	
+	<insert id="addChildGroup" parameterType="DocumentGroup" useGeneratedKeys="true" keyProperty="groupID">
+		INSERT INTO eo_project_document_group (eo_project_document_group.groupName,eo_project_document_group.projectID,eo_project_document_group.parentGroupID,eo_project_document_group.isChild) 
+		VALUES (#{groupName},#{projectID},#{parentGroupID},#{isChild});
+	</insert>
+	
+	<delete id="deleteParentalGroup">
+		DELETE FROM eo_project_document_group WHERE eo_project_document_group.groupID = #{groupID}
+	</delete>
+	
+	<delete id="deleteChildrenGroup">
+		DELETE FROM eo_project_document_group WHERE eo_project_document_group.parentGroupID = #{parentGroupID}
+	</delete>
+	
+	<delete id="deleteGroupDocument">
+		DELETE FROM eo_project_document WHERE eo_project_document.groupID = #{groupID}
+	</delete>
+	
+	<select id="getParentalGroup" resultType="DocumentGroup">
+		SELECT eo_project_document_group.groupID,eo_project_document_group.groupName,eo_project_document_group.isChild FROM eo_project_document_group 
+		WHERE projectID = #{projectID} AND isChild = 0 ORDER BY groupID ASC
+	</select>
+	
+	<select id="getChildrenGroup" resultType="DocumentGroup">
+		SELECT eo_project_document_group.groupID,eo_project_document_group.groupName,eo_project_document_group.parentGroupID,eo_project_document_group.isChild FROM eo_project_document_group 
+		WHERE projectID = #{projectID}  AND parentGroupID = #{parentGroupID} ORDER BY groupID ASC
+	</select>
+	
+	<select id="getOrderList" resultType="java.lang.String">
+		SELECT eo_project_document_group_order.orderList FROM eo_project_document_group_order WHERE eo_project_document_group_order.projectID = #{projectID}
+	</select>
+	
+	<update id="editParentalGroup" parameterType="DocumentGroup">
+		UPDATE eo_project_document_group SET eo_project_document_group.groupName = #{groupName},eo_project_document_group.parentGroupID = 0,eo_project_document_group.isChild = 0 
+		WHERE eo_project_document_group.groupID = #{groupID}
+	</update>	
+	
+	<update id="editChildrenGroup" parameterType="DocumentGroup">
+		UPDATE eo_project_document_group SET eo_project_document_group.groupName = #{groupName},eo_project_document_group.parentGroupID =#{parentGroupID},eo_project_document_group.isChild = #{isChild}
+		WHERE eo_project_document_group.groupID = #{groupID}
+	</update>
+	
+	<select id="checkGroupPermission" resultType="java.lang.Integer">
+		SELECT eo_conn_project.projectID FROM eo_conn_project INNER JOIN eo_project_document_group ON eo_project_document_group.projectID = eo_conn_project.projectID 
+		WHERE userID = #{userID} AND groupID = #{groupID}
+	</select>
+	
+	<select id="getGroupName" resultType="java.lang.String">
+		SELECT eo_project_document_group.groupName FROM eo_project_document_group WHERE eo_project_document_group.groupID = #{groupID}
+	</select>
+	
+	<insert id="updateGroupOrder">
+		REPLACE INTO eo_project_document_group_order(projectID,orderList) VALUES(#{projectID},#{orderList})
+	</insert>
+	
+	<select id="getGroupData" resultType="DocumentGroup">
+		SELECT eo_project_document_group.groupName,eo_project_document_group.isChild FROM eo_project_document_group 
+		WHERE eo_project_document_group.projectID = #{projectID} AND eo_project_document_group.groupID = #{groupID}
+	</select>
+	
+	<select id="getChildrenGroupData" resultType="DocumentGroup">
+		SELECT eo_project_document_group.groupID,eo_project_document_group.groupName,eo_project_document_group.isChild FROM eo_project_document_group 
+		WHERE eo_project_document_group.parentGroupID = #{parentGroupID} AND eo_project_document_group.projectID = #{projectID}
+	</select>
+	
+	<select id="getDocumentData" resultType="Document">
+		SELECT eo_project_document.* FROM eo_project_document WHERE eo_project_document.groupID = #{groupID} AND eo_project_document.projectID = #{projectID}
+	</select>
+	 
+	<select id="getParentGroupID" resultType="Integer">
+		SELECT eo_project_document_group.parentGroupID FROM eo_project_document_group WHERE eo_project_document_group.groupID = #{groupID}
+	</select>
+	
+</mapper>

@@ -1,0 +1,9 @@
+//author：广州银云信息科技有限公司
+home-project-inside-team {
+    .home-project-inside-team {
+        margin: $HOME-NAVBAR-HEIGHT + 10px 10px 20px 10px;
+        article {
+            @extend %TEAM-ARTICLE-STYLE;
+        }
+    }
+}

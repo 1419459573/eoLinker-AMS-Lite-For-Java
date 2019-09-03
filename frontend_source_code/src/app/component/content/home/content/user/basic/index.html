@@ -1,0 +1,74 @@
+<!-- 作者：riverLethe -->
+<div>
+    <header>
+        <ul class="title-ul">
+            <li class="title-li">
+                {{'0130'|translate}}
+            </li>
+        </ul>
+    </header>
+    <article>
+        <div class="part first-part">
+            <header>
+                <span>{{'0131'|translate}}</span>
+                <span>{{'0132'|translate}}</span>
+            </header>
+            <div class="content">
+                <ul>
+                    <li class="pull-left ">
+                        <ng-form name="basicForm">
+                            <p>
+                                {{'0133'|translate}}
+                            </p>
+                            <p>
+                                <input class="eo-input" type="text" name="" placeholder="用户昵称" maxlength="20" data-ng-model="$ctrl.data.interaction.response.userInfo.userNickName" required>
+                            </p>
+                            <p>
+                                <button ng-class="{'eo-button-success':basicForm.$valid,'eo-button-default':basicForm.$invalid}" data-ng-click="$ctrl.data.fun.confirm()">{{'0134'|translate}}</button>
+                            </p>
+                        </ng-form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="part third-part">
+            <header>
+                <span>{{'0135'|translate}}</span>
+                <span>{{'0136'|translate}}</span>
+            </header>
+            <div class="content">
+                <ng-form name="passwordForm">
+                    <ul>
+                        <li>
+                            <p>
+                                {{'0137'|translate}}
+                            </p>
+                            <p>
+                                <input class="eo-input" ng-class="{'eo-input-error':$ctrl.data.info.password.oldError}" type="password" name="oldPassword" placeholder="{{'0137'|translate}}" data-ng-model="$ctrl.data.interaction.request.oldPassword" data-ng-change="$ctrl.data.info.password.oldError = false;" maxlength="32" required />
+                            </p>
+                            <p>
+                                {{'0138'|translate}}
+                            </p>
+                            <p>
+                                <input class="eo-input" ng-class="{'eo-input-error':passwordForm.password.$invalid&&(passwordForm.password.$dirty)}" type="password" name="password" placeholder="{{'0138'|translate}}" ng-pattern="/^[\x21-\x7E]{6,32}$/" uib-popover="{{'0139'|translate}}" popover-placement="right" popover-trigger="focus" data-ng-model="$ctrl.data.interaction.request.newPassword" maxlength="32" required />
+                            </p>
+                            <p>
+                                {{'01310'|translate}}
+                            </p>
+                            <p>
+                                <input class="eo-input" ng-class="{'eo-input-error':passwordForm.confirmPassword.$invalid&&(passwordForm.confirmPassword.$dirty)}" type="password" name="confirmPassword" placeholder="{{'01311'|translate}}" password-confirm-directive="password" data-ng-model="$ctrl.data.info.password.confirm" maxlength="32" required />
+                            </p>
+                            <p>
+                                <button ng-class="{'eo-button-success':passwordForm.$valid,'eo-button-default':passwordForm.$invalid}" data-ng-click="$ctrl.data.fun.changePassword()">{{'01312'|translate}}</button>
+                            </p>
+                        </li>
+                    </ul>
+                </ng-form>
+            </div>
+        </div>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>

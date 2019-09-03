@@ -1,0 +1,47 @@
+<div class="home-project-inside-detail home-project-inside-div">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li pull-left">
+                <a class="common-btn default-btn" ui-sref="home.project.inside.doc.list({ groupID: $ctrl.data.interaction.request.groupID, childGroupID:$ctrl.data.interaction.request.childGroupID })">
+                    <span class="iconfont icon-xiangzuo"></span>{{'012100074'|translate}}
+                </a>
+            </li>
+            <li class="btn-li common-btn default-btn" ng-if="$ctrl.powerObject.edit">
+                <span class="iconfont icon-caidan"></span> {{'01210033'|translate}}
+                <div class="list-function-wrap">
+                    <ul class="nav-function">
+                        <li ui-sref="home.project.inside.doc.edit($ctrl.data.interaction.request)"><span class="iconfont icon-bianji"></span>{{'01210034'|translate}}</li>
+                        <li ui-sref="home.project.inside.doc.edit({ groupID: $ctrl.data.interaction.request.groupID, documentID:$ctrl.data.interaction.request.documentID, childGroupID:$ctrl.data.interaction.request.childGroupID, type:2 })">
+                            <span class="iconfont icon-renwuguanli"></span>{{'01210035'|translate}}
+                        </li>
+                        <li data-ng-click="$ctrl.data.fun.delete()">
+                            <span class="iconfont icon-shanchu"></span>{{'01210036'|translate}}
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article">
+        <div class="fifth-part">
+            <table class="header">
+                <thead>
+                    <tr>
+                        <th>{{$ctrl.data.interaction.response.documentInfo.title}}</th>
+                    </tr>
+                    <tr>
+                        <td class="eo-status-tips">{{$ctrl.data.interaction.response.documentInfo.updateTime}}&nbsp;&nbsp;&nbsp;{{$ctrl.data.interaction.response.documentInfo.groupName}}</td>
+                    </tr>
+                </thead>
+            </table>
+            <article ng-class="{'wangEditor-container':$ctrl.data.interaction.response.documentInfo.contentType=='0'}">
+                <div ng-class="{'markdown-body editormd-preview-container':$ctrl.data.interaction.response.documentInfo.contentType=='1','wangEditor-txt':$ctrl.data.interaction.response.documentInfo.contentType=='0'}" ng-bind-html="$ctrl.data.interaction.response.documentInfo.docNoteHtml">
+                </div>
+            </article>
+        </div>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>

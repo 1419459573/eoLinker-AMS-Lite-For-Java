@@ -1,0 +1,413 @@
+.modal-open {
+    .modal-content {
+        .api-management-modal-auto-generation {
+            width: 640px;
+            top: 75px;
+            @include eo-left(50%, 320px);
+            text-align: left;
+            border-radius: 5px;
+            @include eo-animation(fade .3s);
+            box-shadow: 0px 10px 29px #a3a3a3;
+            background-color: #fff;
+            header,
+            article {
+                padding: 0 20px;
+                font-size: 14px;
+                @include eo-width(100%, 40px);
+            }
+            header {
+                font-weight: bold;
+                @include eo-line(61px);
+            }
+            >article {
+                select {
+                    @include eo-line(35px);
+                }
+                .title-li {
+                    margin-top: 20px;
+                }
+                .copy-ul {
+                    margin-top: 10px;
+                    text-align: center;
+                    input {
+                        cursor: pointer;
+                        width: 540px;
+                        padding-right: 55px;
+                        display:block;
+                        white-space:nowrap; 
+                        overflow:hidden; 
+                        text-overflow:ellipsis;
+                    }
+                    .copy-tips {
+                        margin-top: -25px;
+                        margin-right: 10px;
+                        position: relative;
+                        font-size: 12px;
+                        color: #999;
+                        cursor: pointer;
+                    }
+                    .copy-success {
+                        color: $buttonSuccessBgColor;
+                    }
+                    .copy-error {
+                        color: #c6533b;
+                    }
+                }
+                .btn-group {
+                    text-align: left;
+                    margin: 30px 0 10px 0;
+                    a {
+                        display: inline-block;
+                        width: 80px;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+        .api-management-modal-backups {
+            width: 362px;
+            top: 75px;
+            @include eo-left(50%, 181px);
+            text-align: left;
+            border-radius: 5px;
+            @include eo-animation(fade .3s);
+            box-shadow: 0px 10px 29px #a3a3a3;
+            background-color: #fff;
+            header,
+            article {
+                padding: 0 20px;
+                font-size: 14px;
+                @include eo-width(100%, 40px);
+            }
+            header {
+                font-weight: bold;
+                @include eo-line(61px);
+            }
+            >article {
+                p {
+                    font-weight: bold;
+                    line-height: 25px;
+                }
+                .green-font {
+                    color: $buttonSuccessBgColor;
+                }
+                .border {
+                    border-bottom: 1px solid #ededed;
+                    padding-bottom: 10px;
+                    margin-bottom: 10px;
+                }
+                .ul-login {
+                    border-bottom: 1px solid #ededed;
+                    input {
+                        margin-top: 15px;
+                        width: 100%;
+                    }
+                    .forget-psw {
+                        margin-top: 18px;
+                        float: right;
+                    }
+                    .checkbox-label {
+                        margin-top: 15px;
+                        border: 1px solid #dcdcdc;
+                        @include eo-line(23px, 26px);
+                        width: 23px;
+                        font-size: 13px;
+                        margin-right: 4px;
+                        cursor: pointer;
+                        display: inline-block;
+                        text-align: center;
+                        border-radius: 3px;
+                    }
+                    button {
+                        margin: 30px 0;
+                        width: 100%;
+                        @include eo-line(33px);
+                    }
+                }
+            }
+            footer {
+                text-align: center;
+                @include eo-line(50px);
+                font-size: 14px;
+            }
+        }
+        .api-management-modal-automated-select-api {
+            width: 800px;
+            top: 50px;
+            height: 500px;
+            @include eo-left(50%, 400px);
+            text-align: left;
+            border-radius: 5px;
+            @include eo-animation(fade .3s);
+            box-shadow: 0px 10px 29px #a3a3a3;
+            background-color: #fff;
+            overflow: hidden;
+            header,
+            article,
+            footer {
+                margin: 0 20px;
+                font-size: 14px;
+                @include eo-width(100%, 40px);
+            }
+            header {
+                font-weight: bold;
+                @include eo-line(61px);
+            }
+            article {
+                height: 385px;
+                group-common-component .home-project-inside-group,
+                .home-group {
+                    position: absolute;
+                    left: 0;
+                    .group-ul {
+                        >.title-li {
+                            display: none;
+                        }
+                        >.item-li {
+                            margin-top: 0;
+                        }
+                    }
+                }
+                .first-level-article {
+                    @extend %COMMON-CONTAINER-STYLE;
+                    margin-left: 241px;
+                    table {
+                        tbody {
+                            .iconfont {
+                                font-size: 14px;
+                                cursor: pointer;
+                            }
+                            tr:nth-child(odd) {
+                                background: #fafafa;
+                            }
+                            tr:nth-child(even) {
+                                background: #fff;
+                            }
+                            tr {
+                                @include eo-line(40px);
+                                td {
+                                    color: #666;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                }
+                                .second-th{
+                                    width:40%;
+                                }
+                                .third-th{
+                                    width:60%;
+                                }
+                                &:hover {
+                                    background: #f0f0f0;
+                                    cursor: pointer;
+                                    .icon-favor {
+                                        display: inline-block;
+                                    }
+                                }
+                            }
+                            .elem-active {
+                                @extend %BATCH-OPERATION;
+                            }
+                        }
+                    }
+                }
+            }
+            footer {
+                @include eo-line(50px);
+                position: relative;
+                z-index: 3;
+                button,
+                input[type=button] {
+                    display: inline-block;
+                    min-width: 40px;
+                    padding: 0 10px;
+                    text-align: center;
+                    font-size: 14px;
+                    min-width: 65px;
+                }
+            }
+        }
+        .api-management-modal-automated-test-bind {
+            width: 800px;
+            top: 50px;
+            @include eo-left(50%, 400px);
+            text-align: left;
+            border-radius: 5px;
+            @include eo-animation(fade .3s);
+            box-shadow: 0px 10px 29px #a3a3a3;
+            background-color: #fff;
+            overflow: hidden;
+            header,
+            article,
+            footer {
+                margin: 0 20px;
+                font-size: 14px;
+                @include eo-width(100%, 40px);
+            }
+            header {
+                font-weight: bold;
+                @include eo-line(61px);
+            }
+            article {
+                background-color: #fafafa;
+                border: 1px solid #e5e5e5;
+                border-radius: 3px;
+                table {
+                    table-layout: fixed;
+                    width: 100%;
+                    border-spacing: 0;
+                    td {
+                        vertical-align: top;
+                        text-indent: 10px;
+                    }
+                    .match-rule-td {
+                        width: 40%;
+                        border-right: 1px solid #e5e5e5;
+                    }
+                }
+                .common-ul {
+                    width: 100%;
+                    height: 380px;
+                    overflow: auto;
+                    li {
+                        line-height: 40px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        cursor: pointer;
+                        p {
+                            cursor: pointer;
+                        }
+                        &:nth-child(odd) {
+                            background-color: #fff;
+                        }
+                        &:nth-child(even) {
+                            background-color: #fafafa;
+                        }
+                    }
+                    .elem-active {
+                        color: #4CAF50;
+                        &:nth-child(n) {
+                            background-color: #ecf8ee;
+                        }
+                        >p {
+                            color: #4CAF50;
+                        }
+                        span {
+                            color: #4CAF50;
+                        }
+                    }
+                }
+                .match-rule-ul {
+                    li {
+                        .num-span {
+                            margin-right: 10px;
+                        }
+                        &:hover {
+                            background-color: #ecf8ee;
+                            color: #4CAF50;
+                            span {
+                                color: #4CAF50;
+                            }
+                        }
+                    }
+                }
+                .match-param-ul {
+                    li {
+                        p {
+                            &:hover {
+                                background-color: #ecf8ee;
+                                color: #4CAF50;
+                                span {
+                                    color: #4CAF50;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            footer {
+                @include eo-line(50px);
+                button,
+                input[type=button] {
+                    display: inline-block;
+                    min-width: 40px;
+                    padding: 0 10px;
+                    text-align: center;
+                    font-size: 14px;
+                    min-width: 65px;
+                }
+            }
+        }
+        .api-management-modal-automated-test-edit {
+            width: 550px;
+            top: 150px;
+            @include eo-left(50%, 275px);
+            text-align: left;
+            border-radius: 5px;
+            @include eo-animation(fade .3s);
+            box-shadow: 0px 10px 29px #a3a3a3;
+            background-color: #fff;
+            header,
+            article,
+            footer {
+                padding: 0 20px;
+                font-size: 14px;
+                @include eo-width(100%, 40px);
+            }
+            header {
+                font-weight: bold;
+                @include eo-line(61px);
+            }
+            >article {
+                select {
+                    text-indent: 0;
+                    color: #333;
+                }
+                .common-li {
+                    line-height: 50px;
+                    label {
+                        width: 60px;
+                        line-height: 50px;
+                    }
+                    .eo-input {
+                        @include eo-width(100%, 2px);
+                    }
+                    button,
+                    input[type=button] {
+                        display: inline-block;
+                        min-width: 60px;
+                        text-align: center;
+                        margin-right: 5px;
+                    }
+                }
+                .title-li{
+                    margin-top: 10px;
+                }
+                .container-li {
+                    .group-ul {
+                        display: inline-block;
+                        .eo-input {
+                            margin-top: 10px;
+                            width: 100%;
+                            display: inline-block;
+                            line-height: 33px;
+                        }
+                        li:first-child {
+                            line-height: 30px;
+                        }
+                    }
+                    .group-select {
+                        &:nth-last-child(n+2){
+                            @include eo-width(100% / 3, 10px);
+                            margin-right: 10px;
+                        }
+                        &:last-child{
+                            @include eo-width(100% / 3, 1px);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

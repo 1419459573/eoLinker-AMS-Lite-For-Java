@@ -1,0 +1,252 @@
+<div class="home-project-inside-detail home-project-inside-div">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li pull-left">
+                <a class="common-btn default-btn" ng-click="$ctrl.data.service.default.navbar.menu('list',$ctrl.data.interaction.request)">
+                    <span class="iconfont icon-xiangzuo"></span>{{'01210000'|translate}}
+                </a>
+            </li>
+            <li class="menu-li pull-left">
+                <a class="pull-left elem-active">{{'01210001'|translate}}
+                    </a>
+                <a class="pull-left" data-ng-click="$ctrl.data.service.default.navbar.menu('test',$ctrl.data.interaction.request,$ctrl.data.info.template.envModel)">{{'01210002'|translate}}
+                    </a>
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('mock',$ctrl.data.interaction.request)">mock
+                    </a>
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('history',$ctrl.data.interaction.request)">{{'012100058'|translate}}
+                    </a>
+            </li>
+            <li class="divide-li pull-left" ng-if="$ctrl.powerObject.edit"><span></span></li>
+            <li class="menu-li pull-left" style="margin-left: 5px;" ng-if="$ctrl.powerObject.edit&&$ctrl.data.interaction.request.groupID!=-2">
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('edit',$ctrl.data.interaction.request)">{{'01210004'|translate}}
+                    </a>
+            </li>
+            <li class="btn-li common-btn default-btn" ng-if="$ctrl.powerObject.edit">
+                <span class="iconfont icon-caidan"></span> {{'01210003'|translate}}
+                <div class="list-function-wrap">
+                    <ul class="nav-function" ng-if="$ctrl.data.interaction.request.groupID!=-2">
+                        <li ng-click="$ctrl.data.service.default.navbar.menu('copy',$ctrl.data.interaction.request)">
+                            <span class="iconfont icon-renwuguanli"></span>{{'01210005'|translate}}
+                        </li>
+                        <li ng-click="$ctrl.data.service.default.navbar.delete($ctrl.data.interaction.request)">
+                            <span class="iconfont icon-shanchu"></span>{{'01210006'|translate}}
+                        </li>
+                    </ul>
+                    <ul class="nav-function" ng-if="$ctrl.data.interaction.request.groupID==-2">
+                        <li ng-click="$ctrl.data.service.default.navbar.recover($ctrl.data.interaction.request)">
+                            <span class="iconfont icon-shuaxin"></span>{{'01210007'|translate}}
+                        </li>
+                        <li ng-click="$ctrl.data.service.default.navbar.deleteCompletely($ctrl.data.interaction.request)">
+                            <span class="iconfont icon-shanchu"></span>{{'01210008'|translate}}
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article">
+        <div class="first-part">
+            <ul>
+                <li class="pull-left api-status" ng-class="{'eo-color-success':$ctrl.data.service.home.envObject.object.model.baseInfo.apiStatus==0,'eo-color-warning':$ctrl.data.service.home.envObject.object.model.baseInfo.apiStatus==1,'eo-color-unuse':$ctrl.data.service.home.envObject.object.model.baseInfo.apiStatus==2}">{{$ctrl.data.service.home.envObject.object.model.baseInfo.status}}</li>
+                <li class="api-detail">
+                    <ul>
+                        <li class="pull-left">
+                            <label class="send-protocol">{{$ctrl.data.service.home.envObject.object.model.baseInfo.protocol}}</label>
+                        </li>
+                        <li class="pull-left api-url">{{$ctrl.data.service.home.envObject.object.model.baseInfo.apiURI}}
+                        </li>
+                        <li class="pull-right star-btn"><a data-ng-click="$ctrl.data.fun.storage()"><span class="iconfont " ng-class="{'icon-favor':$ctrl.data.service.home.envObject.object.model.baseInfo.starred==0,'icon-favorfill':$ctrl.data.service.home.envObject.object.model.baseInfo.starred==1}"></span></a></li>
+                    </ul>
+                    <ul>
+                        <li class="pull-left" ng-switch="$ctrl.data.service.home.envObject.object.model.baseInfo.apiRequestType">
+                            <label class="send-function eo-color-success" ng-switch-when=0>POST</label>
+                            <label class="send-function eo-color-default" ng-switch-when=1>GET</label>
+                            <label class="send-function eo-color-others" ng-switch-when=2>PUT</label>
+                            <label class="send-function eo-color-danger" ng-switch-when=3>DELETE</label>
+                            <label class="send-function eo-color-info" ng-switch-when=4>HEAD</label>
+                            <label class="send-function eo-color-options" ng-switch-when=5>OPTS</label>
+                            <label class="send-function eo-color-warning" ng-switch-when=6>PATCH</label>
+                        </li>
+                        <li class="pull-left api-name">{{$ctrl.data.service.home.envObject.object.model.baseInfo.apiName}}</li>
+                        <li class="pull-right time-li">{{$ctrl.data.service.home.envObject.object.model.baseInfo.apiUpdateTime}}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="item-part request-header-part" ng-if="$ctrl.data.service.home.envObject.object.model.headerInfo.length>0">
+            <p class="title-p">
+                <b>{{'01210009'|translate}}</b>
+                <a class="pull-right spreed-btn" ng-click="$ctrl.data.info.spreed.header=!$ctrl.data.info.spreed.header"><span class="iconfont " ng-class="{'icon-xiangxia':!$ctrl.data.info.spreed.header,'icon-xiangshang':$ctrl.data.info.spreed.header}"></span>{{$ctrl.data.info.spreed.header?$ctrl.data.info.filter.shrink:$ctrl.data.info.filter.open}}</a>
+            </p>
+            <table ng-show="$ctrl.data.info.spreed.header">
+                <thead>
+                    <tr>
+                        <td class="num-td">{{'012100012'|translate}}</td>
+                        <td class="request-header-label">{{'012100013'|translate}}</td>
+                        <td>{{'012100014'|translate}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="item in $ctrl.data.service.home.envObject.object.model.headerInfo track by $index">
+                        <td>
+                            <label class="number-label">{{$index+1}}</label>
+                        </td>
+                        <th>
+                            <span>{{item.headerName}}</span>
+                        </th>
+                        <td>{{item.headerValue}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="item-part request-param-part" ng-switch='$ctrl.data.service.home.envObject.object.model.baseInfo.apiRequestParamType' ng-if="($ctrl.data.service.home.envObject.object.model.requestInfo.length>0&&$ctrl.data.service.home.envObject.object.model.baseInfo.apiRequestParamType!=1)||($ctrl.data.service.home.envObject.object.model.baseInfo.apiRequestParamType==1&&$ctrl.data.service.home.envObject.object.model.baseInfo.apiRequestRaw)">
+            <p class="title-p"><b>{{'012100015'|translate}}</b>            
+                <tip-directive input="<p>{{'012100016'|translate}}</p>"></tip-directive>
+                <a class="pull-right spreed-btn" ng-click="$ctrl.data.info.spreed.request=!$ctrl.data.info.spreed.request"><span class="iconfont " ng-class="{'icon-xiangxia':!$ctrl.data.info.spreed.request,'icon-xiangshang':$ctrl.data.info.spreed.request}"></span>{{$ctrl.data.info.spreed.request?$ctrl.data.info.filter.shrink:$ctrl.data.info.filter.open}}</a>
+            </p>
+            <table ng-show="$ctrl.data.info.spreed.request" ng-switch-default>
+                <thead>
+                    <tr>
+                        <td class="num-td">{{'012100012'|translate}}</td>
+                        <td class="param-name">{{'012100017'|translate}}</td>
+                        <td class="param-desc">{{'012100018'|translate}}</td>
+                        <td class="require-label">{{'012100019'|translate}}</td>
+                        <td class="type-label">{{'012100020'|translate}}</td>
+                        <td class="last-td">{{'012100021'|translate}}</td>
+                        <td class="operation-td">{{'012100022'|translate}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="hover-tr" data-ng-repeat="item in $ctrl.data.service.home.envObject.object.model.requestInfo track by $index">
+                        <td ng-class="{'hover-click-td':(item.paramLimit||item.paramValueList.length>0||item.paramValue)}" data-ng-click="$ctrl.data.fun.show.request({item:item})">
+                            <label class="number-label">{{$index+1}}</label>
+                        </td>
+                        <!-- <th>
+                            <span ng-bind-html="item.paramKeyHtml"></span>
+                        </th> -->
+                        <th style="text-indent: {{item.paramLevel*10}}px" ng-switch="item.paramLevel">
+                            <span class="iconfont icon-xiangyou eo-status-default" style="font-size: 12px;" ng-switch-when=1></span>
+                            <span class="iconfont icon-xiangyou eo-status-success" style="font-size: 12px;" ng-switch-when=2></span>
+                            <span class="iconfont icon-xiangyou eo-status-warning" style="font-size: 12px;" ng-switch-when=3></span>
+                            <span class="iconfont icon-xiangyou eo-status-error" style="font-size: 12px;" ng-switch-when=4></span>
+                            <span class="iconfont icon-xiangyou eo-status-danger" style="font-size: 12px;" ng-switch-when=5></span>
+                            <span ng-if="item.paramLevel" class="iconfont icon-xiangyou eo-status-danger" style="font-size: 12px;" ng-switch-default></span>
+                            <span>{{item.paramKeyHtml}}</span>
+                        </th>
+                        <td ng-class="{'hover-click-td':(item.paramLimit||item.paramValueList.length>0||item.paramValue)}" data-ng-click="$ctrl.data.fun.show.request({item:item})" title="{{item.paramName}}">{{item.paramName}}</td>
+                        <td ng-class="{'hover-click-td':(item.paramLimit||item.paramValueList.length>0||item.paramValue)}" data-ng-click="$ctrl.data.fun.show.request({item:item})">{{item.paramNotNull==0?$ctrl.data.info.filter.yes:''}}</td>
+                        <td ng-class="{'hover-click-td':(item.paramLimit||item.paramValueList.length>0||item.paramValue)}" data-ng-click="$ctrl.data.fun.show.request({item:item})">{{item.paramType==0?"[string]":item.paramType==1?"[file]":item.paramType==2?"[json]":item.paramType==3?"[int]":item.paramType==4?"[float]":item.paramType==5?"[double]":item.paramType==6?"[date]":item.paramType==7?"[datetime]":item.paramType==8?"[boolean]":item.paramType==9?"[byte]":item.paramType==10?"[short]":item.paramType==11?"[long]":item.paramType==12?"[array]":item.paramType==13?"[object]":"[number]"}}</td>
+                        <td ng-class="{'hover-click-td':(item.paramLimit||item.paramValueList.length>0||item.paramValue)}" data-ng-click="$ctrl.data.fun.show.request({item:item})">{{item.paramValue}}</td>
+                        <td>
+                            <button ng-if="(item.paramLimit||item.paramValueList.length>0||item.paramValue)" class="get-more-btn eo-button-default" data-ng-click="$ctrl.data.fun.show.request({item:item})">{{'012100023'|translate}}</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <article ng-show="$ctrl.data.info.spreed.request" class="raw-article" ng-switch-when="1">
+                <div class="request-param-raw-form" arrange-format="request-param-div-js" interaction="{request:{onlyOneTime:true}}" ng-model="$ctrl.data.service.home.envObject.object.model.baseInfo.apiRequestRaw">
+                    <pre class="request-param-raw-content" id="request-param-div-js"></pre>
+                </div>
+            </article>
+        </div>
+        <div class="item-part response-param-part" ng-if="$ctrl.data.service.home.envObject.object.model.resultInfo.length>0">
+            <p class="title-p"><b>{{'012100024'|translate}}</b>
+                <tip-directive input="<p>{{'012100016'|translate}}</p>"></tip-directive>
+                <a class="pull-right spreed-btn" ng-click="$ctrl.data.info.spreed.response=!$ctrl.data.info.spreed.response"><span class="iconfont " ng-class="{'icon-xiangxia':!$ctrl.data.info.spreed.response,'icon-xiangshang':$ctrl.data.info.spreed.response}"></span>{{$ctrl.data.info.spreed.response?$ctrl.data.info.filter.shrink:$ctrl.data.info.filter.open}}</a>
+            </p>
+            <table ng-show="$ctrl.data.info.spreed.response">
+                <thead>
+                    <tr>
+                        <td class="num-td">{{'012100012'|translate}}</td>
+                        <td class="param-name">{{'012100017'|translate}}</td>
+                        <td class="param-desc">{{'012100018'|translate}}</td>
+                        <td class="require-label">{{'012100025'|translate}}</td>
+                        <td class="last-td">{{'012100020'|translate}}</td>
+                        <td class="operation-td">{{'012100022'|translate}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="hover-tr" data-ng-repeat="item in $ctrl.data.service.home.envObject.object.model.resultInfo track by $index ">
+                        <td ng-class="{'hover-click-td':(item.paramValueList.length>0)}" data-ng-click="$ctrl.data.fun.show.request({item:item})">
+                            <label class="number-label">{{$index+1}}</label>
+                        </td>
+                        <!-- <th>
+                            <span ng-bind-html="item.paramKeyHtml"></span>
+                        </th> -->
+                        <th style="text-indent: {{item.paramLevel*10}}px" ng-switch="item.paramLevel">
+                            <span class="iconfont icon-xiangyou eo-status-default" style="font-size: 12px;" ng-switch-when=1></span>
+                            <span class="iconfont icon-xiangyou eo-status-success" style="font-size: 12px;" ng-switch-when=2></span>
+                            <span class="iconfont icon-xiangyou eo-status-warning" style="font-size: 12px;" ng-switch-when=3></span>
+                            <span class="iconfont icon-xiangyou eo-status-error" style="font-size: 12px;" ng-switch-when=4></span>
+                            <span class="iconfont icon-xiangyou eo-status-danger" style="font-size: 12px;" ng-switch-when=5></span>
+                            <span ng-if="item.paramLevel" class="iconfont icon-xiangyou eo-status-danger" style="font-size: 12px;" ng-switch-default></span>
+                            <span>{{item.paramKeyHtml}}</span>
+                        </th>
+                        <td ng-class="{'hover-click-td':(item.paramValueList.length>0)}" data-ng-click="$ctrl.data.fun.show.request({item:item})" title="{{item.paramName}}">{{item.paramName}}</td>
+                        <td ng-class="{'hover-click-td':(item.paramValueList.length>0)}" data-ng-click="$ctrl.data.fun.show.request({item:item})">{{item.paramNotNull==0?$ctrl.data.info.filter.yes:''}}</td>
+                        <td ng-class="{'hover-click-td':(item.paramValueList.length>0)}" data-ng-click="$ctrl.data.fun.show.request({item:item})">{{item.paramType==0?"[string]":item.paramType==1?"[file]":item.paramType==2?"[json]":item.paramType==3?"[int]":item.paramType==4?"[float]":item.paramType==5?"[double]":item.paramType==6?"[date]":item.paramType==7?"[datetime]":item.paramType==8?"[boolean]":item.paramType==9?"[byte]":item.paramType==10?"[short]":item.paramType==11?"[long]":item.paramType==12?"[array]":item.paramType==13?"[object]":"[number]"}}</td>
+                        <td>
+                            <button ng-if="item.paramValueList.length>0" class="get-more-btn eo-button-default" data-ng-click="$ctrl.data.fun.show.response({item:item})">{{'012100023'|translate}}</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="eo-tab-container">
+                <div class="pull-left  item-tab" ng-class="{'active-item':!$ctrl.data.info.mock.isFailure}" ng-click="$ctrl.data.info.mock.isFailure = false;">{{'012100027'|translate}}</div>
+                <div class="pull-left item-tab" ng-class="{'active-item':$ctrl.data.info.mock.isFailure}" ng-click="$ctrl.data.info.mock.isFailure = true;">{{'012100028'|translate}}</div>
+        </div>
+        <div class="item-part response-example-part" ng-if="$ctrl.data.service.home.envObject.object.model.baseInfo" ng-switch="$ctrl.data.info.mock.isFailure">
+            <header ng-show="$ctrl.data.info.spreed.example">
+                <ul>
+                    <li ng-hide="$ctrl.data.info.mock.isFailure">
+                        <button class="eo-button-info change-type-btn send-format" arrange-format="apiResult_js" ng-model="$ctrl.data.service.home.envObject.object.model.baseInfo.apiSuccessMock"><span class="iconfont icon-magic"></span>{{'012100029'|translate}}</button>
+                    </li>
+                    <li ng-show="$ctrl.data.info.mock.isFailure">
+                        <button class="eo-button-info change-type-btn send-format" arrange-format="apiResult_js_1" ng-model="$ctrl.data.service.home.envObject.object.model.baseInfo.apiFailureMock"><span class="iconfont icon-magic"></span>{{'012100029'|translate}}</button>
+                    </li>
+                </ul>
+            </header>
+            <article ng-show="$ctrl.data.info.spreed.example">
+                <div class="copy-url-box" ng-switch-when=false>
+                    <ul>
+                        <li copy-directive copy-model="$ctrl.data.service.home.envObject.object.model.baseInfo.successMockCode">
+                        </li>
+                    </ul>
+                </div>
+                <div ng-hide='$ctrl.data.info.mock.isFailure'>
+                    <pre class="back-result-content " id="apiResult_js">
+                    <span class="null-tip-span">No Response</span>
+                    </pre>
+                </div>
+            </article>
+            <article ng-show="$ctrl.data.info.spreed.example">
+                <div class="copy-url-box" ng-switch-when=true>
+                    <ul>
+                        <li copy-directive copy-model="$ctrl.data.service.home.envObject.object.model.baseInfo.failureMockCode">
+                        </li>
+                    </ul>
+                </div>
+                <div ng-show='$ctrl.data.info.mock.isFailure'>
+                    <pre class="back-result-content " id="apiResult_js_1">
+                    <span class="null-tip-span">No Response</span>
+                    </pre>
+                </div>
+            </article>
+        </div>
+        <div class="item-part note-part" ng-if="$ctrl.data.service.home.envObject.object.model.baseInfo.apiNoteHtml">
+            <p class="title-p">
+                <b>{{'012100031'|translate}}</b>
+                <a class="pull-right spreed-btn" ng-click="$ctrl.data.info.spreed.note=!$ctrl.data.info.spreed.note"><span class="iconfont " ng-class="{'icon-xiangxia':!$ctrl.data.info.spreed.note,'icon-xiangshang':$ctrl.data.info.spreed.note}"></span>{{$ctrl.data.info.spreed.note?$ctrl.data.info.filter.shrink:$ctrl.data.info.filter.open}}</a>
+            </p>
+            <article class="wangEditor-container" ng-show="$ctrl.data.info.spreed.note">
+                <div class="wangEditor-txt" ng-class="{'markdown-body editormd-preview-container':$ctrl.data.service.home.envObject.object.model.baseInfo.apiNoteType=='1'}" ng-bind-html="$ctrl.data.service.home.envObject.object.model.baseInfo.apiNoteHtml">
+                </div>
+            </article>
+        </div>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>

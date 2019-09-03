@@ -1,0 +1,203 @@
+eo-navbar2 {
+    .nav-2 {
+        @extend %NAV-BASIC-STYLE;
+        position: fixed;
+        border: none;
+        background-color: #fff;
+        z-index: 6;
+        .nav-header {
+            margin: 0 auto;
+            font-size: 14px;
+            width: 100%;
+            border-bottom: 1px solid #e5e5e5;
+            @include eo-line(50px,49px);
+            .unread-msg-num-span {
+                @extend %NAV-UNREAD-NUM;
+            }
+            .first-level-ul {
+                display: inline-block;
+            }
+            .first-level-ul>li {
+                @include eo-line(50px);
+                text-align: left;
+                display: block;
+            }
+            .logo-li {
+                border-right: 1px solid #e5e5e5;
+                width: 50px;
+            }
+            .nav-li {
+                span {
+                    margin-left: 10px;
+                }
+            }
+            .navigation-li {
+                min-width: 200px;
+                a,
+                span {
+                    color: #999;
+                }
+                .iconfont {
+                    font-size: 12px;
+                    margin: 0 5px;
+                }
+                a {
+                    padding: 0px;
+                    &:hover {
+                        color: #333;
+                    }
+                }
+            }
+            .list-function {
+                @extend %NAV-LIST-GROUP-STYLE;
+                .news-btn {
+                    @extend %NAV-LIST-GROUP-NEWS-BTN;
+                }
+                .nav-hide-ul {
+                    @extend %NAV-HIDE-UL;
+                }
+                .list {
+                    border: 1px solid #e7e7e7;
+                    border-top:none;
+                    border-bottom:none;
+                    background-color: #fff;
+                    margin-left: 5px;
+                    margin-right: 0;
+                    cursor: pointer;
+                    width: 50px;
+                    text-align: center;
+                    @include eo-line(49px, 50px);
+                    &:hover {
+                        background-color: $buttonSuccessBgColor;
+                        border: 1px solid $buttonSuccessBorderColor;
+                        ul {
+                            display: block;
+                        }
+                        .first-icon {
+                            color: #fff;
+                        }
+                    }
+                    .list-function-wrap {
+                        position: absolute;
+                        cursor: default;
+                        margin-left: -151px;
+                        margin-top: -2px;
+                        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.12);
+                    }
+                }
+                ul {
+                    display: none;
+                }
+            }
+        }
+        .project-array-article {
+            position: fixed;
+            width: 380px;
+            .second-level-ul {
+                background-color: #fff;
+                margin-top: 5px;
+                margin-left: -1px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.12);
+                border: 1px solid #e5e5e5;
+                max-height: 80%;
+                overflow-y: auto;
+                overflow-x: hidden;
+                .first-level-li {
+                    table {
+                        margin: 0 5px;
+                        table-layout: fixed;
+                        border-spacing: 0;
+                        width: 100%;
+                        td {
+                            line-height: 22px;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                        .row-td {
+                            height: 65px;
+                            width: 40px;
+                            text-align: center;
+                        }
+                        .tips-td {
+                            font-size: 12px;
+                            color: #999;
+                        }
+                        .project-name-td {
+                            vertical-align: bottom;
+                        }
+                        .label-td {
+                            font-size: 12px;
+                            width: 78px;
+                            padding-left: 10px;
+                            label {
+                                padding: 0 5px;
+                                border-radius: 3px;
+                                width: 52px;
+                                display: inline-block;
+                                text-align: center;
+                            }
+                            .eo-status-success {
+                                border: 1px solid #4CAF50;
+                            }
+                            .eo-status-warning {
+                                border: 1px solid #FF9800;
+                            }
+                            .eo-status-error {
+                                border: 1px solid $buttonDangerBgColor;
+                            }
+                        }
+                    }
+                    &:nth-last-child(n+3) {
+                        table {
+                            border-bottom: 1px dashed #e5e5e5;
+                        }
+                    }
+                    &:hover {
+                        background-color: #f2f2f2;
+                    }
+                }
+            }
+            .icon-check {
+                display: none;
+            }
+            .btn-group-li {
+                border-top: 1px solid #e5e5e5;
+                text-align: left;
+                .iconfont {
+                    width: 40px;
+                    text-align: center;
+                    display: inline-block;
+                    margin-left: 5px;
+                }
+            }
+            .elem-active-li {
+                .project-name-td,
+                .iconfont {
+                    color: $buttonSuccessFocusBgColor;
+                }
+                .project-name-td {
+                    display: table-cell;
+                }
+                .icon-check {
+                    margin: auto;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+.shrink-div {
+    eo-navbar2 {
+        .nav-2 {
+            .nav-header {
+                .project-controller-li {
+                    .menu-item {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

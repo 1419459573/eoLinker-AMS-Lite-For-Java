@@ -1,0 +1,32 @@
+%DATABASE-VIEW-STYLE {
+        margin: $HOME-NAVBAR-HEIGHT 0 0 $HOME-SIDEBAR-LEFT + $HOME-GROUP-SIDEBAR-LEFT;
+        z-index: 0;
+    }
+database {
+    
+    .database {
+        @extend %CONTENT-INIT-TYPE;
+        .database-content {
+            @extend %CONTENT-INIT-TYPE;
+            z-index: 0;
+            background: #fafafa;
+        }
+    }
+    .shrink-inside-div {
+        .inside-sidebar {
+            @extend %SHRINK-SIDEBAR;
+        }
+        .database-sidebar {
+            left: $HOME-SHRINK-SIDEBAR-LEFT + 10px;
+        }
+        .database-list {
+            margin-left: $HOME-SHRINK-SIDEBAR-LEFT + $HOME-GROUP-SIDEBAR-LEFT;
+        }
+        .database-team {
+            margin-left: $HOME-SHRINK-SIDEBAR-LEFT;
+        }
+        .home-database-inside-overview{
+            margin-left: $HOME-SHRINK-SIDEBAR-LEFT;
+        }
+    }
+}

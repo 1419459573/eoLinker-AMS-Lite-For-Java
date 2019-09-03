@@ -1,0 +1,19 @@
+<div class="eo-env">
+    <div class="en-v-li" ng-mouseleave="$ctrl.data.info.itemStatus='hidden'">
+        <ul>
+            <li class="child-input-li" ng-click="$ctrl.data.info.itemStatus='visible'">
+                <input class="eo-input" placeholder="{{'310'|translate}}" type="text" ng-model="$ctrl.data.info.model.envName" readonly>
+                <label class="iconfont icon-xiangxia"></label>
+            </li>
+            <li class="absolute enV-child-li" ng-class="{hidden:$ctrl.data.info.itemStatus=='hidden'}">
+                <ul class="message-ul">
+                    <li class="list-li" ng-click="$ctrl.data.fun.click(null)">{{'311'|translate}}</li>
+                    <li class="list-li" ng-repeat="item in $ctrl.data.interaction.response.query track by $index" ng-click="$ctrl.data.fun.click(item)">
+                        {{item.envName}}
+                    </li>
+                    <li ng-if="!$ctrl.authorityObject||$ctrl.authorityObject.look" class="admin-li" ui-sref="{{$ctrl.version?'home.project.proInside.env':'home.project.inside.env'}}">{{'312'|translate}}</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

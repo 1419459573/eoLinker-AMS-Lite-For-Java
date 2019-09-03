@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.ProjectOperationLogMapper">
+	<insert id="addProjectOperationLog" parameterType="ProjectOperationLog"
+		useGeneratedKeys="true" keyProperty="opID">
+		INSERT INTO
+		eo_log_project_operation
+		(opType,opUserID,opDesc,opTime,opProjectID,opTarget,opTargetID) VALUES
+		(#{opType},#{opUserID},#{opDesc},now(),#{opProjectID},#{opTarget},#{opTargetID})
+	</insert>
+
+	<select id="getLogCount" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(eo_log_project_operation.opID) AS logCount FROM
+		eo_log_project_operation WHERE eo_log_project_operation.opProjectID =
+		#{projectID} AND eo_log_project_operation.opTime >
+		DATE_SUB(NOW(),INTERVAL #{dayOffset} DAY)
+	</select>
+
+	<select id="getProjectLogList" parameterType="Integer" resultType="java.util.Map">
+		SELECT
+		eo_log_project_operation.opTime,eo_log_project_operation.opType,eo_conn_project.partnerNickName,eo_user.userNickName,eo_log_project_operation.opTarget,eo_log_project_operation.opDesc
+		FROM eo_log_project_operation LEFT JOIN eo_conn_project ON
+		eo_log_project_operation.opUserID = eo_conn_project.userID AND
+		eo_log_project_operation.opProjectID = eo_conn_project.projectID
+		INNER JOIN eo_user ON eo_log_project_operation.opUserID = eo_user.userID
+		WHERE eo_log_project_operation.opProjectID = #{projectID} AND
+		eo_log_project_operation.opTime > DATE_SUB(NOW(),INTERVAL #{dayOffset} DAY)
+		ORDER BY eo_log_project_operation.opTime DESC LIMIT #{page},#{pageSize}
+	</select>
+
+</mapper>

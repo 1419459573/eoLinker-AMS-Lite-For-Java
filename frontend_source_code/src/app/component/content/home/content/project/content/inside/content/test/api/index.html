@@ -1,0 +1,86 @@
+<report-ams-component input="$ctrl.data.interaction.reportObject"></report-ams-component>
+<div batch-test-directive case-list="$ctrl.data.interaction.response.query" output="$ctrl.data.interaction.batchTestObject.output" status-object="$ctrl.data.interaction.batchTestObject.statusObject" status="automated" flag="$ctrl.data.interaction.batchTestObject.flag" env="$ctrl.data.service.home.envObject.object.total"></div>
+<div class="common-table-div" check-plug-directive input="$ctrl.data.info.plugObject">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li pull-left">
+                <a class="default-btn common-btn" ui-sref="home.project.inside.test.default($ctrl.data.interaction.request)">
+                    <span class="iconfont icon-xiangzuo"></span>{{'0121600'|translate}}
+                </a>
+                <a class="eo-button-success common-btn" ng-click="$ctrl.data.fun.bind('add')" ng-if="$ctrl.powerObject.edit">
+                    <span class="iconfont icon-tianjia"></span><span class="btn-name">{{'0121601'|translate}}</span>
+                </a>
+                <a class="eo-button-success common-btn" ng-click="$ctrl.data.fun.edit('add')" ng-if="$ctrl.powerObject.edit">
+                    <span class="iconfont icon-tianjia"></span><span class="btn-name">{{'0121602'|translate}}</span>
+                </a>
+                <button class="eo-button-info common-btn batch-test-btn" ng-click="$ctrl.data.fun.test('all')" testing="{{$ctrl.data.info.statusObject.testing||false}}" ng-disabled="(!$ctrl.data.info.plugObject.version)||($ctrl.data.info.plugObject.version<190)||($ctrl.data.interaction.response.query<=0)"><span class="iconfont icon-searchlist"></span><span class="btn-name">{{$ctrl.data.info.statusObject.testing?$ctrl.data.info.filter.stop:$ctrl.data.info.filter.testAll}}</span></button>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article" ng-switch="$ctrl.data.info.plugObject.version>=194">
+        <ul class="tips-ul warning-ul" ng-switch-when=false>
+            <li class="title-li pull-left">{{'0121605'|translate}}</li>
+            <li>{{'0121606'|translate}}<a href="https://www.eolinker.com/#/plug/introduce" target="_blank">[{{'012100312'|translate}}]</a></li>
+        </ul>
+        <ul class="tips-ul common-ul" ng-switch-when=true>
+            <li class="title-li pull-left">{{'0121605'|translate}}</li>
+            <li>{{'0121607'|translate}}[{{$ctrl.data.info.plugObject.versionString}}]{{'0121608'|translate}}</li>
+        </ul>
+        <table>
+            <thead>
+                <tr>
+                    <th class="first-th">{{'0121609'|translate}}</th>
+                    <th class="second-th">{{'01216010'|translate}}</th>
+                    <th class="third-th">{{'01216011'|translate}}</th>
+                    <td class="response-td">{{'01216012'|translate}}</td>
+                    <th class="forth-th">{{'01216013'|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat='item in $ctrl.data.interaction.response.query'>
+                    <td>
+                        {{$index+1}}
+                    </td>
+                    <td>{{item.apiName}}</td>
+                    <td title="{{item.apiURI}}"><span class="eo-method-label" ng-class="{'eo-color-success':item.apiRequestType==0,'eo-color-default':item.apiRequestType==1,'eo-color-others':item.apiRequestType==2,'eo-color-warning':item.apiRequestType==6,'eo-color-danger':item.apiRequestType==3,'eo-color-info':item.apiRequestType==4,'eo-color-options':item.apiRequestType==5}">
+                        {{item.apiRequestType==0?'POST':item.apiRequestType==1?'GET':item.apiRequestType==2?'PUT':item.apiRequestType==3?'DELETE':item.apiRequestType==4?'HEAD':item.apiRequestType==5?'OPTS':'PATCH'}}
+                        </span> {{$ctrl.data.service.home.envObject.object.fun(item.apiURI)}}</td>
+                    <td ng-switch="$ctrl.data.interaction.batchTestObject.output[$index].responseType">
+                        <a class="eo-status-success" ng-switch-when="success" ng-click="$ctrl.data.fun.detail('success',{item:item,$index:$index})">{{'01216014'|translate}}</a>
+                        <a class="eo-status-error" ng-switch-when="error" ng-click="$ctrl.data.fun.detail('error',{item:item,$index:$index})">{{'01216015'|translate}}</a>
+                        <p ng-switch-default>
+                            <span class="iconfont icon-loading1" ng-show="item.testing||$ctrl.data.info.statusObject.testing"></span>
+                            <span ng-show="item.testing||$ctrl.data.info.statusObject.testing">{{'01216016'|translate}}</span>
+                            <span ng-class="{'un-test-td':item.statusCode,'eo-status-error':!item.statusCode}" ng-hide="item.testing||$ctrl.data.info.statusObject.testing">{{item.statusCode?$ctrl.data.info.filter.noResult:$ctrl.data.info.filter.noReg}}</span>
+                        </p>
+                    </td>
+                    <td class="operate-td" >
+                        <button class="eo-operate-btn batch-test-btn" ng-disabled="(!item.statusCode)||$ctrl.data.info.statusObject.testing||($ctrl.data.info.plugObject.version<190)||!$ctrl.data.info.plugObject.version" ng-click="$ctrl.data.fun.test('singal',{item:item,$index:$index})" testing="{{item.testing||false}}"><span class="iconfont icon-shandian"></span>{{item.testing?$ctrl.data.info.filter.stop:$ctrl.data.info.filter.test}}</button>
+                        <button class="eo-operate-btn" ng-disabled="$ctrl.data.info.statusObject.testing||item.testing" ng-click="item.listIsClick=!item.listIsClick" ng-mouseleave="item.listIsClick=false">
+                                <span class="iconfont icon-zaiqianmiancharuxinmuluxiang"></span>{{'01216031'|translate}}
+                                <div class="list-function-wrap" ng-show="item.listIsClick">
+                                    <ul class="list-function-ul">
+                                        <li class="list-function-detail">
+                                            <ul>
+                                                <li ng-click="$ctrl.data.fun.bind('insert',{item:item,$index:$index+1,$event:$event})">{{'0121601'|translate}} </li>
+                                                <li ng-click="$ctrl.data.fun.edit('insert',{item:item,$index:$index+1,$event:$event})">{{'0121602'|translate}} </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </button>
+                        <button class="eo-operate-btn" ng-click="$ctrl.data.fun.edit('edit',{item:item,$index:$index,$event:$event})" ng-disabled="$ctrl.data.info.statusObject.testing||item.testing" ng-if="$ctrl.powerObject.edit"><span class="iconfont icon-bianji"></span>{{'01216021'|translate}}</button>
+                        <button class="eo-operate-btn" ng-click="$ctrl.data.fun.delete({item:item,$index:$index,$event:$event})" ng-disabled="$ctrl.data.info.statusObject.testing||item.testing" ng-if="$ctrl.powerObject.edit"><span class="iconfont icon-shanchu"></span>{{'01216022'|translate}}</button>
+                    </td>
+                </tr>
+                <tr class="eo-none-tr" ng-if="$ctrl.data.interaction.response.query.length==0">
+                    <td colspan="5">{{'01216023'|translate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>

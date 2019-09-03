@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.EnvMapper">
+	
+	<select id="getEnvList" resultType="Env" >
+		SELECT eo_api_env.envID,eo_api_env.envName FROM eo_api_env WHERE eo_api_env.projectID = #{projectID} ORDER BY eo_api_env.envID DESC
+	</select>
+
+	<insert id="addEnv" parameterType="Env" useGeneratedKeys="true" keyProperty="envID">
+		INSERT INTO eo_api_env (eo_api_env.envName,eo_api_env.projectID) VALUES (#{envName},#{projectID});
+	</insert>
+
+	<delete id="deleteEnv">
+		DELETE FROM eo_api_env WHERE eo_api_env.envID = #{envID} AND eo_api_env.projectID = #{projectID}
+	</delete>
+	
+	<update id="editEnv" parameterType="Env">
+		UPDATE eo_api_env SET eo_api_env.envName = #{envName} WHERE eo_api_env.envID = #{envID}
+	</update>
+
+	<select id="getEnvInfo" resultType="Env">
+		SELECT eo_api_env.envID,eo_api_env.envName FROM eo_api_env WHERE eo_api_env.envID = #{envID}
+	</select>
+
+	<select id="getEnvName" resultType="java.lang.String">
+		SELECT eo_api_env.envName FROM eo_api_env WHERE eo_api_env.envID = #{envID}
+	</select>
+
+	<select id="checkEnvPermission" resultType="java.lang.Integer">
+		SELECT eo_conn_project.projectID FROM eo_api_env LEFT JOIN eo_conn_project ON eo_api_env.projectID = eo_conn_project.projectID 
+		WHERE eo_api_env.envID = #{envID} AND eo_conn_project.userID = #{userID};
+	</select>
+
+</mapper>

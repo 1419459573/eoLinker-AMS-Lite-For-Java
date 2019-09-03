@@ -1,0 +1,145 @@
+home-project-inside-test-api {
+    .common-table-div {
+        padding: 0 10px 10px 10px;
+        header {
+            .title-ul {
+                @extend %COMMON-TITLE-UL;
+                .default-btn {
+                    margin: 0;
+                }
+                .eo-button-success{
+                    &:nth-child(n+2){
+                        margin-left:5px;
+                    }
+                }
+                .batch-test-btn {
+                    margin-left: 5px;
+                    @include eo-line(32px, 30px);
+                    width: 90px;
+                    &:disabled {
+                        background-color: rgb(195, 195, 195);
+                        cursor: not-allowed;
+                        span {
+                            cursor: not-allowed;
+                        }
+                    }
+                }
+            }
+        }
+        .first-level-article {
+            margin-top: 10px;
+            .tips-ul {
+                padding: 0 10px;
+                @include eo-line(32px);
+                margin-bottom: 10px;
+                li {
+                    font-size: 12px;
+                }
+                .title-li {
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                }
+            }
+            .warning-ul {
+                @include eo-color(#fffbf5, #e3d6c5);
+                li,
+                a {
+                    color: #eaa244;
+                }
+                a:hover {
+                    font-weight: bold;
+                }
+            }
+            .common-ul {
+                @include eo-color(#F1F8E9, #DCEDC8);
+                * {
+                    color: #4caf50;
+                }
+            }
+            table {
+                border: 1px solid #e5e5e5;
+                border-radius: 3px;
+                width: 100%;
+                background: #fff;
+                font-size: 14px;
+                border-spacing: 0;
+                text-align: left;
+                text-indent: 15px;
+                border-radius: 3px;
+                table-layout: fixed;
+                thead {
+                    font-weight: bold;
+                    @include eo-line(40px);
+                    .first-th {
+                        width: 50px;
+                    }
+                    .second-th {
+                        width: 20%;
+                    }
+                    .third-th {
+                        min-width: 170px
+                    }
+                    .forth-th {
+                        width: 280px
+                    }
+                    .response-td {
+                        width: 200px;
+                    }
+                }
+                tbody {
+                    tr {
+                        @include eo-line(40px);
+                        td {
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            .list-function-wrap {
+                                position: absolute;
+                                cursor: default;
+                                margin-top: -15px;
+                                margin-bottom: 10px;
+                                .iconfont {
+                                    margin: 0;
+                                    cursor: pointer;
+                                }
+                                .list-function-ul {
+                                    background-color: #fff;
+                                    border: 1px solid #e7e7e7;
+                                    border-radius: 3px;
+                                    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.05);
+                                    color: #333;
+                                    .list-function-detail {
+                                        li {
+                                            padding: 0 10px;
+                                            @include eo-line(35px);
+                                            padding: 0 10px;
+                                            font-size: 13px;
+                                            cursor: pointer;
+                                            &:hover {
+                                                background-color: #f0f0f0;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .un-test-td {
+                            color: #999;
+                        }
+                        .icon-loading1 {
+                            @include eo-animation(load 1.7s infinite ease);
+                            display: inline-block;
+                            text-indent: 0;
+                        }
+                        &:first-child {
+                            td,
+                            th {
+                                border-top: 1px solid #e5e5e5;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,197 @@
+home-project-inside-doc-edit {
+    .home-project-inside-edit {
+        z-index: 0;
+        margin: $HOME-NAVBAR-HEIGHT 0 0 0;
+        .common-btn {
+            margin-right: 5px;
+        }
+        header {
+            .title-ul {
+                @extend %COMMON-TITLE-UL;
+                @extend %COMMON-MENU-LI;
+                .btn-group-li {
+                    .default-btn {
+                        margin-left: 10px;
+                    }
+                    .last-btn {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+        .first-level-article {
+            padding: 0 10px 10px 10px;
+            .first-part,
+            .forth-part {
+                padding-top: 0;
+                min-height: 50px;
+                background-color: #fff;
+                margin-top: 10px;
+                border: 1px solid #e5e5e5;
+                border-radius: 3px;
+            }
+            .first-part {
+                padding: 6px 10px;
+                input {
+                    @include eo-line(28px);
+                    width: 100%;
+                }
+                li {
+                    @include eo-line(30px);
+                    * {
+                        font-size: 14px;
+                    }
+                    span {
+                        font-weight: bold;
+                    }
+                    .center-span {
+                        margin: 0 5px;
+                    }
+                }
+                select {
+                    width: auto;
+                    text-indent: 0;
+                    margin-right: 5px;
+                    @include eo-line(30px);
+                    padding: 0 5px;
+                }
+                .api-message-send {
+                    margin-top: 10px;
+                    .pull-right {
+                        margin-right: 10px;
+                        .iconfont {
+                            color: #ccc;
+                        }
+                        .icon-favorfill {
+                            color: #f48932;
+                        }
+                    }
+                    .first-select-li {
+                        width: 50px;
+                    }
+                }
+                .api-message-url,
+                .api-message-name {
+                    font-size: 14px;
+                    clear: both;
+                    margin-top: 10px;
+                    li:last-child {
+                        margin: 0 10px 0 50px;
+                    }
+                }
+            }
+            .forth-part {
+                .title-p {
+                    @include eo-line(40px);
+                    border-bottom: 1px solid #e5e5e5;
+                    padding-left: 10px;
+                    b {
+                        font-size: 14px;
+                        color: $buttonSuccessBgColor;
+                    }
+                }
+                header {
+                    padding: 10px 10px 12px 10px;
+                    @include eo-line(30px, 29px);
+                    .test-nav-li {
+                        text-align: center;
+                        min-width: 80px;
+                        padding: 0 10px;
+                        font-weight: initial;
+                        font-size: 14px;
+                        @include eo-line(28px);
+                        background-color: #edf7ee;
+                        cursor: pointer;
+                        color: $buttonSuccessBorderColor;
+                        border: 1px solid #b2d8b6;
+                        &:hover {
+                            background-color: $buttonSuccessBgColor;
+                            border-color: $buttonSuccessFocusBgColor;
+                            color: #fff;
+                        }
+                    }
+                    .success-li {
+                        border-radius: 3px 0 0 3px;
+                        border-right: none;
+                    }
+                    .failure-li {
+                        border-radius: 0 3px 3px 0;
+                        border-left: none;
+                        margin-right: 5px;
+                    }
+                    .active {
+                        background-color: $buttonSuccessFocusBgColor;
+                        border-color: $buttonSuccessFocusBgColor;
+                        color: #fff;
+                    }
+                }
+            }
+            .remark-part {
+                height: auto;
+                header {
+                    .remark-type-li {
+                        li {
+                            display: inline-flex;
+                            .radio-input,
+                            label {
+                                @include eo-line(35px);
+                            }
+                            label {
+                                margin-right: 10px;
+                                font-weight: initial;
+                                cursor: pointer;
+                            }
+                        }
+                        .radio-input {
+                            width: auto;
+                            padding-right: 5px;
+                            margin: 0;
+                            font-size: 12px;
+                        }
+                        .icon-weibiaoti1fuzhi02 {
+                            color: #999;
+                        }
+                        .icon-circle {
+                            color: $buttonSuccessFocusBgColor;
+                        }
+                    }
+                }
+                article {
+                    margin-top: 5px;
+                    padding: 0 10px 10px 10px;
+                    .wangEditor-container {
+                        border-radius: 3px;
+                        .menu-item {
+                            @include eo-line(39px);
+                            a {
+                                padding: 14px 0;
+                                i {
+                                    color: #555;
+                                }
+                            }
+                        }
+                        .wangEditor-txt {
+                            min-height: 400px;
+                        }
+                        .upload-icon-container {
+                            display: inline-block!important;
+                            width: 340px;
+                            cursor: pointer;
+                            i {
+                                cursor: pointer;
+                            }
+                        }
+                        .file-up-button {
+                            position: absolute;
+                            opacity: 0;
+                            @include eo-line(82px);
+                        }
+                    }
+                    .editormd {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}

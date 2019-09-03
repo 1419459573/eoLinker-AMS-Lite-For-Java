@@ -1,0 +1,75 @@
+//author：广州银云信息科技有限公司
+home-project-inside-doc-list {
+    .home-project-inside-list {
+        header {
+            .title-ul {
+                @extend %COMMON-TITLE-UL;
+            }
+            .search-li {
+                @extend %SEARCH-UL;
+                margin-left:0;
+            }
+        }
+        .first-level-article {
+            @extend %COMMON-CONTAINER-STYLE;
+            table {
+                .iconfont {
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+                thead {
+                    font-weight: bold;
+                    @include eo-line(40px);
+                    th {
+                        font-weight: initial;
+                        &:nth-child(1) {
+                            min-width: 200px;
+                            width: 23%;
+                        }
+                        &:nth-child(2) {
+                            min-width: 100px;
+                            width: 11%;
+                        }
+                        &:nth-child(3) {
+                            min-width: 150px;
+                            width: 15%;
+                        }
+                        &:last-child {
+                            min-width: 115px;
+                            width: 144px;
+                        }
+                    }
+                }
+                tbody {
+                    tr:nth-child(odd) {
+                        background: #fafafa;
+                    }
+                    tr:nth-child(even) {
+                        background: #fff;
+                    }
+                    tr {
+                        @include eo-line(41px, 40px);
+                        th {
+                            width: 36px;
+                            text-align: center;
+                            text-indent: 0;
+                        }
+                        td {
+                            color: #666;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                        &:hover {
+                            background: #f0f0f0;
+                            cursor: pointer;
+                        }
+                    }
+                    .elem-active {
+                        @extend %BATCH-OPERATION;
+                    }
+                }
+            }
+        }
+    }
+}

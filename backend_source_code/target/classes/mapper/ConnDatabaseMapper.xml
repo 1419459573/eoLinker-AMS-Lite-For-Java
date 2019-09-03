@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eolinker.mapper.ConnDatabaseMapper">
+	
+	<insert id="addDatabaseConnection">
+		INSERT INTO eo_conn_database (eo_conn_database.dbID,eo_conn_database.userID) VALUES (#{dbID},#{userID});
+	</insert>
+	
+	<select id="checkDatabasePermission" resultType="java.lang.Integer">
+		SELECT eo_conn_database.dbID FROM eo_conn_database WHERE eo_conn_database.dbID = #{dbID}
+		AND eo_conn_database.userID = #{userID};
+	</select>
+	
+	<select id="getDatabaseUserType" parameterType="ConnDatabase" resultType="ConnDatabase">
+		SELECT eo_conn_database.userType FROM eo_conn_database WHERE eo_conn_database.dbID = #{dbID} AND eo_conn_database.userID = #{userID};
+	</select>
+	
+	
+	
+	
+</mapper>

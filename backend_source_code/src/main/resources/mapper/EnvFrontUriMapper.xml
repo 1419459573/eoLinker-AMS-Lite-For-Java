@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.EnvFrontUriMapper">
+	
+	<select id="getEnvFrontUriList" resultType="EnvFrontUri">
+		SELECT eo_api_env_front_uri.applyProtocol,eo_api_env_front_uri.uri,eo_api_env_front_uri.uriID FROM eo_api_env_front_uri WHERE eo_api_env_front_uri.envID = #{envID}
+	</select>
+	
+	<delete id="deleteEnvFrontUri">
+		DELETE FROM eo_api_env_front_uri WHERE eo_api_env_front_uri.envID = #{envID}
+	</delete>
+	
+	<insert id="addEnvFrontUri" parameterType="EnvFrontUri">
+		<choose>
+			<when test="uri != null">
+				INSERT INTO eo_api_env_front_uri (eo_api_env_front_uri.envID,eo_api_env_front_uri.applyProtocol,eo_api_env_front_uri.uri) 
+				VALUES (#{envID},#{applyProtocol},#{uri})
+			</when>
+			<otherwise>
+				INSERT INTO eo_api_env_front_uri (eo_api_env_front_uri.envID,eo_api_env_front_uri.applyProtocol,eo_api_env_front_uri.uri) 
+				VALUES (#{envID},#{applyProtocol},"")
+			</otherwise>
+		</choose>
+	</insert>
+
+	<select id="getEnvFrontUri" resultType="EnvFrontUri">
+		SELECT eo_api_env_front_uri.applyProtocol,eo_api_env_front_uri.uri,eo_api_env_front_uri.uriID FROM eo_api_env_front_uri WHERE eo_api_env_front_uri.envID = #{envID}
+	</select>
+
+</mapper>

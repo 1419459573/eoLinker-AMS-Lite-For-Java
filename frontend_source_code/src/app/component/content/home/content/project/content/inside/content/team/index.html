@@ -1,0 +1,128 @@
+<!-- author：广州银云信息科技有限公司 -->
+<div class="home-project-inside-team ">
+    <article>
+        <ul>
+            <li class="search-input-li item-li" data-ng-mouseenter="$ctrl.data.info.search.leave=false;" data-ng-mouseleave="$ctrl.data.info.search.leave=true;" ng-hide="$ctrl.data.info.power>1" >
+                <div class="form-div">
+                    <form name="sureForm">
+                        <input class="eo-input " id="search-user-js" type="text" name="user" data-ng-model="$ctrl.data.interaction.request.userName" placeholder="{{'0101010'|translate}}" data-ng-change="$ctrl.data.fun.check()" data-ng-blur="$ctrl.data.fun.closeSearch()" required>
+                        <button class="hidden" data-ng-click="$ctrl.data.fun.search()"></button>
+                        <label class="eo-button-success search-btn" for="search-user-js" data-ng-click="$ctrl.data.fun.search()">
+                            <span class="iconfont icon-sousuo"></span> {{'0101011'|translate}}
+                        </label>
+                    </form>
+                </div>
+                <label for="search-user-js">
+                    <ul class="search-ul" ng-show="$ctrl.data.interaction.response.userInfo" ng-class="{'had-invited-search-ul':$ctrl.data.interaction.response.userInfo&&$ctrl.data.interaction.response.userInfo.isInvited==1}" data-ng-click="$ctrl.data.fun.add()">
+                        <li>
+                            <ul class="people-ul">
+                                <li class="pull-left name-summary-li">
+                                    {{!!$ctrl.data.interaction.response.userInfo.userNickName?$ctrl.data.interaction.response.userInfo.userName.substr(0, 2).toUpperCase():$ctrl.data.info.filter.unknown}}
+                                </li>
+                                <li class="pull-left people-li">
+                                    <p>
+                                        <span>{{!!$ctrl.data.interaction.response.userInfo.userNickName?$ctrl.data.interaction.response.userInfo.userNickName: $ctrl.data.info.filter.unknownNickName}}</span>
+                                    </p>
+                                    <p class="userName-p">
+                                        {{$ctrl.data.interaction.response.userInfo.userName}}
+                                    </p>
+                                </li>
+                                <li class="pull-right">
+                                    <span class="check-status">{{$ctrl.data.interaction.response.userInfo.isInvited==1? $ctrl.data.info.filter.haveJoined: $ctrl.data.info.filter.add}}</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </label>
+                <label for="search-user-js">
+                    <ul class="search-ul nothing-search-ul" ng-hide="$ctrl.data.interaction.response.userInfo||!$ctrl.data.info.search.submited">
+                        <li>
+                            <ul class="none-people-ul">
+                                <li>{{'0101016'|translate}}</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </label>
+            </li>
+            <li class="item-li admin-li">
+                <p class="title-p">{{'0101017'|translate}}</p>
+                <ul class="list-ul">
+                    <li class="item-child-li pull-left" ng-repeat="item in $ctrl.data.interaction.response.adminQuery">
+                        <ul class="people-ul">
+                            <li class="pull-left name-summary-li">
+                                {{!!item.userNickName?item.userNickName.substr(0, 2).toUpperCase(): $ctrl.data.info.filter.unknown}}
+                            </li>
+                            <li class="pull-left people-li">
+                                <p>
+                                    <span>{{!!item.userNickName?item.userNickName: $ctrl.data.info.filter.unknownNickName}}</span>
+                                    <span class="iconfont " ng-class="{'icon-huangguan':item.userType==0}"></span>
+                                </p>
+                                <p class="userName-p" title="{{item.partnerNickName}}">
+                                    {{(!!item.partnerNickName)?item.partnerNickName:(item.inviteCall?item.inviteCall: $ctrl.data.info.filter.administrators)}}
+                                </p>
+                            </li>
+                            <li class="pull-right list-li" ng-hide="($ctrl.data.info.power!=0)&&item.isNow==0" data-ng-click="item.listIsClick=true;" data-ng-mouseleave="item.listIsClick=false">
+                                <span class="iconfont icon-caidan"></span>
+                                <div class="list-function-wrap" data-ng-show="item.listIsClick">
+                                    <ul class="list-function-ul">
+                                        <li class="list-function-detail">
+                                            <ul>
+                                                <li data-ng-click="$ctrl.data.fun.setNickName({item:item})">{{'0101018'|translate}} </li>
+                                                <li data-ng-click="$ctrl.data.fun.setType({item:item,userType:2,$index:$index})" ng-hide="item.isNow==1" >{{'0101019'|translate}}</li>
+                                                <li data-ng-click="$ctrl.data.fun.setType({item:item,userType:3,$index:$index})" ng-hide="item.isNow==1" >{{'01010110'|translate}}</li>
+                                                <li ng-hide="item.isNow==1&&item.userType==0" data-ng-click="$ctrl.data.fun.delete({item:item,$index:$index,isAdmin:true})">{{$ctrl.data.info.power==0? $ctrl.data.info.filter.kick: $ctrl.data.info.filter.quit}}</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="item-li partner-li" data-ng-hide="$ctrl.data.interaction.response.query.length==0">
+                <p class="title-p">{{'01010113'|translate}}</p>
+                <ul class="list-ul">
+                    <li class="item-child-li pull-left" ng-repeat="item in $ctrl.data.interaction.response.query">
+                        <ul class="people-ul">
+                            <li class="pull-left name-summary-li">
+                                {{!!item.userNickName?item.userNickName.substr(0, 2).toUpperCase(): $ctrl.data.info.filter.unknown}}
+                            </li>
+                            <li class="pull-left people-li">
+                                <p>
+                                    <span>{{!!item.userNickName?item.userNickName: $ctrl.data.info.filter.unknownNickName}}</span>
+                                    <span class="iconfont " ng-class="{'icon-huangguan':item.userType==0}"></span>
+                                </p>
+                                <p class="userName-p" title="{{item.partnerNickName}}">
+                                    [{{item.userType=='2'?$ctrl.data.info.filter.readAndWrite:$ctrl.data.info.filter.read}}]{{(!!item.partnerNickName)?item.partnerNickName:(item.userName?item.userName: $ctrl.data.info.filter.unknown)}}
+                                </p>
+                            </li>
+                            <li class="pull-right list-li" ng-hide="($ctrl.data.info.power==2)&&item.isNow==0" data-ng-click="item.listIsClick=true;" data-ng-mouseleave="item.listIsClick=false">
+                                <span class="iconfont icon-caidan"></span>
+                                <div class="list-function-wrap" data-ng-show="item.listIsClick">
+                                    <ul class="list-function-ul">
+                                        <li class="list-function-detail">
+                                            <ul>
+                                                <li data-ng-click="$ctrl.data.fun.setNickName({item:item})">{{'0101018'|translate}} </li>
+                                                <li data-ng-click="$ctrl.data.fun.setType({item:item,userType:1,$index:$index})" ng-hide="$ctrl.data.info.power>0" >{{'01010125'|translate}} </li>
+                                                <li data-ng-click="$ctrl.data.fun.setType({item:item,userType:2,$index:$index})" ng-hide="$ctrl.data.info.power>0||item.userType==2" >{{'0101019'|translate}}</li>
+                                                <li data-ng-click="$ctrl.data.fun.setType({item:item,userType:3,$index:$index})" ng-hide="$ctrl.data.info.power>0||item.userType==3" >{{'01010110'|translate}}</li>
+                                                <li data-ng-click="$ctrl.data.fun.delete({item:item,$index:$index,isAdmin:false})">{{!($ctrl.data.info.power==2)? $ctrl.data.info.filter.kick: $ctrl.data.info.filter.quit}}</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </article>
+    <div class="introduce-common-div">
+        <p class="title-p">想要更强大的权限管理？</p>
+        <p class="desc-p"><b>AMS开源版</b> 仅包括基础的团队协作功能，您可以为其设置读写、只读等权限；</p>
+        <p class="desc-p"><b>AMS专业版</b> 则支持通过链接邀请人员，支持企业级人员架构，允许对用户进行权限分组以及设置详细的操作权限，如查看/编辑API、导出项目、查看项目动态等等。</p>
+        <p class="desc-p">如果您是专业用户，AMS专业版将更能满足您的需求，<a class="eo-link" href="https://www.eolinker.com/#/product/pro" target="_blank">点击这里了解更多</a>！</p>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<report-ams-component input="$ctrl.component.reportObject" status="automated-global-all" other-object="$ctrl.data.interaction.response.query" fun="$ctrl.data.fun.test()"></report-ams-component>
+<div batch-test-directive status="automated-global" flag="$ctrl.component.batchTestObject.flag" env="$ctrl.data.service.home.envObject.object.total" report-object="$ctrl.component.reportObject" ng-if="$ctrl.data.info.plugObject.version>204" status-object="$ctrl.component.batchTestObject"></div>
+<div class="home-project-inside-default home-project-inside-div" check-plug-directive input="$ctrl.data.info.plugObject">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li pull-left" ng-if="$ctrl.powerObject.edit">
+                <a class="eo-button-success common-btn" ng-click="$ctrl.data.fun.edit('add')" ng-if="!$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-tianjia"></span><span class="btn-name">{{'0121610'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" ng-click="$ctrl.data.fun.batch.default()" ng-if="!$ctrl.data.info.batch.disable">
+                    {{'0121611'|translate}}
+                </a>
+                <button class="eo-button-info common-btn batch-test-btn" ng-click="$ctrl.data.fun.test()" ng-if="!$ctrl.data.info.batch.disable" testing="{{$ctrl.component.reportObject.testing||false}}" ng-disabled="$ctrl.data.info.plugObject.version<=204">
+                    {{$ctrl.component.reportObject.testing?('0121603'|translate):('0121604'|translate)}}
+                </button>
+                <a class="common-btn default-btn" ng-click="$ctrl.data.info.batch.disable=false" ng-if="$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-close"></span><span class="btn-name">{{'0121612'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" ng-click="$ctrl.data.fun.delete('batch')" ng-if="$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-shanchu"></span><span class="btn-name">{{'0121613'|translate}}</span>
+                </a>
+            </li>
+            <li class="divide-li pull-left" ng-if="$ctrl.powerObject.edit"><span></span></li> 
+            <li class="search-li pull-left">
+                <form name="searchForm">
+                    <ul class="search-function-ul">
+                        <li class="search-input-li">
+                            <input class="eo-input" type="text" placeholder="{{'0121614'|translate}}" ng-model="$ctrl.data.interaction.request.tips" required>
+                        </li>
+                        <li class="search-btn-li">
+                            <button class="iconfont icon-sousuo" ng-click="$ctrl.data.fun.search()"></button>
+                        </li>
+                    </ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article" ng-switch="$ctrl.data.info.plugObject.version>=194">
+        <table>
+            <thead>
+                <tr>
+                    <th class="first-th">{{'0121615'|translate}}</th>
+                    <!-- <th class="third-th">
+                        最后测试结果
+                    </th> -->
+                    <th class="second-th">{{'0121616'|translate}}</th>
+                    <th class="forth-th" ng-if="$ctrl.powerObject.edit">{{'0121617'|translate}}</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in $ctrl.data.interaction.response.query" ng-click="$ctrl.data.fun.enter({item:item,$index:$index})" ng-class="{'elem-active':item.isClick&&$ctrl.data.info.batch.disable}">
+                    <td>
+                        {{item.caseName}}
+                    </td>
+                    <!-- <td title="{{item.codeDescription}}">暂无测试结果</td> -->
+                    <td>{{item.updateTime}}</td>
+                    <td ng-if="$ctrl.powerObject.edit"> 
+                        <a class="eo-operate-btn" ng-click="$ctrl.data.fun.edit('edit',{$event:$event,item:item})" ng-if="!$ctrl.data.info.batch.disable"><span class="iconfont icon-bianji"></span>{{'0121618'|translate}}</a>
+                        <a class="eo-operate-btn" ng-click="$ctrl.data.fun.delete('singal',{$event:$event,item:item,$index:$index})" ng-if="!$ctrl.data.info.batch.disable"><span class="iconfont icon-shanchu"></span>{{'0121619'|translate}}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>
+<div class="introduce-common-div">
+    <p class="title-p">想要更强大的自动化测试？</p>
+    <p class="desc-p"><b>AMS开源版</b> 仅包括最基础的UI模式自动化测试；</p>
+    <p class="desc-p"><b>AMS专业版</b> 则额外支持高级代码模式的自动化测试，以及定时测试任务等。</p>
+    <p class="desc-p">如果您是专业用户，AMS专业版将更能满足您的需求，<a class="eo-link" href="https://www.eolinker.com/#/product/pro" target="_blank">点击这里了解更多</a>！</p>
+</div>

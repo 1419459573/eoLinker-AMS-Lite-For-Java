@@ -1,0 +1,37 @@
+<div class="login-wrap">
+    <eo-navbar1></eo-navbar1>
+    <header>
+        <span class="iconfont icon-eoLinkerAMS"></span><span class="font">{{'0200'|translate }}</span>
+    </header>
+    <div class="login-content ">
+        <article>
+            <form name="loginForm">
+                <ul ng-if="$ctrl.data.service.info.status==0">
+                    <li class="pull-left">
+                        <input class="eo-input" name="username" data-ng-model="$ctrl.data.interaction.request.loginName" type="text" placeholder="{{'0201'|translate }}" ng-class="{'eo-input-error':loginForm.username.$invalid&&$ctrl.data.info.submitted}" required autofocus />
+                    </li>
+                    <li class="pull-left" style="position:relative">
+                        <input class="eo-input" name="password" ng-if="!$ctrl.data.info.password.isShow" data-ng-class="{'eo-input-error':$ctrl.data.info.submitted&&loginForm.password.$invalid}" type="password" placeholder="{{'0202'|translate }}" data-ng-model="$ctrl.data.interaction.request.loginPassword" required />
+                        <input class="eo-input" name="eyepassword" ng-if="$ctrl.data.info.password.isShow" data-ng-class="{'eo-input-error':$ctrl.data.info.submitted&&loginForm.eyepassword.$invalid}" type="text" placeholder="{{'0202'|translate }}" data-ng-model="$ctrl.data.interaction.request.loginPassword" required />
+                        <span class="icon-style">
+                            <a class="iconfont" data-ng-class="{'icon-attention':$ctrl.data.info.password.isShow,'icon-attentionfill':!$ctrl.data.info.password.isShow}" data-ng-click="$ctrl.data.fun.changeView()" ></a>
+                        </span>
+                    </li>
+                    <li>
+                        <button ng-class="{'eo-button-success':loginForm.$valid,'eo-button-default':loginForm.$invalid}" data-ng-click="$ctrl.data.fun.confirm()">{{'0203'|translate }}<span class="iconfont icon-xiangyou pull-right"></span></button>
+                    </li>
+                    <li>
+                        <label class="common-label"></label>
+                        <input class="hidden" type="checkbox" id="remember-password-js" ng-model="$ctrl.data.info.isRemember">
+                        <label for="remember-password-js" class="checkbox-label iconfont" ng-class="{'icon-check':$ctrl.data.info.isRemember}">{{$ctrl.data.info.isRemember?'':'&nbsp;'}}</label>
+                        <label class="common-btn" for="remember-password-js">{{'0204'|translate }}</label>
+                    </li>
+                </ul>
+                <ul ng-if="$ctrl.data.service.info.status==1" style="text-align:center">
+                    <a ui-sref="home.project.api.default"><button class="eo-button-success">{{'0205'|translate }}<span class="iconfont icon-xiangyou pull-right"></span></button></a>
+                </ul>
+            </form>
+        </article>
+    </div>
+    <eo-footer></eo-footer>
+</div>

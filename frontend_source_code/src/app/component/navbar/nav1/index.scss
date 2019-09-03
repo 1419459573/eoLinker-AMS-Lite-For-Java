@@ -1,0 +1,98 @@
+eo-navbar1 {
+    .nav-1 {
+        @extend %NAV-BASIC-STYLE;
+        position: absolute;
+        border-bottom: 1px solid #ededed;
+        .nav-header {
+            li {
+                @include eo-line(60px, 58px);
+                .nav-li {
+                    padding: 0;
+                    min-width: 68px;
+                    @include eo-line(30px, 32px);
+                    color: #777;
+                    display: inline-block;
+                    text-align: center;
+                    border-radius: 3px;
+                    margin-right: 15px;
+                    vertical-align: inherit;
+                    .iconfont {
+                        cursor: pointer;
+                    }
+                    &:hover {
+                        color: $buttonSuccessBgColor;
+                    }
+                }
+                .icon-hot {
+                    color: #ff0000;
+                    position: absolute;
+                    top: -12px;
+                    right: -1px;
+                    font-size: 30px;    
+                }
+            }
+            .register-function {
+                @extend %NAV-REGISTER-BTN;
+            }
+            .navbar-li-function {
+                .list-function-wrap {
+                    position: absolute;
+                    cursor: default;
+                    display: none;
+                    .iconfont {
+                        margin: 0;
+                        cursor: pointer;
+                    }
+                    .nav-hide-ul {
+                        @extend %NAV-HIDE-UL;
+                    }
+                }
+                &:hover {
+                    .list-function-wrap {
+                        display: inherit;
+                    }
+                }
+            }
+            .list-function {
+                @extend %NAV-LIST-GROUP-STYLE;
+                .news-btn {
+                    @extend %NAV-LIST-GROUP-NEWS-BTN;
+                }
+                .nav-hide-ul {
+                    @extend %NAV-HIDE-UL;
+                }
+                .list {
+                    border: 1px solid #e7e7e7;
+                    background-color: #fff;
+                    margin-left: 5px;
+                    margin-right: 0;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: $buttonSuccessBgColor;
+                        border: 1px solid $buttonSuccessBorderColor;
+                        ul {
+                            display: block;
+                        }
+                        .first-icon {
+                            color: #fff;
+                        }
+                    }
+                    .list-function-wrap {
+                        position: absolute;
+                        cursor: default;
+                        margin-left: -131px;
+                        margin-top: -2px;
+                    }
+                }
+                ul {
+                    display: none;
+                }
+            }
+            .active {
+                a {
+                    color: $buttonSuccessBgColor;
+                }
+            }
+        }
+    }
+}

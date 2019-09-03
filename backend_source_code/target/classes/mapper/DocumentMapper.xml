@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.DocumentMapper">
+
+	<insert id="addDocument" parameterType="Document" useGeneratedKeys="true" keyProperty="documentID">
+		INSERT INTO eo_project_document (eo_project_document.groupID,eo_project_document.projectID,eo_project_document.contentType,eo_project_document.contentRaw,eo_project_document.content,eo_project_document.title,eo_project_document.userID) 
+		VALUES (#{groupID},#{projectID},#{contentType},#{contentRaw},#{content},#{title},#{userID});
+	</insert>
+	
+	<delete id="deleteDocument">
+		DELETE FROM eo_project_document WHERE eo_project_document.documentID = #{documentID}
+	</delete>
+
+	<select id="getDocumentList" resultType="com.eolinker.dto.DocumentDTO">
+		SELECT eo_project_document.groupID,eo_project_document.projectID,eo_project_document.documentID,eo_project_document_group.groupName,eo_project_document.updateTime,eo_project_document.contentType,eo_project_document.contentRaw,eo_project_document.content,eo_project_document.title,eo_project_document.userID,eo_user.userNickName FROM eo_project_document LEFT JOIN eo_user ON eo_project_document.userID = eo_user.userID LEFT JOIN eo_project_document_group ON eo_project_document.groupID = eo_project_document_group.groupID 
+		WHERE eo_project_document.groupID IN
+		<foreach collection="groupIDS" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	 ORDER BY eo_project_document.updateTime DESC
+	</select>
+	
+	<select id="getAllDocumentList" resultType="com.eolinker.dto.DocumentDTO">
+		SELECT eo_project_document.groupID,eo_project_document.projectID,eo_project_document.documentID,eo_project_document_group.groupName,eo_project_document.updateTime,eo_project_document.contentType,eo_project_document.contentRaw,eo_project_document.content,eo_project_document.title,eo_project_document.userID,eo_user.userNickName FROM eo_project_document LEFT JOIN eo_user ON eo_project_document.userID = eo_user.userID LEFT JOIN eo_project_document_group ON eo_project_document_group.groupID = eo_project_document.groupID 
+		WHERE eo_project_document_group.projectID = #{projectID}
+	</select>
+	
+	<update id="editDocument" parameterType="Document">
+		UPDATE eo_project_document SET eo_project_document.groupID = #{groupID},eo_project_document.contentType = #{contentType},eo_project_document.contentRaw = #{contentRaw},eo_project_document.content = #{content},eo_project_document.title = #{title},eo_project_document.userID = #{userID} WHERE eo_project_document.documentID = #{documentID}
+	</update>
+	
+	<select id="searchDocument" resultType="com.eolinker.dto.DocumentDTO">
+		SELECT eo_project_document.groupID,eo_project_document.projectID,eo_project_document.documentID,eo_project_document_group.groupName,eo_project_document.updateTime,eo_project_document.contentType,eo_project_document.contentRaw,eo_project_document.content,eo_project_document.title,eo_project_document.userID,eo_user.userNickName FROM eo_project_document LEFT JOIN eo_user ON eo_project_document.userID = eo_user.userID LEFT JOIN eo_project_document_group ON eo_project_document_group.groupID = eo_project_document.groupID 
+		WHERE eo_project_document_group.projectID = #{projectID} AND eo_project_document.title LIKE '%${tips}%';
+	</select>
+
+	<select id="getDocument" resultType="java.util.Map">
+		SELECT eo_project_document.groupID,eo_project_document.projectID,eo_project_document.contentType,eo_project_document.contentRaw,eo_project_document.content,eo_project_document.title,eo_project_document.userID,eo_user.userNickName,eo_project_document.updateTime FROM eo_project_document LEFT JOIN eo_user ON eo_project_document.userID = eo_user.userID LEFT JOIN eo_project_document_group ON eo_project_document_group.groupID = eo_project_document.groupID 
+		WHERE eo_project_document.documentID = #{documentID}
+	</select>
+	
+	<select id="getParentGroupInfo" resultType="DocumentGroup">
+		SELECT eo_project_document_group.parentGroupID,eo_project_document_group.groupName FROM eo_project_document_group 
+		WHERE eo_project_document_group.groupID = #{groupID}
+	</select>
+	
+	<delete id="deleteDocuments">
+		DELETE FROM eo_project_document WHERE eo_project_document.documentID in 
+		<foreach collection="documentIDList" open="(" separator="," close=")" index="index" item="item">
+			#{item}
+		</foreach>
+		AND eo_project_document.projectID = #{projectID}
+	</delete>
+
+	<select id="checkDocumentPermission" resultType="java.lang.Integer">	
+		SELECT eo_conn_project.projectID FROM eo_project_document LEFT JOIN eo_conn_project ON eo_project_document.projectID = eo_conn_project.projectID 
+		WHERE eo_conn_project.userID = #{userID} AND eo_project_document.documentID = #{documentID}
+	</select>
+	
+	<select id="getDocumentTitle" resultType="String">
+		SELECT GROUP_CONCAT(eo_project_document.title) AS title FROM eo_project_document WHERE eo_project_document.documentID IN
+		<foreach collection="documentIDList" index="index" open="(" separator="," close=")" item="item">
+			#{item}
+		</foreach>
+	</select>
+
+
+</mapper>

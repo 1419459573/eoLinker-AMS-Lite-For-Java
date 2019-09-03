@@ -1,0 +1,86 @@
+.modal-open {
+    .modal-content {
+        .common-modal-upload-file {
+            article {
+                .container-li {
+                    &:nth-child(n+2) {
+                        margin-top: 10px;
+                    }
+                }
+                .group-ul {
+                    display: inline-block;
+                    .eo-input {
+                        margin-top: 10px;
+                        width: 100%;
+                        display: inline-block;
+                        line-height: 33px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                    label {
+                        color: #999;
+                        cursor: pointer;
+                    }
+                    select {
+                        text-indent: 0;
+                        color: #333;
+                    }
+                }
+                .group-inherit {
+                    width: 100%;
+                }
+                .group-name {
+                    width: 60%;
+                }
+                .group-select {
+                    &:nth-last-child(n+2){
+                        @include eo-width(100% / 3, 10px);
+                        margin-right: 10px;
+                    }
+                    &:last-child{
+                        @include eo-width(100% / 3, 1px);
+                    }
+                }
+            }
+        }
+        .common-modal-recover-api{
+            article {
+                .container-li {
+                    &:nth-child(n+2) {
+                        margin-top: 10px;
+                    }
+                }
+                .group-ul {
+                    display: inline-block;
+                    .eo-input {
+                        margin-top: 10px;
+                        width: 100%;
+                        display: inline-block;
+                        line-height: 33px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                    label {
+                        color: #999;
+                        cursor: pointer;
+                    }
+                    select {
+                        text-indent: 0;
+                        color: #333;
+                    }
+                }
+                .group-select {
+                    &:nth-last-child(n+2){
+                        @include eo-width(100% / 3, 10px);
+                        margin-right: 10px;
+                    }
+                    &:last-child{
+                        @include eo-width(100% / 3, 1px);
+                    }
+                }
+            }
+        }
+    }
+}

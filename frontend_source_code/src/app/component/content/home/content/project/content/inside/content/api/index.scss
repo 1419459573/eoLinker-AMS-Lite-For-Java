@@ -1,0 +1,9 @@
+home-project-inside-api {
+    .env-li {
+        float: right;
+        @include eo-line(30px);
+        margin:9px 0;
+        margin-right:5px;
+    }
+    
+}

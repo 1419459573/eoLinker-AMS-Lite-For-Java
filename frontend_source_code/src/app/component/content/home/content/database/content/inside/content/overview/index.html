@@ -1,0 +1,65 @@
+<!-- author：广州银云信息科技有限公司 -->
+<div class="home-database-inside-overview ">
+    <div class="left-div">
+        <div class="first-div">
+            <ul>
+                <li class="title-li" title="{{$ctrl.data.interaction.response.databaseInfo.dbName}}">
+                    <b class="pull-left">{{$ctrl.data.interaction.response.databaseInfo.dbName}}</b>
+                    <a class="eo-button-default" ng-click="$ctrl.data.fun.edit()" ng-if="$ctrl.data.info.edit">
+                        <label class="iconfont icon-bianji"></label>
+                        修改
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="item-div second-div">
+            <ul>
+                <li class="pull-left first-li">
+                    <div class="pull-left">
+                        <p class="title-p">基础版本</p>
+                        <p class="desc-p">产品类别</p>
+                    </div>
+                </li>
+                <li class="pull-left last-li">
+                    <p class="title-p">V{{$ctrl.data.interaction.response.databaseInfo.dbVersion}}</p>
+                    <p class="desc-p">版本号</p>
+                </li>
+                <li class="last-li">
+                    <p class="title-p">{{$ctrl.data.interaction.response.databaseInfo.dbUpdateTime}}</p>
+                    <p class="desc-p">最后更新日期</p>
+                </li>
+            </ul>
+        </div>
+        <div class="item-div third-div">
+            <ul>
+                <li class="pull-left first-li">
+                    <p class="title-p">
+                        <label class="iconfont icon-biaodanku"></label>
+                        {{$ctrl.data.interaction.response.databaseInfo.tableCount}} 张表
+                    </p>
+                    <p class="desc-p">表总数</p>
+                </li>
+                <li class="last-li">
+                    <p class="title-p">
+                        <label class="iconfont icon-biaoqian"></label>
+                        {{$ctrl.data.interaction.response.databaseInfo.fieldCount}} 个字段
+                    </p>
+                    <p class="desc-p">字段总数</p>
+                </li>
+            </ul>
+        </div>
+        <p class="item-p" ng-if="$ctrl.data.info.edit">其他功能</p>
+        <div class="item-div forth-div" ng-if="$ctrl.data.info.edit">
+            <ul>
+                <li class=" pull-left only-li" ng-click="$ctrl.data.fun.dump()">
+                    <p class="title-p">
+                        <label class="iconfont icon-xiazai"></label>
+                        导出数据库
+                    </p>
+                    <p class="desc-p">导出数据结构</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div load-directive="$ctrl.data.fun.init(arg)"></div>
+</div>

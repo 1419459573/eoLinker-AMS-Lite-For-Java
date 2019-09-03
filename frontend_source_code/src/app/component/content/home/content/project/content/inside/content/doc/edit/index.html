@@ -1,0 +1,89 @@
+<div class="home-project-inside-edit ">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li pull-left">
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.back()">
+                    <span class="iconfont icon-xiangzuo"></span>{{'012100074'|translate}}
+                </a>
+            </li>
+            <li class="btn-group-li pull-right">
+                <button class="eo-button-success common-btn" ng-disabled="$ctrl.data.info.input.disable" data-ng-click="$ctrl.data.fun.load({status:1})">
+                    {{'01210016'|translate}}
+                </button>
+                <button class="eo-button-success common-btn last-btn" data-ng-click="$ctrl.data.fun.load({status:0})" ng-disabled="$ctrl.data.info.input.disable"
+                    ng-if="!$ctrl.data.info.reset.documentID">
+                    {{'01210014'|translate}}
+                </button>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article">
+        <div class="first-part">
+            <ng-form name="editForm">
+                <ul>
+                    <li>
+                        <ul class="api-message-send">
+                            <li class="pull-left first-select-li">
+                                <span>分组：</span>
+                            </li>
+                            <li class="pull-left ">
+                                <select class="eo-input " ng-model="$ctrl.data.interaction.response.docInfo.groupID" ng-options="group.groupID as group.groupName for group in $ctrl.data.info.group.parent"
+                                    ng-change="$ctrl.data.fun.change.group('first-level')">
+                                </select>
+                            </li>
+                            <li class="pull-left">
+                                <select class="eo-input" ng-model="$ctrl.data.interaction.response.docInfo.childGroupID" ng-options="group.groupID as group.groupName for group in $ctrl.data.info.group.child"
+                                    ng-change="$ctrl.data.fun.change.group('second-level')">
+                                </select>
+                            </li>
+                            <li class="pull-left">
+                                <select class="eo-input" ng-model="$ctrl.data.interaction.response.docInfo.grandSonGroupID" ng-options="group.groupID as group.groupName for group in $ctrl.data.info.group.grandson">
+                                </select>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="api-message-url">
+                            <li class="pull-left">
+                                <span>{{'012100081'|translate}}</span>
+                            </li>
+                            <li>
+                                <input class="eo-input" type="text" name="title" data-ng-model="$ctrl.data.interaction.response.docInfo.title" data-ng-class="{'eo-input-error':($ctrl.data.info.input.submited&&editForm.title.$invalid)}"
+                                    maxlength="255" required>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </ng-form>
+        </div>
+        <div class="forth-part remark-part">
+            <p class="title-p">
+                <b>{{'012100082'|translate}}</b>
+            </p>
+            <header>
+                <ul>
+                    <li class="pull-left test-nav-li success-li" ng-class="{'active':$ctrl.data.interaction.response.docInfo.contentType==0}"
+                        data-ng-click="$ctrl.data.interaction.response.docInfo.contentType = 0">{{'012100083'|translate}}</li>
+                    <li class="pull-left test-nav-li failure-li" ng-class="{'active':$ctrl.data.interaction.response.docInfo.contentType==1}"
+                        data-ng-click="$ctrl.data.interaction.response.docInfo.contentType = 1;$ctrl.data.fun.change.noteType()">markdown</li>
+                </ul>
+            </header>
+            <article ng-hide="$ctrl.data.interaction.response.docInfo.contentType==0">
+                <div id="editormd-js" data-ng-model="$ctrl.data.interaction.response.docInfo.contentRaw" result-html="$ctrl.data.interaction.response.docInfo.docMarkdownNote"
+                    markdown>
+                    <textarea style="display:none;"></textarea>
+                </div>
+            </article>
+            <article ng-hide="$ctrl.data.interaction.response.docInfo.contentType==1">
+                <textarea wang-editor ng-model="$ctrl.data.interaction.response.docInfo.docRichNote" id="editor-js" maxlength="65535"></textarea>
+            </article>
+            <footer>
+            </footer>
+        </div>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.requestProcessing(arg)" interaction="{request:{delay:true}}">
+        </div>
+    </footer>
+</div>
+<div oc-lazy-load="$ctrl.data.constant.lazyload"></div>

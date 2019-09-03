@@ -1,0 +1,96 @@
+<!-- author：广州银云信息科技有限公司 -->
+<article class="common-inside-article">
+    <ul class="title-ul" ng-if="$ctrl.powerObject.edit">
+        <li class="btn-group-li">
+            <a class="eo-button-success common-btn" data-ng-click="$ctrl.data.fun.add()"><span class="iconfont icon-tianjia"></span>{{'012120'|translate}}</a>
+        </li>
+    </ul>
+    <div class="content-div">
+        <ul class="group-ul env-sidebar-ul pull-left">
+            <li class="title-li"><b>{{'012121'|translate}}</b></li>
+            <li class="background-group-li" data-ng-repeat='item in $ctrl.data.interaction.response.query' ng-class="{'elem-active':item.envID==$ctrl.data.interaction.request.envID}" data-ng-click="$ctrl.data.fun.click({item:item})" ng-init="$ctrl.data.fun.initQuery({item:item,$index:$index})">
+                <span>{{item.envName}}</span>
+                <div class="pull-right list-fun-div" ng-mouseleave="item.isClick=false" ng-if="$ctrl.powerObject.edit&&item.envID!=-1">
+                    <a class="iconfont icon-caidan" ng-click="$event.stopPropagation();item.isClick=true"></a>
+                    <ul class="btn-group-ul" ng-show="item.isClick">
+                        <a ng-click="$ctrl.data.fun.delete.sidebar({item:item,$event:$event,$index:$index})">
+                            <li>{{'012122'|translate}}</li>
+                        </a>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <form name="ConfirmForm" class="home-project-inside-env" ng-show="$ctrl.data.info.current.envID">
+            <div>
+                <p class="title-p"><b>{{'012123'|translate}}</b></p>
+                <p class="name-form">
+                    <input name="envName" ng-model="$ctrl.data.info.current.envName" class="eo-input" type="text" placeholder="{{'012123'|translate}}" ng-readonly="!$ctrl.powerObject.edit" required>
+                </p>
+                <p class="title-p"><b>{{'012124'|translate}}</b></p>
+                <p class="name-form">
+                    <input name="name" data-ng-model="$ctrl.data.info.current.frontURIList[0].uri" class="eo-input" type="text" placeholder="{{'012124'|translate}}" ng-readonly="!$ctrl.powerObject.edit">
+                </p>
+                <p class="title-p"><b>{{'012125'|translate}}</b></p>
+                <div style="display: inline-block;width: 100%;">
+                    <ul class="item-ul" ng-mouseover="item.mouseLeave=false" ng-mouseleave="item.mouseLeave=true" ng-repeat="item in $ctrl.data.info.current.headerList track by $index">
+                        <li style="height: 35px;" class="pull-left header-input-li" ng-if="$ctrl.powerObject.edit" ng-class="{'eo-had-input-error':!item.headerName&&item.headerValue}">
+                            <auto-complete-ams-component model="item.headerName" array="$ctrl.data.constant.headerArray" add-class="header-icon-input" placeholder="{{'012126'|translate}}" input-change-fun="$ctrl.data.fun.change({$last:$last,switch:0})"></auto-complete-ams-component>
+                        </li>
+                        <li class="pull-left header-input-li">
+                            <input class="eo-input header-content-input" type="text" placeholder="{{'012126'|translate}}" data-ng-model="item.headerName" readonly ng-if="!$ctrl.powerObject.edit">
+                        </li>
+                        <li class="header-content-li pull-left">
+                            <input class="eo-input header-content-input" type="text" placeholder="{{'012127'|translate}}" data-ng-model="item.headerValue" ng-change="$ctrl.data.fun.change({$last:$last,switch:0})" ng-readonly="!$ctrl.powerObject.edit">
+                        </li>
+                        <li class="operate-li">
+                            <a class="iconfont icon-shanchu number-label" data-ng-click="$ctrl.data.fun.delete.headerList({$index:$index})" ng-hide="$last" ng-if="$ctrl.powerObject.edit"></a>
+                            &nbsp;
+                        </li>
+                    </ul>
+                </div>
+                <p class="title-p"><b>{{'0121224'|translate}}</b></p>
+                <div class="item-div" style="display: inline-block;width: 100%;">
+                    <ul class="item-ul" ng-repeat="item in $ctrl.data.info.current.additionalParamList">
+                        <li class="pull-left header-input-li">
+                            <input class="eo-input header-icon-input" type="text" placeholder="变量名" data-ng-model="item.paramKey" ng-change="$ctrl.data.fun.change({$last:$last,switch:2})" ng-readonly="!$ctrl.powerObject.edit" ng-class="{'eo-input-error':!item.paramKey&&item.paramValue}">
+                        </li>
+                        <li class="header-content-li pull-left">
+                            <input class="eo-input header-content-input" type="text" placeholder="变量值" data-ng-model="item.paramValue" ng-change="$ctrl.data.fun.change({$last:$last,switch:2})" ng-readonly="!$ctrl.powerObject.edit">
+                        </li>
+                        <li class="operate-li">
+                            <a class="iconfont icon-shanchu number-label" data-ng-click="$ctrl.data.fun.delete.additionalParamList({$index:$index})" ng-hide="$last" ng-if="$ctrl.powerObject.edit"></a>
+                            &nbsp;
+                        </li>
+                    </ul>
+                </div>
+                <p class="title-p"><b>{{'012128'|translate}}</b></p>
+                <div>
+                    <ul class="item-ul" ng-repeat="item in $ctrl.data.info.current.paramList">
+                        <li class="pull-left header-input-li">
+                            <input class="eo-input header-icon-input" type="text" placeholder="{{'0121213'|translate}}" data-ng-model="item.paramKey" ng-change="$ctrl.data.fun.change({$last:$last,switch:1})" ng-readonly="!$ctrl.powerObject.edit" ng-class="{'eo-input-error':!item.paramKey&&item.paramValue}">
+                        </li>
+                        <li class="header-content-li pull-left">
+                            <input class="eo-input header-content-input" type="text" placeholder="{{'012129'|translate}}" data-ng-model="item.paramValue" ng-change="$ctrl.data.fun.change({$last:$last,switch:1})" ng-readonly="!$ctrl.powerObject.edit">
+                        </li>
+                        <li class="operate-li">
+                            <a class="iconfont icon-shanchu number-label" data-ng-click="$ctrl.data.fun.delete.paramList({$index:$index})" ng-hide="$last" ng-if="$ctrl.powerObject.edit"></a>
+                            &nbsp;
+                        </li>
+                    </ul>
+                </div>
+                <p class="btn-group-p" ng-if="$ctrl.powerObject.edit">
+                    <button class="eo-button-success" button-set-disable-directive="$ctrl.data.fun.confirm()">{{'0121210'|translate}}</button>
+                    <input type="button" class="eo-button-default" ng-click="$ctrl.data.fun.cancle()" ng-if="$ctrl.data.info.current.envID==-1" value="{{'0121211'|translate}}">
+                </p>
+            </div>
+        </form>
+        <div class="unproject-mask" ng-if="!$ctrl.data.info.current.envID">
+            <div>
+                <p class="pull-left">
+                    <label class="iconfont icon-kong"></label>
+                </p>
+                <p class="item-p first-p">{{'0121212'|translate}}</p>
+            </div>
+        </div>
+    </div>
+</article>

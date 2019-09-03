@@ -1,0 +1,67 @@
+home-project-inside-doc-detail {
+    .home-project-inside-detail {
+        z-index: 0;
+        header {
+            .title-ul {
+                @extend %COMMON-TITLE-UL;
+                @extend %COMMON-MENU-LI;
+                .btn-group-li {
+                    .default-btn {
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+        .first-level-article {
+            padding: 0 10px 10px 10px;
+            margin-top: 10px;
+            .fifth-part {
+                padding: 6px 10px;
+                min-height: 48px;
+                background-color: #fff;
+                border: 1px solid #e5e5e5;
+                border-radius: 3px;
+                margin-bottom: 20px;
+                padding-top: 0;
+                .header {
+                    width: 100%;
+                    text-align: left;
+                    font-size: 14px;
+                    border-spacing: 0;
+                    th,
+                    td {
+                        vertical-align: top;
+                        cursor: default;
+                    }
+                    thead {
+                        @include eo-line(35px);
+                        td {
+                            border-bottom: 1px solid #e5e5e5;
+                            font-size: 12px;
+                            line-height: 10px;
+                            padding-bottom: 10px;
+                        }
+                        th {
+                            width: 88px;
+                        }
+                    }
+                }
+                article {
+                    margin-top: 5px;
+                    border:none;
+                    min-height: 500px;
+                    @include eo-width(100%,40px);
+                }
+                .wangEditor-container,
+                .wangEditor-container * {
+                    cursor: default;
+                    .wangEditor-txt {
+                        img {
+                            cursor: default;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

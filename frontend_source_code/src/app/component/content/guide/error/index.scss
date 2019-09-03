@@ -1,0 +1,19 @@
+.install-error {
+    background-color: #fff;
+    box-shadow: 0px 10px 15px #dcdcdc;
+    border-radius: 5px;
+    padding: 25px 25px;
+    ul {
+        li {
+            margin-bottom: 10px;
+            word-break: normal;
+            a {
+                color: #4ab24e;
+            }
+        }
+    }
+    .eo-button-success:hover {
+        border-radius: 17px;
+    }
+}
+

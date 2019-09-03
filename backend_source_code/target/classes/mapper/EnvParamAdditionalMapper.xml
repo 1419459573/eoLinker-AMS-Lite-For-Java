@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.EnvParamAdditionalMapper">
+
+	<select id="getEnvParamAdditional" resultType="EnvParamAdditional">
+		SELECT eo_api_env_param_additional.paramKey,eo_api_env_param_additional.paramValue,eo_api_env_param_additional.paramID FROM eo_api_env_param_additional WHERE eo_api_env_param_additional.envID = #{envID}
+	</select>
+
+	<insert id="addEnvParamAdditional" parameterType="EnvParamAdditional">
+		INSERT INTO eo_api_env_param_additional(eo_api_env_param_additional.envID,eo_api_env_param_additional.paramKey,eo_api_env_param_additional.paramValue) 
+		VALUES (#{envID},#{paramKey},#{paramValue});
+	</insert>
+	
+	<delete id="deleteEnvParamAdditional">
+		DELETE FROM eo_api_env_param_additional WHERE eo_api_env_param_additional.envID = #{envID}
+	</delete>
+
+</mapper>

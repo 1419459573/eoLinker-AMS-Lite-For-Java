@@ -1,0 +1,154 @@
+//author：广州银云信息科技有限公司
+home-project-inside-api-list {
+    .home-project-inside-list {
+        header {
+            .title-ul {
+                @extend %COMMON-TITLE-UL;
+            }
+            .search-li {
+                @extend %SEARCH-UL;
+                margin-left:0;
+            }
+            .view-btn-li {
+                margin-left:5px;
+                >p {
+                    @include eo-line(30px);
+                    margin-top: 9px;
+                    a {
+                        background-color: #fff;
+                        @include eo-line(30px);
+                        display: inline-block;
+                        text-align: center;
+                        padding: 0 10px;
+                        font-size: 12px;
+                        border: 1px solid #e5e5e5;
+                        .iconfont{
+                            font-size: 12px;
+                            margin-right:5px;
+                        }
+                        &:nth-child(n+2){
+                            border-left:none;
+                        }
+                    }
+                    .view-common-btn {
+                        float: left;
+                        &:first-child {
+                            border-radius: 3px 0 0 3px;
+                        }
+                        &:last-child {
+                            margin-left: 0;
+                            border-left: none;
+                            border-radius: 0 3px 3px 0;
+                        }
+                    }
+                    .elem-active {
+                        background-color: #43A047;
+                        color: #fff;
+                        .iconfont {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+        .first-level-article {
+            @extend %COMMON-CONTAINER-STYLE;
+            table {
+                .icon-favorfill {
+                    color: #f48932;
+                }
+                .icon-favor {
+                    color: #ccc;
+                }
+                thead {
+                    font-weight: bold;
+                    @include eo-line(40px);
+                    .first-th {
+                        text-align: center;
+                        text-indent: 0;
+                        width: 36px;
+                    }
+                    .second-th {
+                        width: 30%;
+                        .count-span {
+                            color: #999;
+                            font-weight: initial;
+                            font-size: 12px;
+                        }
+                    }
+                    .third-th {
+                        width: 50%;
+                    }
+                    .forth-th {
+                        min-width: 100px;
+                        width: 11%;
+                    }
+                    .fifth-th {
+                        min-width: 150px;
+                        width: 15%;
+                    }
+                    .sixth-th {
+                        min-width: 115px;
+                        width: 144px;
+                    }
+                    .trash-sixth-th {
+                        width: 175px;
+                    }
+                }
+                td,th {
+                    color: #666;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                tbody {
+                    .iconfont {
+                        font-size: 14px;
+                        cursor: pointer;
+                    }
+                    tr:nth-child(odd) {
+                        background: #fafafa;
+                    }
+                    tr:nth-child(even) {
+                        background: #fff;
+                    }
+                    tr {
+                        @include eo-line(40px);
+                        th {
+                            width: 36px;
+                            text-align: center;
+                            text-indent: 0;
+                        }
+                        
+                        td:nth-child(2) {
+                            .icon-circle {
+                                font-size: 12px;
+                                margin-right: 5px;
+                            }
+                            span {
+                                padding: 2px;
+                                border: 1px solid rgb(39, 107, 225);
+                                background-color: rgb(72, 128, 224);
+                                color: #fff;
+                                border-radius: 5px;
+                            }
+                        }
+                        .icon-favor {
+                            display: none;
+                        }
+                        &:hover {
+                            background: #f0f0f0;
+                            cursor: pointer;
+                            .icon-favor {
+                                display: inline-block;
+                            }
+                        }
+                    }
+                    .elem-active {
+                        @extend %BATCH-OPERATION;
+                    }
+                }
+            }
+        }
+    }
+}

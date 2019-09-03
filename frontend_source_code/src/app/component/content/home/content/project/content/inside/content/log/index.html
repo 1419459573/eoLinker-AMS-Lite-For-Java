@@ -1,0 +1,51 @@
+<div class="home-project-inside-log">
+    <article class="first-level-article">
+        <table class="thead-table">
+            <thead>
+                <tr>
+                    <th class="first-th">{{'012150'|translate}}</th>
+                    <th class="second-th">{{'012151'|translate}}</th>
+                    <th class="third-th">{{'012152'|translate}}</th>
+                    <th class="forth-th">{{'012153'|translate}}</th>
+                    <th class="fifth-th">{{'012154'|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="tr-title" data-ng-repeat='item in $ctrl.data.interaction.response.query'>
+                    <th class="first-th">{{item.opTime}}</th>
+                    <td class="second-th" ng-switch="item.opType">
+                        <span ng-switch-when=0>{{'012155'|translate}}</span>
+                        <span ng-switch-when=1>{{'012156'|translate}}</span>
+                        <span ng-switch-when=2>{{'012157'|translate}}</span>
+                        <span ng-switch-when=3>{{'012158'|translate}}</span>
+                    </td>
+                    <td class="third-th" ng-switch="item.opTarget">
+                    <span ng-switch-when=0>{{'012159'|translate}}</span>
+                        <span ng-switch-when=1>{{'0121510'|translate}}</span>
+                        <span ng-switch-when=2>{{'0121511'|translate}}</span>
+                        <span ng-switch-when=3>{{'0121512'|translate}}</span>
+                        <span ng-switch-when=4>{{'0121513'|translate}}</span>
+                        <span ng-switch-when=5>{{'0121514'|translate}}</span>
+                        <span ng-switch-when=6>{{'0121515'|translate}}</span>
+                        <span ng-switch-when=7>{{'0121516'|translate}}</span>
+                        <span ng-switch-when=8>{{'0121517'|translate}}</span>
+                    </td>
+                    <td class="forth-th">
+                        {{item.partnerNickName||item.userNickName}}
+                    </td>
+                    <td class="fifth-th" title="{{item.opDesc}}">
+                        {{item.opDesc}}
+                    </td>
+                </tr>
+                <tr class="eo-none-tr" ng-if="$ctrl.data.interaction.response.query.length==0">
+                    <td colspan="5">{{'0121518'|translate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <footer class="pageFooter"  ng-if="$ctrl.data.interaction.response.query.length>0">
+        <uib-pagination total-items="$ctrl.data.info.pagination.logCount" items-per-page="$ctrl.data.interaction.request.pageSize" ng-model="$ctrl.data.interaction.request.page" max-size="$ctrl.data.info.pagination.maxSize" class="pagination-sm " boundary-link-Number="true" rotate="false" next-text="&#xe684;" previous-text="&#xe685;" ng-change="$ctrl.data.fun.pageChange()"></uib-pagination>
+    </footer>
+    <div load-directive="$ctrl.data.fun.init(arg)">
+    </div>
+</div>

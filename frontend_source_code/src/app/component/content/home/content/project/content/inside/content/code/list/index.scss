@@ -1,0 +1,101 @@
+home-project-inside-code-list {
+    .home-project-inside-code-list {
+        header {
+            .title-ul {
+                @extend %COMMON-TITLE-UL;
+            }
+            .search-li {
+                @extend %SEARCH-UL;
+                margin-left:0;
+            }
+            .first-tab-btn,.last-tab-btn{
+                border: 1px solid #ddd;
+                background-color: #fff;
+            }
+            .first-tab-btn{
+                margin-left: 5px;
+                border-radius:3px 0 0 3px;
+                border-right:none;
+                margin-right: 0px;
+            }
+            .last-tab-btn{
+                margin-left:0;
+                border-radius:0 3px 3px 0;
+            }
+        }
+        .first-level-article {
+            @extend %COMMON-CONTAINER-STYLE;
+            table {
+                .iconfont {
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+                thead {
+                    font-weight: bold;
+                    @include eo-line(40px);
+                    th {
+                        font-weight: initial;
+                    }
+                    .first-th {
+                        text-align: left;
+                        text-indent: 10px;
+                        width: 18%;
+                    }
+                    .second-th {
+                        min-width: 200px;
+                        width: 23%;
+                    }
+                    .third-th {
+                        min-width: 220px;
+                    }
+                    .forth-th {
+                        min-width: 115px;
+                        width: 144px;
+                    }
+                }
+                tbody {
+                    tr:nth-child(odd) {
+                        background: #fafafa;
+                    }
+                    tr:nth-child(even) {
+                        background: #fff;
+                    }
+                    tr {
+                        @include eo-line(41px, 40px);
+                        th {
+                            width: 36px;
+                            text-align: center;
+                            text-indent: 0;
+                        }
+                        td {
+                            color: #666;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            cursor: default;
+                        }
+                        td:nth-child(2) {
+                            .icon-circle {
+                                font-size: 12px;
+                                margin-right: 5px;
+                            }
+                            span {
+                                padding: 2px;
+                                border: 1px solid rgb(39, 107, 225);
+                                background-color: rgb(72, 128, 224);
+                                color: #fff;
+                                border-radius: 5px;
+                            }
+                        }
+                        &:hover {
+                            background: #f0f0f0;
+                        }
+                    }
+                    .elem-active {
+                        @extend %BATCH-OPERATION;
+                    }
+                }
+            }
+        }
+    }
+}

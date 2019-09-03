@@ -1,0 +1,192 @@
+.expression-builder-directive {
+    height: 100%;
+    .expression-builder-view {
+        min-height: 560px;
+        min-width: 1141px;
+        height: 90%;
+        width: 80%;
+        margin: auto;
+        background-color: #fff;
+        border: 1px solid #dcdcdc;
+        border-radius: 3px;
+        box-shadow: 0px 10px 29px #a3a3a3;
+        .first-level-ul {
+            overflow: hidden;
+            .first-level-li {
+                .title-p {
+                    @include eo-line(50px);
+                    padding: 0 10px;
+                    b {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        .header-ul {
+            border-bottom: 1px solid #dcdcdc;
+            .first-level-li {
+                padding: 5px 10px;
+                .title-p {
+                    span {
+                        font-size: 18px;
+                    }
+                }
+            }
+        }
+        .auto-view-div {
+            @include eo-height(100%, 192px);
+            display: grid;
+            border-bottom: 1px solid #dcdcdc;
+            overflow: auto;
+            .method-ul {
+                .first-level-li {
+                    float: left;
+                    height: 100%;
+                    border-left: 1px solid #dcdcdc;
+                    @include eo-width(33%, 0.07em);
+                    &:last-child {
+                        @include eo-width(34%, 0.07em);
+                    }
+                    &:first-child {
+                        border-left: none;
+                    }
+                    .title-p {
+                        border-bottom: 1px solid #dcdcdc;
+                        background-color: #f5f5f5;
+                    }
+                    .second-level-ul {
+                        overflow: auto;
+                        @include eo-height(100%, 50px);
+                        a {
+                            &:last-child {
+                                li {
+                                    border-bottom: none;
+                                }
+                            }
+                            li {
+                                line-height: 30px;
+                                padding: 5px 20px;
+                                border-bottom: 1px solid #dcdcdc;
+                                font-size: 13px;
+                                &:hover {
+                                    background-color: #f9f9f9;
+                                    color: #333;
+                                    p,
+                                    label,
+                                    .tips-span {
+                                        color: #333;
+                                    }
+                                }
+                                .tips-span {
+                                    color: #999;
+                                    font-size: 12px;
+                                }
+                                p {
+                                    line-height: 40px;
+                                }
+                                label {
+                                    width: 78px;
+                                    display: inline-block;
+                                    text-indent: 15px;
+                                    text-align: left;
+                                }
+                                input[type=text],
+                                select {
+                                    @include eo-width(100%, 80px);
+                                    height: 31px;
+                                }
+                                select {
+                                    @include eo-width(100%, 78px);
+                                }
+                            }
+                            .random-li {
+                                input[type=text] {
+                                    width: 100px;
+                                }
+                            }
+                            .active-li {
+                                background-color: #0088cc;
+                                color: #fff;
+                                p,
+                                label,
+                                .tips-span {
+                                    color: #fff;
+                                }
+                            }
+                        }
+                    }
+                }
+                .only-li,
+                .only-two-li {
+                    border-right: 1px solid #dcdcdc;
+                }
+            }
+            .expression-ul {
+                border-top: 1px solid #dcdcdc;
+                min-height: 50px;
+                overflow: auto;
+                .item-a {
+                    font-size: 12px;
+                    padding: 0 10px;
+                    margin-right: 10px;
+                    display: inline-block;
+                    @include eo-line(28px, 26px);
+                    .iconfont {
+                        font-size: 12px;
+                        margin-left: 5px;
+                        color: $buttonDangerBorderColor;
+                        &:hover {
+                            color: $buttonDangerFocusBorderColor;
+                        }
+                    }
+                }
+                .eo-button-info {
+                    .item-detail {
+                        color: #fff;
+                    }
+                }
+                .first-level-li {
+                    .title-p {
+                        height: inherit;
+                        b {
+                            display: inline-block;
+                            width: 64px;
+                        }
+                        .filter-span {
+                            @include eo-width(100%, 70px);
+                            display: inline-block;
+                            vertical-align: top;
+                        }
+                    }
+                }
+            }
+        }
+        .preview-ul {
+            height: 80px;
+            background-color: #f5f5f5;
+            .first-level-li {
+                .title-p {
+                    margin-top: 15px;
+                    .result-input {
+                        margin-left: 20px;
+                        line-height: 35px;
+                        display: inline-block;
+                        vertical-align: middle;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        @include eo-width(100%, 75px);
+                    }
+                }
+            }
+        }
+        .btn-group-ul {
+            padding: 10px 0;
+            border-top: 1px solid #dcdcdc;
+            .btn {
+                width: 100px;
+                margin-right: 20px;
+            }
+        }
+    }
+}

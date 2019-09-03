@@ -1,0 +1,52 @@
+guide {
+    background-color: #f7f7f7;
+    position: absolute;
+    height: 100%;
+    display: table;
+    width: 100%;
+    top: 0;
+    left: 0;
+    .eo-footer {
+        //@include eo-line(80px);
+        line-height: 24px;
+        background-color: #f7f7f7;
+    }
+    .guide-content-wrap {
+        display: table-cell;
+        vertical-align: middle;
+    }
+    .guide-logo {
+        width: 100px;
+        margin: auto auto;
+        padding-bottom: 20px;
+    }
+    .guide-wrap {
+        width: 732px;
+        min-height: 450px;
+        margin: auto auto;
+        font-size: 14px;
+        line-height: 30px;
+    }
+    .eo-footer {
+        background-color: #f7f7f7;
+    }
+}
+
+.guide-button {
+    margin-top: 15px;
+}
+
+.guide-button {
+    box-shadow: 0px 10px 29px #ededed;
+    width: 172px;
+    border-radius: 17px;
+    text-align: left;
+    text-indent: 10px;
+    margin-left: -5px;
+    .pull-right {
+        margin-right: 10px;
+    }
+    .eo-button-success:hover {
+        border-radius: 17px;
+    }
+}

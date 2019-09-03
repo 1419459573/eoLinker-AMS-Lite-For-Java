@@ -1,0 +1,17 @@
+<div class="eo-navbar">
+	<div class="nav nav-1" >
+		<header class="nav-header register-nav-header logo-li">
+			<ul>
+			<li class="logo-li pull-left"> <img alt="logo" src="app/assets/images/eolinker_sim.png" ui-sref="index" /></li>
+			<li class="pull-left" ui-sref-active="active"><a ui-sref="index" class="nav-li">{{'2100'|translate}}</a></li>
+			<li class="pull-left"><a class="nav-li" href="https://www.eolinker.com" target="_blank">{{'2101'|translate}}</a></li>
+			<li class="pull-left"><a class="nav-li" href="http://blog.eolinker.com/#/" target="_blank">{{'2102'|translate}}</a></li>
+			<li class="pull-left"><a class="nav-li" href="https://www.eolinker.com/#/about" target="_blank">{{'2103'|translate}}</a></li>
+			<li class="pull-left"><a class="nav-li" href="http://help.eolinker.com" target="_blank" target="_blank">帮助中心</a></li>
+			<li class="pull-right register-function" ng-if="$ctrl.data.info.registerShow&&$ctrl.data.service.info.status==0">
+				<a ui-sref="register.default" class="goto-register nav-li">{{'2104'|translate}}</a>
+			</li>
+		</ul>
+		</header>
+	</div>
+</div>

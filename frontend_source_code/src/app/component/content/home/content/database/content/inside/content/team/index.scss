@@ -1,0 +1,11 @@
+//author：广州银云信息科技有限公司
+database-team {
+    .database-team {
+        @extend %DATABASE-VIEW-STYLE;
+        margin-left:$HOME-SIDEBAR-LEFT;
+        padding:10px 5px;
+        article {
+            @extend %TEAM-ARTICLE-STYLE;
+        }
+    }
+}

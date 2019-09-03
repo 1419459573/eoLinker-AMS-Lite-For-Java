@@ -1,0 +1,62 @@
+<div class="common-table-div">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li">
+                <a class="eo-button-success common-btn" data-ng-click="$ctrl.data.fun.edit()">
+                        <span class="iconfont icon-tianjia"></span>{{'01200'|translate}}
+                    </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.import()">
+                        <span class="iconfont icon-shangchuan"></span>{{'01201'|translate}}
+                    </a>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article">
+        <table>
+            <thead>
+                <tr>
+                    <th class="first-th">{{'01202'|translate}}</th>
+                    <th class="second-th">{{'01203'|translate}}</th>
+                    <th class="second-th">{{'01204'|translate}}</th>
+                    <th class="third-th">{{'01205'|translate}}</th>
+                    <th class="forth-th">{{'01206'|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat='item in $ctrl.data.interaction.response.query' data-ng-click="$ctrl.data.fun.enter({item:item})">
+                    <th>
+                        {{item.projectName}}
+                    </th>
+                    <td><span >V&nbsp;{{item.projectVersion}}</span></td>
+                    <td ng-switch="item.projectType">
+                        <span  ng-switch-when=0>Web</span>
+                        <span ng-switch-when=1>App</span>
+                        <span  ng-switch-when=2>PC</span>
+                        <span  ng-switch-when=3>{{'01207'|translate}}</span>
+                        <span  ng-switch-when=4>{{'01208'|translate}}</span>
+                    </td>
+                    <td>{{item.projectUpdateTime}}</td>
+                    <td>
+                        <div ng-if="item.userType<=1">
+                            <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.edit({item:item,$index:$index,$event:$event})"><span class="iconfont icon-bianji"></span>{{'01209'|translate}}</a>
+                            <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.delete({item:item,$index:$index,$event:$event})" ng-if="item.userType==0"><span class="iconfont icon-shanchu"></span>{{'012011'|translate}}</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="eo-none-tr" ng-if="$ctrl.data.interaction.response.query.length==0">
+                    <td colspan="5">{{'012012'|translate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+    <div class="introduce-common-div">
+        <p class="title-p">开源版与专业版的区别？</p>
+        <p class="desc-p"><b>AMS开源版</b> 专为微型团队设计，拥有基础的API管理、测试以及团队协作功能；</p>
+        <p class="desc-p"><b>AMS专业版</b> 则专注于企业级用户，除了在API管理、基础测试、自动化测试等方面有所强化外，在人员管理方面支持企业级人员架构，允许对用户进行权限分组以及设置详细的操作权限等。</p>
+        <p class="desc-p">如果您是专业用户，AMS专业版将更能满足您的需求，<a class="eo-link"  href="https://www.eolinker.com/#/product/pro" target="_blank">点击这里了解更多</a>！</p>
+    </div>
+</div>

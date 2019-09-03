@@ -1,0 +1,48 @@
+<div class="common-table-div">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li">
+                <a class="eo-button-success common-btn" data-ng-click="$ctrl.data.fun.edit()"><span class="iconfont icon-tianjia"></span>{{'01000'|translate}}</a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.import()"><span class="iconfont icon-shangchuan"></span>{{'01001'|translate}}</a>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article">
+        <table>
+            <thead>
+                <tr>
+                    <th class="first-th">{{'01002'|translate}}</th>
+                    <th class="second-th">{{'01003'|translate}}</th>
+                    <th class="third-th">{{'01004'|translate}}</th>
+                    <th class="forth-th">{{'01005'|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat='item in $ctrl.data.interaction.response.query' data-ng-click="$ctrl.data.fun.enter({item:item})">
+                    <th>{{item.dbName}}</th>
+                    <td>V&nbsp;{{item.dbVersion}}</td>
+                    <td>{{item.dbUpdateTime}}</td>
+                    <td>
+                        <div ng-hide="item.userType>1">
+                            <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.edit({item:item,$index:$index,$event:$event})"><span class="iconfont icon-bianji"></span>{{'01006'|translate}}</a>
+                            <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.delete({item:item,$index:$index,$event:$event})"><span class="iconfont icon-shanchu"></span>{{'01007'|translate}}</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="eo-none-tr" ng-if="$ctrl.data.interaction.response.query.length==0">
+                    <td colspan="5">{{'01008'|translate}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+    <div class="introduce-common-div">
+        <p class="title-p">想要更强大的数据库结构管理功能？</p>
+        <p class="desc-p"><b>AMS开源版</b> 仅包括最基础的API测试功能；</p>
+        <p class="desc-p"><b>AMS专业版</b> 则额外支持参数构造器、保存测试用例、批量测试用例、查看更多测试信息等。</p>
+        <p class="desc-p">如果您是专业用户，AMS专业版将更能满足您的需求，<a class="eo-link"  href="https://www.eolinker.com/#/product/pro" target="_blank">点击这里了解更多</a>！</p>
+    </div>
+</div>

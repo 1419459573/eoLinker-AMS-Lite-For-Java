@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eolinker.mapper.UserMapper">
+	<insert id="addUser" parameterType="User" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into
+		eo_user(userName,userPassword,userNickName)values(#{userName},#{userPassword},#{userNickName})
+	</insert>
+	<select id="getUserByUserName" resultType="User">
+		select eo_user.* from eo_user where eo_user.userName = #{userName}
+	</select>
+	<update id="updatePassword">
+		update eo_user set eo_user.userPassword = #{userPassword} where
+		eo_user.userID = #{userID}
+	</update>
+	<update id="updateNickName">
+		update eo_user set eo_user.userNickName = #{userNickName} where
+		eo_user.userID = #{userID}
+	</update>
+</mapper>

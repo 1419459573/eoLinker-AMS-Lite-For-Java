@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.AutomatedTestCaseMapper">
+	<delete id="deleteTestCaseByGroupID">
+		DELETE FROM eo_project_test_case WHERE
+		eo_project_test_case.groupID IN
+		<foreach collection="groupIDS" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<insert id="addTestCase" parameterType="AutomatedTestCase"
+		useGeneratedKeys="true" keyProperty="caseID">
+		INSERT INTO
+		eo_project_test_case(eo_project_test_case.projectID,eo_project_test_case.userID,eo_project_test_case.caseName,eo_project_test_case.caseDesc,eo_project_test_case.createTime,eo_project_test_case.updateTime,eo_project_test_case.caseType,eo_project_test_case.groupID)
+		VALUES(#{projectID},#{userID},#{caseName},#{caseDesc},#{createTime},#{updateTime},#{caseType},#{groupID})
+	</insert>
+
+	<update id="editTestCase" parameterType="AutomatedTestCase">
+		UPDATE
+		eo_project_test_case SET
+		eo_project_test_case.caseName =
+		#{caseName},eo_project_test_case.caseDesc =
+		#{caseDesc},eo_project_test_case.updateTime =
+		#{updateTime},eo_project_test_case.caseType =
+		#{caseType},eo_project_test_case.groupID = #{groupID} WHERE
+		eo_project_test_case.caseID = #{caseID} AND
+		eo_project_test_case.projectID = #{projectID}
+	</update>
+
+	<select id="getTestCaseList" resultType="java.util.Map">
+		SELECT
+		eo_conn_project.partnerNickName,eo_user.userNickName,eo_project_test_case.caseID,eo_project_test_case.caseName,eo_project_test_case.caseDesc,eo_project_test_case.updateTime,eo_project_test_case.caseType,eo_project_test_case_group.groupID,eo_project_test_case_group.parentGroupID,eo_project_test_case_group.groupName
+		FROM eo_project_test_case LEFT JOIN eo_project_test_case_group ON
+		eo_project_test_case_group.groupID = eo_project_test_case.groupID LEFT
+		JOIN eo_conn_project ON eo_conn_project.userID =
+		eo_project_test_case.userID AND eo_conn_project.projectID =
+		eo_project_test_case.projectID LEFT JOIN eo_user ON
+		eo_project_test_case.userID = eo_user.userID
+		WHERE
+		eo_project_test_case_group.projectID = #{projectID}
+		<if test="groupIDS!=null and groupIDS.size > 0">
+			AND eo_project_test_case_group.groupID IN
+			<foreach collection="groupIDS" item="item" index="index"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		ORDER BY eo_project_test_case.updateTime DESC
+	</select>
+
+	<select id="getTestCaseInfo" resultType="java.util.Map">
+		SELECT
+		eo_conn_project.partnerNickName,eo_user.userNickName,eo_project_test_case.caseID,eo_project_test_case.caseName,eo_project_test_case.caseDesc,eo_project_test_case.updateTime,eo_project_test_case.caseType,eo_project_test_case_group.groupID,eo_project_test_case_group.parentGroupID,eo_project_test_case_group.groupName
+		FROM eo_project_test_case LEFT JOIN eo_project_test_case_group ON
+		eo_project_test_case_group.groupID = eo_project_test_case.groupID LEFT
+		JOIN eo_conn_project ON eo_project_test_case.userID =
+		eo_conn_project.userID AND eo_conn_project.projectID =
+		eo_project_test_case.projectID LEFT JOIN eo_user ON
+		eo_project_test_case.userID = eo_user.userID WHERE
+		eo_project_test_case.projectID = #{projectID} AND
+		eo_project_test_case.caseID = #{caseID}
+	</select>
+
+	<select id="getCaseNameByIDs" resultType="String">
+		SELECT GROUP_CONCAT(eo_project_test_case.caseName) AS caseName FROM
+		eo_project_test_case
+		WHERE eo_project_test_case.caseID IN
+		<foreach collection="caseIDs" item="item" index="index"
+			open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	<delete id="deleteTestCase">
+		DELETE FROM eo_project_test_case WHERE eo_project_test_case.caseID IN
+		<foreach collection="caseIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		AND eo_project_test_case.projectID = #{projectID}
+	</delete>
+	<select id="searchTestCase" resultType="java.util.Map">
+		SELECT
+		eo_conn_project.partnerNickName,eo_user.userNickName,eo_project_test_case.caseID,eo_project_test_case.caseName,eo_project_test_case.caseDesc,eo_project_test_case.updateTime,eo_project_test_case.caseType,eo_project_test_case_group.groupID,eo_project_test_case_group.parentGroupID,eo_project_test_case_group.groupName
+		FROM eo_project_test_case LEFT JOIN eo_project_test_case_group ON
+		eo_project_test_case_group.groupID = eo_project_test_case.groupID LEFT
+		JOIN eo_conn_project ON eo_project_test_case.userID =
+		eo_conn_project.userID AND eo_conn_project.projectID =
+		eo_project_test_case.projectID LEFT JOIN eo_user ON
+		eo_project_test_case.userID = eo_user.userID
+		WHERE
+		eo_project_test_case.projectID = #{projectID} AND
+		eo_project_test_case.caseName LIKE concat('%',#{tips},'%') ORDER BY
+		eo_project_test_case.updateTime DESC
+	</select>
+	<select id="getTestCaseDataList" resultType="java.util.Map">
+		SELECT
+		eo_project_test_case.caseID,eo_project_test_case.caseName,eo_project_test_case.caseType
+		FROM eo_project_test_case LEFT JOIN eo_project_test_case_group ON
+		eo_project_test_case.groupID = eo_project_test_case_group.groupID
+		WHERE eo_project_test_case.projectID = #{projectID}
+		<if test="groupID!=null">
+			AND (eo_project_test_case.groupID = #{groupID} OR
+			eo_project_test_case_group.parentGroupID = #{groupID})
+		</if>
+	</select>
+	<select id="getProjectIDByCaseID" resultType="Integer">
+		SELECT
+		eo_project_test_case.projectID FROM eo_project_test_case WHERE
+		eo_project_test_case.caseID = #{caseID}
+	</select>
+
+	<select id="getTestCaseListByGroupID" resultType="java.util.Map">
+		SELECT
+		eo_conn_project.partnerNickName,eo_user.userNickName,eo_project_test_case.caseID,eo_project_test_case.caseName,eo_project_test_case.caseDesc,eo_project_test_case.updateTime,eo_project_test_case.caseType,eo_project_test_case_group.groupID,eo_project_test_case_group.parentGroupID,eo_project_test_case_group.groupName
+		FROM eo_project_test_case LEFT JOIN eo_project_test_case_group ON
+		eo_project_test_case_group.groupID = eo_project_test_case.groupID LEFT
+		JOIN eo_conn_project ON eo_conn_project.userID =
+		eo_project_test_case.userID AND eo_conn_project.projectID =
+		eo_project_test_case.projectID LEFT JOIN eo_user ON
+		eo_project_test_case.userID = eo_user.userID
+		WHERE
+		eo_project_test_case_group.projectID = #{projectID}
+		AND
+		eo_project_test_case_group.groupID = #{groupID}
+		ORDER BY
+		eo_project_test_case.updateTime DESC
+	</select>
+	
+</mapper>

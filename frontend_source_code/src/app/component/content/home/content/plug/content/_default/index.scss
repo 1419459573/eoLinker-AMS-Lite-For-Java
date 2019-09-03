@@ -1,0 +1,111 @@
+home-plug-default {
+    .first-level-article {
+        border-radius: 0 3px 3px 0;
+        border: 1px solid #e5e5e5;
+        @include eo-height(100%, 72px);
+        overflow: auto;
+        position: absolute;
+        background-color: #fff;
+        margin-left: $HOME-SIDEBAR-LEFT + $HOME-SIDEBAR-LEFT + 9px;
+        margin-right: 10px;
+        top: $HOME-NAVBAR-HEIGHT + 10px;
+        .pro-label{
+            color:#fff;
+            background-color: #FF5722;
+            border-radius:3px;
+            padding:2px 5px;
+            font-size: 12px;
+            margin-left:5px;
+        }
+        table {
+            width: 100%;
+            background: #fff;
+            font-size: 14px;
+            border-spacing: 0;
+            text-align: left;
+            text-indent: 10px;
+            table-layout: fixed;
+            thead {
+                font-weight: bold;
+                @include eo-line(40px);
+                .second-th {
+                    width: 100px
+                }
+                .third-th {
+                    width: 200px
+                }
+                .forth-th {
+                    width: 100px;
+                }
+                th {
+                    padding-right: 20px;
+                    border-bottom: 1px solid #e5e5e5;
+                }
+            }
+            tbody {
+                tr {
+                    height: 120px;
+                    td {
+                        vertical-align: middle;
+                    }
+                    .key-td {
+                        label {
+                            font-size: 32px;
+                            width: 64px;
+                            @include eo-line(64px);
+                            border-radius: 50%;
+                            color: #fff;
+                            background-color: #35a7ff;
+                            text-align: center;
+                            text-indent: 0;
+                            margin: 0 20px 0 20px;
+                        }
+                        >div {
+                            vertical-align: middle;
+                            display: inherit;
+                            height: 64px;
+                            p {
+                                text-indent: 0;
+                            }
+                            .name-p {
+                                color: #35a7ff;
+                            }
+                            .desc-p {
+                                color: #999;
+                            }
+                        }
+                    }
+                    &:nth-child(n+2){
+                        td{
+                            border-top: 1px solid #e5e5e5;
+                        }
+                    }
+                }
+                .disable-tr {
+                    background-color: #f5f5f5;
+                    td {
+                        color:#999;
+                        label,p,a{
+                            color:#999;
+                        }
+                        label{
+                            background-color:#ddd;
+                        }
+                        div > .name-p{
+                            color:#999;
+                            line-height: 30px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.shrink-div {
+    home-plug-default {
+        .first-level-article {
+            margin-left: $HOME-SIDEBAR-LEFT + $HOME-SHRINK-SIDEBAR-LEFT + 9px;
+        }
+    }
+}

@@ -1,0 +1,63 @@
+<div class="eo-navbar">
+    <div class="nav-2">
+        <header class="nav-header">
+            <ul class="first-level-ul pull-left">
+                <li class="go-index-btn logo-li pull-left">
+                    <img alt="logo" src="app/assets/images/logo_admin.png" / ui-sref="index">
+                </li>
+                <li class="navigation-li pull-left nav-li">
+                    <span>{{'2205'|translate}}</span>
+                </li>
+            </ul>
+            <ul class="first-level-ul pull-left">
+                <li class="navigation-li">
+                    <span ng-repeat="item in $ctrl.data.service.navbar.info.navigation.query">
+                        <span ng-if="!item.sref">{{item.name}}</span>
+                        <a ng-if="item.sref" ui-sref="{{item.sref}}">{{item.name}}</a>
+                        <span class="iconfont icon-xiangyou"></span>
+                    </span>
+                    <span>{{$ctrl.data.service.navbar.info.navigation.current}}</span>
+                </li>
+            </ul>
+            <ul>
+                <li class="list-function pull-right btn-li">
+                    <div class="list ">
+                        <span class="iconfont icon-yonghu first-icon"></span>
+                        <div class="list-function-wrap">
+                            <ul class="nav-hide-ul">
+                                <li class="list-function-detail">
+                                    <ul>
+                                        <a>
+                                            <li data-ng-click="$ctrl.data.fun.update()" ng-if='$ctrl.data.info.allowUpdate'>{{'500'|translate}}
+                                                <span class="iconfont icon-gengxin"></span>
+                                            </li>
+                                        </a>
+                                        <a ui-sref="index">
+                                            <li>{{'2206'|translate}}
+                                                <span class="iconfont icon-zhuye"></span>
+                                            </li>
+                                        </a>
+                                        <a>
+                                            <li data-ng-click="$ctrl.data.fun.logout()">{{'2208'|translate}}
+                                        </a>
+                                    </ul>
+                                    </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </li>
+                    <li class="pull-right">
+                            <a class="news-btn" href="http://help.eolinker.com" target="_blank">
+                                <span class="iconfont icon-bangzhu"></span>&nbsp;帮助
+                            </a>
+                        </li>
+                    <li class="pull-right">
+                        <a class="news-btn eo-status-error" href="https://wj.qq.com/s/1620890/0d46" target="_blank">
+                            <span class="iconfont icon-wenjuan"></span>&nbsp;申请离线专业版本
+                        </a>
+                    </li>
+                    
+            </ul>
+        </header>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+home-project-inside-log {
+    .home-project-inside-log {
+        @extend %COMMON-GRID-STYLE;
+        .warning-tips {
+            font-size: 13px;
+            color: #999;
+            margin-top: 10px;
+            margin-left: 5px;
+        }
+        table {
+            border-spacing: 0;
+            table-layout: fixed;
+            th,
+            td {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis
+            }
+            >thead {
+                .first-th {
+                    width: 200px;
+                }
+                .second-th {
+                    width: 60px;
+                }
+                .third-th {
+                    width: 100px;
+                }
+                .forth-th {
+                    width: 150px;
+                }
+            }
+        }
+    }
+}

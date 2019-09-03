@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.DatabaseMapper">
+	
+	<insert id="addDatabase" parameterType="Database" useGeneratedKeys="true" keyProperty="dbID">
+		INSERT INTO eo_database (eo_database.dbName,eo_database.dbVersion,eo_database.dbUpdateTime,eo_database.databaseType) 
+		values (#{dbName},#{dbVersion},now(),#{dbType});
+	</insert>
+	
+	<delete id="deleteDatabase">
+		DELETE FROM eo_database WHERE eo_database.dbID = #{dbID};
+	</delete>
+	
+	<select id="getDatabaseList" resultType="java.util.Map">
+		SELECT eo_database.dbID,eo_database.dbName,eo_database.dbVersion,eo_database.dbUpdateTime,eo_conn_database.userType,eo_database.databaseType FROM eo_database 
+		INNER JOIN eo_conn_database ON eo_database.dbID = eo_conn_database.dbID WHERE eo_conn_database.userID = #{userID};
+	</select>
+	
+	<update id="editDatabase">
+		UPDATE eo_database SET 
+		<if test="dbName != null">
+			eo_database.dbName = #{dbName},
+		</if>
+		<if test="dbVersion != null">
+			eo_database.dbVersion =#{dbVersion},
+		</if>
+		eo_database.dbUpdateTime =now() WHERE eo_database.dbID =#{dbID};
+	</update>
+	
+	<select id="getDatabaseInfo" resultType="Database">
+		SELECT eo_database.dbName,eo_database.dbVersion,eo_database.databaseType FROM eo_database WHERE eo_database.dbID = #{dbID};
+	</select>
+
+	<select id="getDatabase" resultType="java.util.Map">
+		SELECT eo_database.dbID,eo_database.dbName,eo_database.dbVersion,eo_database.dbUpdateTime,eo_database.databaseType,eo_conn_database.userType FROM eo_database 
+		INNER JOIN eo_conn_database ON eo_database.dbID = eo_conn_database.dbID WHERE eo_conn_database.userID = #{userID} AND eo_database.dbID = #{dbID};
+	</select>
+
+	<update id="updateDatabaseUpdateTime">
+		UPDATE eo_database SET eo_database.dbUpdateTime =now() WHERE eo_database.dbID =#{dbID};
+	</update>
+	
+	
+</mapper>

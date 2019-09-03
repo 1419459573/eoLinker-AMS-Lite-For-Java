@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.PartnerMapper">
+	<insert id="addPartner" parameterType="Partner"
+		useGeneratedKeys="true" keyProperty="connID">
+		INSERT INTO
+		eo_conn_project(projectID,userID,userType,inviteUserID,partnerNickName)VALUES(#{projectID},#{userID},#{userType},#{inviteUserID},#{partnerNickName})
+	</insert>
+	<select id="getProjectUserType" resultType="Partner">
+		SELECT
+		eo_conn_project.userType FROM eo_conn_project WHERE
+		eo_conn_project.userID = #{userID} AND eo_conn_project.projectID =
+		#{projectID}
+	</select>
+	<delete id="deleteAllMember" parameterType="Integer">
+		DELETE FROM
+		eo_conn_project WHERE eo_conn_project.projectID = #{projectID};
+	</delete>
+	<select id="getPartnerCount" parameterType="Integer"
+		resultType="Integer">
+		SELECT COUNT(eo_conn_project.connID) FROM eo_conn_project
+		WHERE eo_conn_project.projectID = #{projectID}
+	</select>
+	<select id="checkIsInvited" resultType="Integer">
+		SELECT
+		eo_conn_project.connID FROM eo_conn_project INNER JOIN eo_user ON
+		eo_user.userID = eo_conn_project.userID WHERE
+		eo_conn_project.projectID = #{projectID} AND eo_user.userName =
+		#{userName}
+	</select>
+	<delete id="removePartner">
+		DELETE FROM eo_conn_project WHERE
+		eo_conn_project.projectID = #{projectID} AND eo_conn_project.connID =
+		#{connID} AND eo_conn_project.userType != 0;
+	</delete>
+	<select id="getPartnerInfoByConnID" resultType="java.util.Map">
+		SELECT
+		eo_user.userName,eo_user.userNickName,eo_conn_project.* FROM
+		eo_conn_project INNER JOIN eo_user ON eo_conn_project.userID =
+		eo_user.userID WHERE eo_conn_project.projectID = #{projectID} AND
+		eo_conn_project.connID = #{connID}
+	</select>
+
+	<select id="getPartnerList" resultType="java.util.Map">
+		SELECT
+		eo_conn_project.userID,eo_conn_project.connID,eo_conn_project.userType,eo_user.userName,eo_user.userNickName,eo_conn_project.partnerNickName
+		FROM eo_conn_project INNER JOIN eo_user ON eo_conn_project.userID =
+		eo_user.userID WHERE eo_conn_project.projectID = #{projectID} ORDER BY
+		eo_conn_project.userType ASC
+	</select>
+	<delete id="quitPartner">
+		DELETE FROM eo_conn_project WHERE
+		eo_conn_project.projectID = #{projectID}
+		AND eo_conn_project.userID =
+		#{userID} AND eo_conn_project.userType !=
+		0;
+	</delete>
+	<update id="editPartnerNickName">
+		UPDATE eo_conn_project SET eo_conn_project.partnerNickName =
+		#{nickName} WHERE eo_conn_project.connID = #{connID} AND
+		eo_conn_project.projectID = #{projectID}
+	</update>
+	<update id="editPartnerType">
+		UPDATE eo_conn_project SET eo_conn_project.userType =
+		#{userType} WHERE eo_conn_project.connID = #{connID} AND
+		eo_conn_project.projectID = #{projectID}
+	</update>
+</mapper>

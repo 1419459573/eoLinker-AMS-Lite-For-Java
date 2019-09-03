@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.ApiGroupMapper">
+	<insert id="addApiGroup" parameterType="ApiGroup"
+		useGeneratedKeys="true" keyProperty="groupID">
+		INSERT INTO
+		eo_api_group(projectID,groupName,parentGroupID,isChild)VALUES(#{projectID},#{groupName},#{parentGroupID},#{isChild})
+	</insert>
+
+	<select id="checkGroupPermission" parameterType="Integer"
+		resultType="Integer">
+		SELECT eo_conn_project.projectID FROM eo_conn_project INNER
+		JOIN
+		eo_api_group ON eo_api_group.projectID = eo_conn_project.projectID
+		WHERE groupID = #{groupID} AND userID = #{userID}
+	</select>
+
+	<delete id="deleteGroup" parameterType="Integer">
+		DELETE FROM eo_api_group
+		WHERE eo_api_group.groupID IN
+		<foreach collection="groupIDS" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<select id="getParentGroupList" parameterType="Integer"
+		resultType="java.util.Map">
+		SELECT
+		eo_api_group.groupID,eo_api_group.groupName,eo_api_group.isChild FROM
+		eo_api_group WHERE projectID = #{projectID} AND isChild = 0 ORDER BY
+		eo_api_group.groupID DESC
+	</select>
+
+	<select id="getChildGroupList" parameterType="Integer"
+		resultType="java.util.Map">
+		SELECT
+		eo_api_group.groupID,eo_api_group.groupName,eo_api_group.parentGroupID,eo_api_group.isChild
+		FROM eo_api_group WHERE projectID = #{projectID} AND
+		parentGroupID =
+		#{parentGroupID} ORDER BY eo_api_group.groupID DESC
+	</select>
+
+	<select id="getGroupOrderList" parameterType="Integer"
+		resultType="String">
+		SELECT eo_api_group_order.orderList FROM eo_api_group_order
+		WHERE
+		eo_api_group_order.projectID = #{projectID}
+	</select>
+
+	<update id="editGroup" parameterType="ApiGroup">
+		UPDATE eo_api_group
+		<set>
+			<if test="parentGroupID != null">eo_api_group.groupName =
+				#{groupName},eo_api_group.parentGroupID =
+				#{parentGroupID},eo_api_group.isChild = #{isChild}
+			</if>
+			<if test="parentGroupID == null">eo_api_group.groupName =
+				#{groupName},eo_api_group.parentGroupID = 0, eo_api_group.isChild = 0</if>
+		</set>
+		WHERE eo_api_group.groupID = #{groupID}
+	</update>
+	<update id="sortGroup">
+		REPLACE INTO eo_api_group_order(projectID, orderList)
+		VALUES (#{projectID},#{orderList})
+	</update>
+
+	<select id="getGroupByID" parameterType="Integer"
+		resultType="ApiGroup">
+		SELECT * FROM eo_api_group WHERE groupID = #{groupID}
+	</select>
+	
+	<select id="getTopParentGroupID" parameterType="Integer" resultType="Integer">
+		SELECT eo_api_group.parentGroupID FROM eo_api_group WHERE eo_api_group.groupID = #{groupID} AND eo_api_group.isChild = 1
+	</select>
+</mapper>

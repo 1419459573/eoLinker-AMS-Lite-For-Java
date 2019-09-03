@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.StatusCodeMapper">
+
+	<insert id="addCode" parameterType="StatusCode" useGeneratedKeys="true" keyProperty="codeID">
+		INSERT INTO eo_project_status_code (eo_project_status_code.groupID,eo_project_status_code.code,eo_project_status_code.codeDescription) 
+		VALUES (#{groupID},#{code},#{codeDescription});
+	</insert>
+
+	<delete id="deleteCode">
+		DELETE FROM eo_project_status_code WHERE eo_project_status_code.codeID = #{codeID}
+	</delete>
+	
+	<select id="getCodeList" resultType="com.eolinker.dto.CodeListDTO">
+		SELECT eo_project_status_code.codeID,eo_project_status_code.code,eo_project_status_code.codeDescription,eo_project_status_code_group.groupName,eo_project_status_code_group.groupID,eo_project_status_code_group.parentGroupID FROM eo_project_status_code INNER JOIN eo_project_status_code_group ON eo_project_status_code.groupID = eo_project_status_code_group.groupID 
+		WHERE eo_project_status_code_group.groupID IN
+		<foreach collection="groupIDS" item="item" index="index"
+				open="(" separator="," close=")">
+				#{item}
+		</foreach>
+	    ORDER BY eo_project_status_code.code ASC;
+	</select>
+
+	<select id="getAllCodeList" resultType="com.eolinker.dto.CodeListDTO">
+		SELECT eo_project_status_code_group.groupID,eo_project_status_code_group.parentGroupID,eo_project_status_code_group.groupName,eo_project_status_code.codeID,eo_project_status_code.code,eo_project_status_code.codeDescription FROM eo_project_status_code INNER JOIN eo_project_status_code_group ON eo_project_status_code.groupID = eo_project_status_code_group.groupID 
+		WHERE projectID = #{projectID} ORDER BY eo_project_status_code.code ASC
+	</select>
+
+	<update id="editCode" parameterType="StatusCode">
+		UPDATE eo_project_status_code SET codeID = #{codeID}
+		<if test="groupID != null and groupID > 0">
+			,eo_project_status_code.groupID = #{groupID}
+		</if>
+		<if test="code != null">
+			,eo_project_status_code.code = #{code} 
+		</if>
+		<if test="codeDescription != null">
+			,eo_project_status_code.codeDescription = #{codeDescription}
+		</if>
+		 WHERE codeID = #{codeID}
+	</update>
+
+	<select id="checkStatusCodePermission" resultType="java.lang.Integer">
+		SELECT eo_conn_project.projectID FROM eo_project_status_code INNER JOIN eo_conn_project INNER JOIN eo_project_status_code_group ON eo_conn_project.projectID = eo_project_status_code_group.projectID AND eo_project_status_code_group.groupID = eo_project_status_code.groupID 
+		WHERE codeID = #{codeID} AND userID = #{userID};
+	</select>
+
+	<select id="searchStatusCode" resultType="com.eolinker.dto.CodeListDTO">
+		SELECT eo_project_status_code_group.groupID,eo_project_status_code_group.parentGroupID,eo_project_status_code_group.groupName,eo_project_status_code.codeID,eo_project_status_code.code,eo_project_status_code.codeDescription FROM eo_project_status_code INNER JOIN eo_project_status_code_group ON eo_project_status_code.groupID = eo_project_status_code_group.groupID 
+		WHERE projectID = #{projectID} AND (eo_project_status_code.code LIKE '%${tips}%' OR eo_project_status_code.codeDescription LIKE '%${tips}%')
+	</select>
+
+	<select id="getStatusCodeCount" parameterType = "Integer" resultType ="Integer">
+		SELECT COUNT(eo_project_status_code.codeID) FROM eo_project_status_code LEFT JOIN eo_project_status_code_group ON eo_project_status_code.groupID = eo_project_status_code_group.groupID WHERE eo_project_status_code_group.projectID = #{projectID}
+	</select>
+	
+	
+	<delete id="deleteCodes" parameterType="java.util.List">
+		DELETE FROM eo_project_status_code WHERE codeID in
+		<foreach collection="codeIDs" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="getStatusCodes" parameterType="java.util.List" resultType="java.lang.String">
+		SELECT GROUP_CONCAT(DISTINCT eo_project_status_code.code) AS statusCodes FROM eo_project_status_code WHERE eo_project_status_code.codeID IN
+		<foreach collection="codeIDs" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	
+	
+	
+	
+</mapper>

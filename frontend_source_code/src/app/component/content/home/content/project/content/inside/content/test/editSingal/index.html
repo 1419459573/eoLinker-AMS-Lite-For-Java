@@ -1,0 +1,241 @@
+<div class="automated-test-singleton">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li pull-left">
+                <button class="common-btn default-btn" ng-click="$ctrl.data.fun.back()">
+                    <span class="iconfont icon-xiangzuo"></span>{{'0121620'|translate}}
+                </button>
+                <button class="eo-button-success common-btn" button-set-disable-directive="$ctrl.data.fun.confirm()">
+                    {{'0121621'|translate}}
+                </button>
+            </li>
+        </ul>
+    </header>
+    <div class="second-level-div">
+        <div class="article">
+            <p class="title-p"><b>{{'0121622'|translate}}</b></p>
+            <form name="ConfirmForm">
+                <p class="case-name-p">
+                    <input type="text" name="apiName" class="eo-input" placeholder="{{'01216241'|translate}}" ng-model="$ctrl.data.interaction.response.caseInfo.apiName" ng-class="{'eo-input-error':$ctrl.data.info.submited&&ConfirmForm.apiName.$invalid}" required>
+                </p>
+                <p class="title-p"><b>{{'0121623'|translate}}</b></p>
+                <ul class="form-ul">
+                    <li class="pull-left">
+                        <select class="eo-input pull-right method-select" ng-model="$ctrl.data.interaction.response.caseInfo.caseData.apiRequestType" >
+                            <option value="0">POST</option>
+                            <option value="1">GET</option>
+                            <option value="2">PUT</option>
+                            <option value="3">DELETE</option>
+                            <option value="4">HEAD</option>
+                            <option value="5">OPTIONS</option>
+                            <option value="6">PATCH</option>
+                        </select>
+                    </li>
+                    <li class="pull-left protocol-li">
+                        <select class="eo-input" ng-model="$ctrl.data.interaction.response.caseInfo.caseData.httpHeader">
+                            <option value="0">HTTP</option>
+                            <option value="1">HTTPS</option>
+                        </select>
+                    </li>
+                    <li class="uri-li">
+                        <input name="uri" type="text" class="eo-input" ng-model="$ctrl.data.interaction.response.caseInfo.caseData.URL" placeholder="{{'01216242'|translate}}" ng-class="{'eo-input-error':$ctrl.data.info.submited&&ConfirmForm.uri.$invalid}" required>
+                    </li>
+                </ul>
+            </form>
+            <div class="item-part request-header-part">
+                <p class="title-p">
+                    <b>{{'0121624'|translate}}</b>
+                </p>
+                <div>
+                    <header>
+                        <ul>
+                            <li class="pull-left test-nav-li success-li" ng-class="{'active':$ctrl.data.info.header.type=='0'}" ng-click="$ctrl.data.info.header.type = '0'">Header</li>
+                            <li class="pull-left test-nav-li failure-li" ng-class="{'active':$ctrl.data.info.header.type=='1'}" ng-click="$ctrl.data.info.header.type = '1'">Auth
+                                <label ng-show="$ctrl.data.interaction.response.caseInfo.caseData.auth.status=='1'" class="iconfont icon-circle pull-right"></label>
+                            </li>
+                        </ul>
+                    </header>
+                    <article ng-show="$ctrl.data.info.header.type == '0'">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td class="num-td">{{'0121625'|translate}}</td>
+                                    <td class="request-header-label">{{'0121626'|translate}}</td>
+                                    <td>{{'0121627'|translate}}</td>
+                                    <td class="operation-td">{{'0121628'|translate}}</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <ul>
+                            <li ng-repeat="item in $ctrl.data.interaction.response.caseInfo.caseData.headers" ng-init="item.checkbox=true">
+                                <table ng-switch="$last">
+                                    <tbody>
+                                        <td class="num-td">
+                                            <input class="hidden" type="checkbox" id="{{'header_case_checkbox_'+$index}}" ng-model="item.checkbox">
+                                            <label for="{{'header_case_checkbox_'+$index}}" class="eo-checkbox pull-left iconfont" ng-class="{'icon-check':item.checkbox}"></label>
+                                        </td>
+                                        <td class="label-td request-header-label">
+                                            <ul class="request-header-icon-form">
+                                                <li ng-class="{'eo-had-input-error':($ctrl.data.info.submited&&!item.headerName&&item.headerValue)}">
+                                                    <auto-complete-ams-component model="item.headerName" array="$ctrl.data.constant.requestHeader" placeholder="{{'0121629'|translate}}" input-change-fun="$ctrl.data.fun.last('header',{$last:$last})"></auto-complete-ams-component>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <input class="eo-input " type="text" name="" ng-model="item.headerValue" maxlength="65530" ng-focus="item.isFocus=true;" ng-blur="$ctrl.data.fun.blurInput({focus:item})" placeholder="{{'01216210'|translate}}" ng-change="$ctrl.data.fun.last('header',{$last:$last})">
+                                        </td>
+                                        <td class="operation-td">
+                                            <a class="number-label add-child-a" ng-click="$ctrl.data.fun.bind('header',{item:item})" ng-show="item.headerName"><span class="iconfont icon-zuzhijigou"></span><span>{{'01216211'|translate}}</span></a>
+                                            <label ng-switch-when=false>
+                                                <a class="iconfont icon-shanchu number-label" ng-click="$ctrl.data.fun.delete('header',{$index:$index})"></a>
+                                            </label>
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                    </article>
+                    <article class="basic-auth-article" ng-show="$ctrl.data.info.header.type =='1'" ng-init="$ctrl.data.interaction.response.caseInfo.caseData.auth.status=$ctrl.data.interaction.response.caseInfo.caseData.auth.status||'0'">
+                        <p class="select-p">
+                            <label>{{'01216212'|translate}}</label>
+                            <select class="eo-input" placeholder="Basic Auth" ng-model="$ctrl.data.interaction.response.caseInfo.caseData.auth.status">
+                                <option value="0">-----{{'01216213'|translate}}-----</option>
+                                <option value="1">Basic Auth</option>
+                            </select>
+                        </p>
+                        <div ng-show="$ctrl.data.interaction.response.caseInfo.caseData.auth.status=='1'">
+                            <p class="common-p">
+                                <label>{{'01216214'|translate}}</label>
+                                <input class="eo-input" type="text" placeholder="Username" ng-model="$ctrl.data.interaction.response.caseInfo.caseData.auth.basicAuth.username">
+                            </p>
+                            <p class="common-p">
+                                <label>{{'01216215'|translate}}</label>
+                                <input class="eo-input" type="password" placeholder="Password" ng-model="$ctrl.data.interaction.response.caseInfo.caseData.auth.basicAuth.password">
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <div class="item-part request-param-part">
+                <p class="title-p"><b>{{'01216216'|translate}}</b>
+                </p>
+                <div>
+                    <header>
+                        <ul>
+                            <li class="pull-left test-nav-li success-li" ng-class="{'active':$ctrl.data.interaction.response.caseInfo.caseData.requestType=='0'}" ng-click="$ctrl.data.interaction.response.caseInfo.caseData.requestType = '0'">{{'01216217'|translate}}[form-data]</li>
+                            <li class="pull-left test-nav-li" ng-class="{'active':$ctrl.data.interaction.response.caseInfo.caseData.requestType=='2'}" ng-click="$ctrl.data.interaction.response.caseInfo.caseData.requestType = '2'">RESTful</li>
+                            <li style="border-left:none;" class="pull-left test-nav-li failure-li" ng-class="{'active':$ctrl.data.interaction.response.caseInfo.caseData.requestType=='1'}" ng-click="$ctrl.data.interaction.response.caseInfo.caseData.requestType = '1'" >{{'01216218'|translate}}[raw]</li>
+                        </ul>
+                    </header>
+                    <article>
+                        <table ng-class="{'hidden':$ctrl.data.interaction.response.caseInfo.caseData.requestType=='1'}">
+                            <thead>
+                                <tr>
+                                    <td class="request-param-label">{{'01216219'|translate}}</td>
+                                    <td class="name-td">{{'01216220'|translate}}</td>
+                                    <td>{{'01216221'|translate}}</td>
+                                    <td class="operation-td">{{'01216222'|translate}}</td>
+                                </tr>
+                            </thead>
+                        </table>
+                        <ul ng-hide="$ctrl.data.interaction.response.caseInfo.caseData.requestType=='1'">
+                            <li ng-repeat="item in $ctrl.data.interaction.response.caseInfo.caseData.params">
+                                <table ng-switch="$last">
+                                    <tbody>
+                                        <td class="request-param-label">
+                                            <input class="hidden" type="checkbox" id="{{'param_checkbox_'+$index}}" ng-model="item.checkbox" ng-init="item.checkbox=item.checkbox||(item.paramNotNull=='0'?true:false)">
+                                            <label for="{{'param_checkbox_'+$index}}" class="eo-checkbox pull-left iconfont" ng-class="{'icon-check':item.checkbox}"></label>
+                                        </td>
+                                        <td class="name-td">
+                                            <input class="eo-input" ng-model="item.paramKey" ng-class="{'eo-input-error':($ctrl.data.info.submited&&!item.paramKey&&item.paramInfo)}" maxlength="255" ng-change="$ctrl.data.fun.last('param',{$last:$last})" placeholder="{{'01216220'|translate}}">
+                                        </td>
+                                        <td>
+                                            <input class="eo-input pull-left" ng-model="item.paramInfo" ng-change="$ctrl.data.fun.last('param',{$last:$last})">
+                                        </td>
+                                        <td class="operation-td">
+                                            <a class=" number-label add-child-a" ng-click="$ctrl.data.fun.bind('param',{item:item})" ng-show="item.paramKey"><span class="iconfont icon-zuzhijigou"></span><span>{{'01216211'|translate}}</span></a>
+                                            <label ng-switch-when=false>
+                                                <a class="iconfont icon-shanchu number-label" ng-click="$ctrl.data.fun.delete('param',{$index:$index})"></a>
+                                            </label>
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ul>
+                        <div class="raw-div" ng-show="$ctrl.data.interaction.response.caseInfo.caseData.requestType=='1'">
+                            <textarea class="back-result-content" ng-model="$ctrl.data.interaction.response.caseInfo.caseData.raw" maxlength="65530" placeholder="{{'01216218'|translate}}">
+                            </textarea>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <p class="title-p"><b>{{'01216223'|translate}}</b></p>
+            <div class="item-part regex-part">
+                <header>
+                    <ul class="menu-ul">
+                        <li class="pull-left test-nav-li" ng-class="{'active':$ctrl.data.interaction.response.caseInfo.matchType==3}" ng-click="$ctrl.data.interaction.response.caseInfo.matchType = 3">{{'01216224'|translate}}</li>
+                        <li class="pull-left test-nav-li" ng-class="{'active':$ctrl.data.interaction.response.caseInfo.matchType==2}" ng-click="$ctrl.data.interaction.response.caseInfo.matchType = 2">{{'01216225'|translate}}</li>
+                        <li class="pull-left test-nav-li" ng-class="{'active':$ctrl.data.interaction.response.caseInfo.matchType==0}" ng-click="$ctrl.data.interaction.response.caseInfo.matchType = 0">{{'01216226'|translate}}</li>
+                        <li class="pull-left test-nav-li" ng-class="{'active':$ctrl.data.interaction.response.caseInfo.matchType==1}" ng-click="$ctrl.data.interaction.response.caseInfo.matchType = 1">{{'01216227'|translate}}
+                        </li>
+                    </ul>
+                    <p class="regex-p" ng-hide="$ctrl.data.interaction.response.caseInfo.matchType==3">
+                        <select class="eo-input" ng-model="$ctrl.data.interaction.response.caseInfo.statusCode" ng-if="$ctrl.data.info.status!='edit'" ng-init="$ctrl.data.interaction.response.caseInfo.statusCode=$ctrl.data.interaction.response.caseInfo.statusCode||'200'" style="margin-right: 5px;">
+                            <option value="200">200</option>
+                            <option value="302">302</option>
+                            <option value="404">404</option>
+                            <option value="500">500</option>
+                            <option value="502">502</option>
+                            <option value="0">{{'01216228'|translate}}</option>
+                        </select>
+                        <input type="text" class="eo-input" ng-show="$ctrl.data.interaction.response.caseInfo.statusCode=='0'||$ctrl.data.info.status=='edit'" placeholder="{{'01216229'|translate}}" ng-model="$ctrl.data.interaction.response.caseInfo.code">
+                    </p>
+                </header>
+                <textarea placeholder="{{'01216230'|translate}}" ng-model="$ctrl.data.interaction.request.matchTextarea" ng-hide="$ctrl.data.interaction.response.caseInfo.matchType>1"></textarea>
+                <div class="json-match-div" ng-show="$ctrl.data.interaction.response.caseInfo.matchType==2">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="name-td">{{'01216231'|translate}}</td>
+                                <td class="match-rule-td">{{'01216232'|translate}}</td>
+                                <td>{{'01216233'|translate}}</td>
+                                <td class="operation-td">{{'01216234'|translate}}</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <ul>
+                        <li ng-repeat="item in $ctrl.data.interaction.request.responseJson track by $index" level-init-directive limit-level=4 status="automatedTest_jsonMatch">
+                            <table ng-switch="$last">
+                                <tbody>
+                                    <td class="name-td">
+                                        <input class="eo-input" ng-model="item.paramKey" ng-class="{'eo-input-error':($ctrl.data.info.submited&&!item.paramKey&&item.paramInfo)}" maxlength="255" ng-change="$ctrl.data.fun.last('response',{$last:$last})" placeholder="{{'01216220'|translate}}" required>
+                                    </td>
+                                    <td class="match-rule-td">
+                                        <select class="eo-input" ng-model="item.matchRule" ng-init="item.matchRule=item.matchRule||'0'">
+                                            <option value="0">{{'01216243'|translate}}</option>
+                                            <option value="1">{{'01216244'|translate}} [ = ]</option>
+                                            <option value="2">{{'01216245'|translate}} [ != ]</option>
+                                            <option value="3">{{'01216246'|translate}} [ > ]</option>
+                                            <option value="4">{{'01216247'|translate}} [
+                                                < ]</option>
+                                                    <option value="5">{{'01216248'|translate}} [ Reg= ]</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input class="eo-input pull-left" ng-model="item.paramInfo" ng-change="$ctrl.data.fun.last('response',{$last:$last})" placeholder="校验值">
+                                    </td>
+                                    <td class="operation-td">
+                                        <a class=" number-label add-child-a" ng-click="$ctrl.data.fun.edit('addChild',{item:item})"><span class="iconfont icon-tianjia"></span><span>{{'01216235'|translate}}</span></a>
+                                        <label ng-switch-when=false>
+                                            <a class="iconfont icon-shanchu number-label" ng-click="$ctrl.data.fun.delete('response',{$index:$index})"></a>
+                                        </label>
+                                    </td>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

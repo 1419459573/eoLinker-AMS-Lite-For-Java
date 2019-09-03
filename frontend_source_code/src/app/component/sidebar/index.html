@@ -1,0 +1,42 @@
+<div class="eo-sidebar">
+    <div class="common-sidebar" ng-class="{'no-child-div':$ctrl.data.info.current.back||!$ctrl.data.info.current.childList||$ctrl.shrinkObject.isShrink}">
+        <ul ng-class="{'had-child-ul':!$ctrl.data.info.current.back&&$ctrl.data.info.current.childList&&!$ctrl.shrinkObject.isShrink}">
+            <a class="shrink-a">
+                <li class="title-li" data-ng-click="$ctrl.data.fun.shrink()"><span class="iconfont" ng-class="{'icon-zuojiantou':!$ctrl.shrinkObject.isShrink,'icon-youjiantou2-copy':$ctrl.shrinkObject.isShrink}"></span></li>
+            </a>
+            <a data-ng-repeat='item in $ctrl.data.info.menu' data-ng-click="$ctrl.data.fun.menu({item:item})" ng-if="item.isShow==-1" ng-init="$ctrl.data.fun.initMenu({item:item})">
+                <li class="item-li" ui-sref-active="elem-active" ng-class="{'divide-li':item.divide}">
+                    <span ui-sref="{{item.sref}}" ng-if="item.sref"></span>
+                    <span class="pull-left title-icon iconfont {{item.icon}}">   
+                        </span>
+                    <span class="pull-left triangle-left"></span>
+                    <span class="group-name" ng-switch="item.status">
+                            {{item.name}}<span class="eo-status-warning un-read-span" data-ng-class="{'hidden':$ctrl.data.service.default.info.userInfo.unreadMsgNum==0}" ng-switch-when="1">{{$ctrl.data.service.default.info.userInfo.unreadMsgNum}}</span>
+                    </span>
+                    <span style="font-size: 14px;" class="link-span iconfont icon-daochu pull-right" ng-if="item.href"></span>
+                </li>
+            </a>
+        </ul>
+    </div>
+    <div class="second-sidebar" ng-show="!$ctrl.data.info.current.back&&$ctrl.data.info.current.childList&&!$ctrl.shrinkObject.isShrink">
+        <header>
+            <ul>
+                <a ng-click="$ctrl.data.info.current.back=true">
+                    <li class="back-li" >
+                        <span class="title-icon iconfont icon-xiangzuo"> </span>
+                        <span class="group-name" ng-switch="item.status">{{$ctrl.data.info.current.name}}</span>
+                    </li>
+                </a>
+                <a data-ng-repeat='item in $ctrl.data.info.current.childList' data-ng-click="$ctrl.data.fun.childMenu({item:item})" ui-sref-active="active" ng-init="$ctrl.data.fun.initChildMenu({item:item})">
+                    <li class="ui-sref-li" ng-class="{'disable-menu-li':item.disable&&$ctrl.data.service.pro.info.isExpire}">
+                        <span ui-sref="{{item.sref}}" ng-if="item.sref"></span>
+                        <span class="title-icon iconfont {{item.icon}}"> </span>
+                        <span class="pull-left triangle-left"></span>
+                        <span class="group-name" ng-switch="item.status">{{item.name}}</span>
+                        <span style="font-size: 14px;margin-right: 20px;" class="link-span iconfont icon-daochu pull-right" ng-if="item.href"></span>
+                    </li>
+                </a>
+            </ul>
+        </header>
+    </div>
+</div>

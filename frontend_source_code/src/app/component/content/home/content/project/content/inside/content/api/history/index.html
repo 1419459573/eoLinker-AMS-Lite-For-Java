@@ -1,0 +1,90 @@
+<div class="home-project-inside-history home-project-inside-div">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li pull-left">
+                <a class="common-btn default-btn" ng-click="$ctrl.data.service.default.navbar.menu('list',$ctrl.data.interaction.request)">
+                    <span class="iconfont icon-xiangzuo"></span>{{'01210030'|translate}}
+                </a>
+            </li>
+            <li class="menu-li pull-left">
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('detail',$ctrl.data.interaction.request)">{{'01210031'|translate}}
+                    </a>
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('test',$ctrl.data.interaction.request)">{{'01210002'|translate}}
+                    </a>
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('mock',$ctrl.data.interaction.request)">mock
+                    </a>
+                <a class="pull-left  elem-active">{{'012100058'|translate}}
+                    </a>
+            </li>
+            <li class="divide-li pull-left" ng-if="$ctrl.powerObject.edit"><span></span></li>
+            <li class="menu-li pull-left" style="margin-left: 5px;" ng-if="$ctrl.powerObject.edit&&$ctrl.data.interaction.request.groupID!=-2">
+                <a class="pull-left" ng-click="$ctrl.data.service.default.navbar.menu('edit',$ctrl.data.interaction.request)">{{'01210004'|translate}}
+                    </a>
+            </li>
+            <li class="btn-li common-btn default-btn" ng-if="$ctrl.powerObject.edit">
+                <span class="iconfont icon-caidan"></span> {{'01210003'|translate}}
+                <div class="list-function-wrap">
+                    <ul class="nav-function" ng-if="$ctrl.data.interaction.request.groupID!=-2">
+                        <li ng-click="$ctrl.data.service.default.navbar.menu('copy',$ctrl.data.interaction.request)">
+                            <span class="iconfont icon-renwuguanli"></span>{{'01210005'|translate}}
+                        </li>
+                        <li ng-click="$ctrl.data.service.default.navbar.delete($ctrl.data.interaction.request)">
+                            <span class="iconfont icon-shanchu"></span>{{'01210006'|translate}}
+                        </li>
+                    </ul>
+                    <ul class="nav-function" ng-if="$ctrl.data.interaction.request.groupID==-2">
+                        <li ng-click="$ctrl.data.service.default.navbar.recover($ctrl.data.interaction.request)">
+                            <span class="iconfont icon-shuaxin"></span>{{'01210007'|translate}}
+                        </li>
+                        <li ng-click="$ctrl.data.service.default.navbar.deleteCompletely($ctrl.data.interaction.request)">
+                            <span class="iconfont icon-shanchu"></span>{{'01210008'|translate}}
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article">
+        <table>
+            <thead>
+                <tr>
+                    <th class="first-th">
+                        {{'012100059'|translate}}
+                    </th>
+                    <th class="api-name second-th">
+                        {{'012100060'|translate}}
+                    </th>
+                    <th class="third-th">{{'012100061'|translate}}</th>
+                    <th class="forth-th">{{'012100062'|translate}}</th>
+                    <th class="fifth-th" ng-if="$ctrl.powerObject.edit"> {{'012100063'|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="item in $ctrl.data.interaction.response.query">
+                    <th class="first-th">
+                        <label class="iconfont icon-check" ng-if="item.isNow==1"></label>
+                    </th>
+                    <td class="second-th">
+                        {{item.updateTime}}
+                    </td>
+                    <td class="third-th">
+                        {{item.userNickName}}
+                    </td>
+                    <td class="forth-th">
+                        {{item.updateDesc}}
+                    </td>
+                    <td class="fifth-th" ng-if="$ctrl.powerObject.edit">
+                        <!--edit权限-->
+                        <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.toggleHistory({item:item})" ng-class="{'hidden':item.isNow==1}"><span class="iconfont icon-shuaxin"></span>{{'012100064'|translate}}</a>
+                        <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.deleteHistory({item:item,$index:$index})" ng-class="{'hidden':item.isNow==1}"><span class="iconfont icon-shanchu"></span>{{'012100065'|translate}}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-tips">*{{'012100066'|translate}}</div>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>

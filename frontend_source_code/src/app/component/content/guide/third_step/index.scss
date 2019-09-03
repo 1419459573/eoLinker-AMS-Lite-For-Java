@@ -1,0 +1,67 @@
+.guide-third-step {
+    background-color: #fff;
+    box-shadow: 0px 10px 15px #dcdcdc;
+    border-radius: 5px;
+    padding: 25px 25px;
+    .install-head {
+        margin-bottom: 10px;
+        .error {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .ok {
+            color: #4caf50;
+            font-weight: bold;
+        }
+        .errorTips {
+            margin-left: 15px;
+            color: grey;
+        }
+    }
+    .failCheck {
+        button {
+            box-shadow: 0px 10px 29px #ededed;
+            width: 116px;
+            border-radius: 17px;
+            text-align: left;
+            text-indent: 10px;
+            margin-left: -5px;
+            margin-right: 15px;
+            .pull-right {
+                margin-right: 10px;
+            }
+        }
+    }
+    .eo-button-success:hover {
+        border-radius: 17px;
+    }
+}
+
+.installing {
+    .installing-wrap {
+        width: 100px;
+        margin: 0 auto;
+    }
+    .icon-wrap {
+        width: 50px;
+        height: 50px;
+        line-height: 51px;
+        margin-left: 14px;
+        animation: load 1.7s infinite ease;
+        -webkit-animation: load 1.7s infinite ease;
+        -moz-animation: load 1.7s infinite ease;
+        -o-animation: load 1.7s infinite ease;
+        span {
+            display: block;
+            font-size: 50px;
+            color: #555;
+            height: 50px;
+            line-height: 55px;
+        }
+    }
+    p {
+        font-size: 16px;
+        width: 70px;
+        margin: 0 auto;
+    }
+}

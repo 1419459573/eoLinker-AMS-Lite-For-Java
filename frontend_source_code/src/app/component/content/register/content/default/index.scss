@@ -1,0 +1,100 @@
+register-default {
+    .register-default {
+        width: 435px;
+        margin: 150px auto 0;
+        text-align: left;
+        font-size: 15px;
+        header {
+            p {
+                margin-bottom: 10px;
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+        article {
+            .register-function {
+                margin-left: -10px;
+                button {
+                    width: 153px;
+                    margin-right: 15px;
+                    @include eo-button($buttonDefaultBgColor,#ccc);
+                    .iconfont {
+                        font-size: 14px;
+                        margin-right: 5px;
+                        color: $buttonDefaultColor;
+                    }
+                }
+                .active {
+                    @include eo-button($buttonSuccessFocusBgColor, $buttonSuccessBorderColor);
+                    .iconfont {
+                        color: #fff;
+                    }
+                }
+                button:last-child {
+                    margin-right: 0;
+                }
+            }
+            .icon-style {
+                position: absolute;
+                @include eo-line(35px,37px);
+                margin-left: -30px;
+                .iconfont {
+                    color: #999;
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        color: #333;
+                    }
+                }
+            }
+            li {
+                margin-bottom: 15px;
+                @include eo-line(37px,27px);
+                label {
+                    width: 75px;
+                    text-align: right;
+                    display: inline-block;
+                    margin-right: 20px;
+                }
+            }
+            li:first-child {
+                margin-top: 20px;
+            }
+            li:nth-child(n+4) {
+                margin-bottom: 25px;
+            }
+            li:last-child {
+                text-align: center;
+            }
+            .eo-input,
+            .eo-button-success,
+            .eo-button-default {
+                width: 323px;
+            }
+            .eo-button-default {
+                cursor: default;
+            }
+            .footer {
+                clear: both;
+                text-align: center;
+                border-top: 1px solid #e5e5e5;
+                padding-top: 15px;
+            }
+        }
+    }
+    footer {
+        border-top: 1px solid #e5e5e5;
+        @include eo-line(50px);
+        width: 100%;
+        background-color: #f1f1f1;
+        position: fixed;
+        bottom: 0;
+        p {
+            text-align: center;
+            font-size: 14px;
+            a {
+                color: $buttonInfoFocusBgColor;
+            }
+        }
+    }
+}

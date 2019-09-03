@@ -1,0 +1,29 @@
+eo-navbar0 {
+    .nav-0 {
+        @extend %NAV-BASIC-STYLE;
+        position: absolute;
+        border-bottom: 1px solid #ededed;
+        .nav-header {
+            li {
+                @include eo-line(60px, 58px);
+                .nav-li {
+                    padding: 0;
+                    min-width: 68px;
+                    @include eo-line(30px, 32px);
+                    color: #777;
+                    display: inline-block;
+                    text-align: center;
+                    border-radius: 3px;
+                    margin-right: 15px;
+                    vertical-align: inherit;
+                    .iconfont {
+                        cursor: pointer;
+                    }
+                    &:hover {
+                        color: $buttonSuccessBgColor;
+                    }
+                }
+            }
+        }
+    }
+}

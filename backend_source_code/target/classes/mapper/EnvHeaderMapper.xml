@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.EnvHeaderMapper">
+	
+	<select id="getEnvHeaderList" resultType="EnvHeader">
+		SELECT eo_api_env_header.applyProtocol,eo_api_env_header.headerName,eo_api_env_header.headerValue,eo_api_env_header.headerID FROM eo_api_env_header WHERE eo_api_env_header.envID = #{envID}
+	</select>
+
+	<insert id="addEnvHeader" parameterType="EnvHeader">
+		INSERT INTO eo_api_env_header (eo_api_env_header.envID,eo_api_env_header.applyProtocol,eo_api_env_header.headerName,eo_api_env_header.headerValue) 
+		VALUES (#{envID},#{applyProtocol},#{headerName},#{headerValue});
+	</insert>
+	
+	<delete id="deleteEnvHeader">
+		DELETE FROM eo_api_env_header WHERE eo_api_env_header.envID = #{envID}
+	</delete>
+
+
+</mapper>

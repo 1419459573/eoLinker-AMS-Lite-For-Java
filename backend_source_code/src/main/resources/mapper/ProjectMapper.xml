@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.ProjectMapper">
+	<insert id="addProject" parameterType="Project"
+		useGeneratedKeys="true" keyProperty="projectID">
+		insert into
+		eo_project(projectType,projectName,projectUpdateTime,
+		projectVersion)values(#{projectType},#{projectName},#{projectUpdateTime},#{projectVersion})
+	</insert>
+
+	<delete id="deleteProject" parameterType="Integer">
+		DELETE FROM eo_project
+		WHERE eo_project.projectID = #{projectID}
+	</delete>
+
+	<select id="getProjectList" resultType="java.util.Map">
+		SELECT
+		eo_project.projectID,eo_project.projectName,eo_project.projectType,eo_project.projectUpdateTime,eo_project.projectVersion,eo_conn_project.userType
+		FROM eo_project INNER JOIN eo_conn_project ON eo_project.projectID =
+		eo_conn_project.projectID WHERE eo_conn_project.userID = #{userID}
+		ORDER BY eo_project.projectUpdateTime DESC
+	</select>
+
+	<update id="updateProject" parameterType="Project">
+		UPDATE eo_project SET
+		eo_project.projectType = #{projectType},eo_project.projectName =
+		#{projectName}, eo_project.projectUpdateTime = #{projectUpdateTime},
+		eo_project.projectVersion = #{projectVersion} WHERE
+		eo_project.projectID= #{projectID}
+	</update>
+
+	<select id="getProject" resultType="Project">
+		SELECT
+		eo_project.*,eo_conn_project.userType FROM eo_project INNER JOIN
+		eo_conn_project ON eo_project.projectID = eo_conn_project.projectID
+		WHERE eo_conn_project.userID = #{userID} AND eo_project.projectID =
+		#{projectID}
+	</select>
+
+	<update id="updateProjectUpdateTime">
+		UPDATE eo_project SET eo_project.projectUpdateTime =
+		now() WHERE eo_project.projectID = #{projectID};
+	</update>
+	<select id="getProjectInfo" resultType="java.util.Map">
+		SELECT * FROM eo_project WHERE eo_project.projectID = #{projectID}
+	</select>
+</mapper>

@@ -1,0 +1,95 @@
+//作者：riverLethe
+user-basic {
+    header {
+        .title-ul {
+            @extend %TITLE-UL;
+            .btn-group-li {
+                button {
+                    @include eo-line(39px);
+                    border: none;
+                    background-color: #fff;
+                    li {
+                        &:hover {
+                            background: #eee;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    article {
+        .part {
+            padding-bottom: 30px;
+            width:100%;
+            display: inline-block;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e5;
+            margin: 15px 0;
+            font-size: 14px;
+            header {
+                border-bottom: 1px solid #e5e5e5;
+                margin: 0 5px;
+                padding-top: 15px;
+                padding-bottom: 5px;
+                span:first-child {
+                    font-weight: bold;
+                }
+                span:last-child {
+                    margin-left: 10px;
+                    color: #999;
+                }
+            }
+            button,
+            input[type=file],
+            label {
+                @include eo-line(30px);
+                width: 85px;
+                &:hover,
+                &:active,
+                &:focus {
+                    @include eo-line(30px);
+                }
+            }
+            label {
+                font-size: 13px;
+                text-align: center;
+            }
+            .content {
+                margin-top: 30px;
+                li:first-child {
+                    margin-left: 77px;
+                }
+                input[type=text],
+                input[type=email],
+                input[type=password] {
+                    @include eo-line(28px);
+                    margin: 10px 0;
+                }
+                .tips {
+                    color: #999;
+                    @include eo-line(25px);
+                }
+            }
+        }
+        .first-part {
+            margin-top: 0; 
+            li:first-child {
+                width: 30.33%;
+                min-width: 300px;
+            }
+            .btn-group {
+                height: 128px;
+                li:first-child {
+                    width: auto;
+                    margin-left: 0;
+                }
+                li:last-child {
+                    margin-top: 44px;
+                }
+            }
+        }
+        .third-part {
+            border-top: 1px solid #e5e5e5;
+        }
+    }
+}

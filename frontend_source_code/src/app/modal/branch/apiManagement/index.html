@@ -1,0 +1,224 @@
+<div class="api-management-modal modal">
+    <!-- 自动生成文档弹窗 -->
+    <script type="text/ng-template" id="ApiManagement_AutoGenerationModal">
+        <div class="api-management-modal-auto-generation eo-modal">
+            <header>
+                <ul>
+                    <li>{{'600'|translate}}</li>
+                </ul>
+            </header>
+            <article>
+                <p>
+                    <a href="http://blog.eolinker.com/#/article?ID=287" target="_blank">
+                        <img src="app/assets/images/autoGeneration_intro.png" />
+                    </a>
+                </p>
+                <form name="editForm">
+                    <ul>
+                        <li class="title-li">
+                            <span>Project_Key：</span>
+                        </li>
+                        <li>
+                            <ul class="copy-ul">
+                                <li copy-directive copy-model="data.input.projectID">
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="title-li">
+                            <span>{{'601'|translate}}</span>
+                        </li>
+                        <li>
+                            <ul class="copy-ul">
+                                <li copy-directive copy-model="data.input.importURL">
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                            <a class="eo-button-default " ng-click="data.fun.cancel()">{{'602'|translate}}</a>
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <script type="text/ng-template" id="ApiManagement_BackupsModal">
+        <div class="api-management-modal-backups eo-modal">
+            <header>
+                <ul>
+                    <li class="pull-right">
+                        <a class="iconfont icon-close" data-ng-click="data.fun.cancel()"></a>
+                    </li>
+                    <li>{{'610'|translate}}</li>
+                </ul>
+            </header>
+            <article>
+                <p class="green-font">{{'611'|translate}}</p>
+                <p class="border">{{'612'|translate}}</p>
+                <form name="loginForm">
+                    <ul class="ul-login">
+                        <li>
+                            <p>{{'613'|translate}}</p>
+                        </li>
+                        <li class="input-li ">
+                            <input type="text" class="pull-left eo-input" name="userCall" data-ng-model="data.interaction.request.userCall" placeholder="{{'614'|translate}}"
+                                data-ng-change="data.fun.check()" required/>
+                        </li>
+                        <li class="input-li ">
+                            <input type="password" class="pull-left eo-input" name="userPassword" data-ng-model="data.interaction.request.userPassword"
+                                placeholder="{{'615'|translate}}" maxlength="32" data-ng-class="{'eo-input-error':(submited&&loginForm.userPassword.$invalid)}"
+                                required/>
+                        </li>
+                        <li>
+                            <a class="forget-psw eo-link" href='https://www.eolinker.com/#/forget' target="_blank">{{'616'|translate}}</a>
+                            <input class="hidden" type="checkbox" id="remember-password-js" ng-model="data.info.isRemember">
+                            <label for="remember-password-js" class="checkbox-label iconfont" ng-class="{'icon-check':data.info.isRemember}">{{data.info.isRemember?'':'&nbsp;'}}</label>
+                            <label class="common-btn" for="remember-password-js">{{'0204'|translate }}</label>
+                        </li>
+                        <li>
+                            <button class="eo-button-success " ng-click="data.fun.confirm()">{{'617'|translate}}</button>
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer>
+                <label>{{'618'|translate}}
+                    <a href='https://www.eolinker.com/#/register/' target="_blank" class="eo-link">{{'619'|translate}}</a>
+                </label>
+            </footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 自动化测试加载API管理弹窗 -->
+    <script type="text/ng-template" id="ApiManagement_AutomatedTest_QiuckAddSingalModal">
+        <div class="api-management-modal-automated-select-api eo-modal" style="{{info.background}}">
+            <header>
+                <ul>
+                    <li>{{'630'|translate}}</li>
+                </ul>
+            </header>
+            <article>
+                <group-common-component class="group-compoment-container" fun-object="{unTop:true}" main-object="data.component.groupCommonObject.group.mainObject"
+                    list="data.interaction.response.groupList"></group-common-component>
+                <div class="first-level-article" style="margin-top: 0;">
+                    <table>
+                        <tr ng-repeat="item in data.interaction.response.apiList | filter:data.fun.filter" ng-class="{'elem-active':item.isClick}"
+                            ng-click="data.fun.select({item:item})">
+                            <td class="second-th" title="{{item.apiName}}">
+                                <label class="iconfont icon-circle " ng-class="{'eo-status-success':item.apiStatus==0,'eo-status-warning':item.apiStatus==1,'eo-status-danger':item.apiStatus==2}"></label>
+                                {{item.apiName}}
+                            </td>
+                            <td class="third-th" title="{{item.apiURI}}">
+                                <span class="eo-method-label" ng-class="{'eo-color-success':item.apiRequestType==0,'eo-color-default':item.apiRequestType==1,'eo-color-others':item.apiRequestType==2,'eo-color-warning':item.apiRequestType==6,'eo-color-danger':item.apiRequestType==3,'eo-color-info':item.apiRequestType==4,'eo-color-options':item.apiRequestType==5}">
+                                    {{item.apiRequestType==0?'POST':item.apiRequestType==1?'GET':item.apiRequestType==2?'PUT':item.apiRequestType==3?'DELETE':item.apiRequestType==4?'HEAD':item.apiRequestType==5?'OPTS':'PATCH'}}
+                                </span> {{item.apiURI}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </article>
+            <footer>
+                <button class="eo-button-success" button-set-disable-directive="data.fun.confirm()">{{'631'|translate}}</button>
+                <input type="button" class="eo-button-default " ng-click="data.fun.cancel()" value="{{'632'|translate}}">
+            </footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 新增用例弹窗 -->
+    <script type="text/ng-template" id="ApiManagement_AutomatedTest_EditCaseModal">
+        <div class="api-management-modal-automated-test-edit eo-modal">
+            <header>
+                <ul>
+                    <li>{{'640'|translate}}</li>
+                </ul>
+            </header>
+            <article>
+                <form name="ConfirmForm">
+                    <ul>
+                        <li class="container-li common-li">
+                            <ul class="group-select group-ul pull-left">
+                                <li>一级分组：</li>
+                                <li>
+                                    <select class="eo-input " ng-model="data.output.groupID" ng-options="group.groupID as group.groupName for group in data.input.group.parent"
+                                        ng-change="data.fun.change('first-level')">
+                                    </select>
+                                </li>
+                            </ul>
+                            <ul class="group-select  group-ul pull-left">
+                                <li>二级分组：</li>
+                                <li>
+                                    <select class="eo-input" ng-model="data.output.childGroupID" ng-options="group.groupID as group.groupName for group in data.input.group.child"
+                                        ng-change="data.fun.change('second-level')">
+                                    </select>
+                                </li>
+                            </ul>
+                            <ul class="group-select  group-ul">
+                                <li>三级分组：</li>
+                                <li>
+                                    <select class="eo-input" ng-model="data.output.grandSonGroupID" ng-options="group.groupID as group.groupName for group in data.input.group.grandson">
+                                    </select>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="title-li" ng-if="data.input.version=='pro'">{{'643'|translate}}</li>
+                        <li class="common-li" ng-if="data.input.version=='pro'">
+                            <select class="eo-input" ng-model="data.input.caseInfo.caseType">
+                                <option value="0">{{'644'|translate}}</option>
+                                <option value="1">{{'645'|translate}}</option>
+                            </select>
+                        </li>
+                        <li class="title-li">{{'646'|translate}}</li>
+                        <li class="common-li">
+                            <input type="text" name="caseName" ng-model="data.input.caseInfo.caseName" placeholder="用例名称" class="eo-input " ng-class="{'eo-input-error':(submited&&ConfirmForm.caseName.$invalid)}"
+                                autofocus="true" required>
+                        </li>
+                        <li class="btn-group common-li">
+                            <button class="eo-button-success" ng-click="data.fun.confirm()">{{'647'|translate}}</button>
+                            <input type="button" class="eo-button-default " value="{{'648'|translate}}" ng-click="data.fun.cancel()">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 自动化测试绑定参数值管理弹窗 -->
+    <script type="text/ng-template" id="ApiManagement_AutomatedTest_BindModal">
+        <div class="api-management-modal-automated-test-bind eo-modal" style="{{info.background}}">
+            <header>
+                <ul>
+                    <li>{{'650'|translate}}</li>
+                </ul>
+            </header>
+            <article>
+                <table>
+                    <tr>
+                        <td class="match-rule-td">
+                            <ul class="pull-left match-rule-ul common-ul">
+                                <li ng-repeat="item in data.input.query track by $index " ng-click="data.fun.changeSingal({item:item})" ng-class="{'elem-active':data.info.current.connID==item.connID}"
+                                    ng-init="item.$index=$index">
+                                    <span class="num-span">{{$index+1}}</span>{{item.apiName}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul class="common-ul match-param-ul">
+                                <li ng-if="data.info.current.matchType==2" ng-repeat="item in data.info.current.matchRule |filter:data.fun.filter track by $index"
+                                    level-init-directive limit-level=4 status="automatedTest_bindRule" ng-class="{'elem-active':data.info.current.activeArray[0]==(item.parent+item.paramKey)}">
+                                    <p ng-click="data.fun.click(item)">{{item.paramKey}}</p>
+                                    <!--data.info.current.bind=item.parent+item.paramKey-->
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </article>
+            <footer>
+                <button class="eo-button-success" button-set-disable-directive="data.fun.confirm()">{{'651'|translate}}</button>
+                <input type="button" class="eo-button-default " ng-click="data.fun.cancel()" value="{{'652'|translate}}">
+            </footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+</div>

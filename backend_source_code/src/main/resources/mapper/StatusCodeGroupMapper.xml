@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.StatusCodeGroupMapper">
+	
+	<insert id="addGroup" parameterType="StatusCodeGroup" useGeneratedKeys="true" keyProperty="groupID">
+		INSERT INTO eo_project_status_code_group (eo_project_status_code_group.projectID,eo_project_status_code_group.groupName) 
+		VALUES (#{projectID},#{groupName});
+	</insert>
+	
+	<insert id="addChildGroup" parameterType="StatusCodeGroup" useGeneratedKeys="true" keyProperty="groupID">
+		INSERT INTO eo_project_status_code_group (eo_project_status_code_group.projectID,eo_project_status_code_group.groupName,eo_project_status_code_group.parentGroupID,eo_project_status_code_group.isChild) 
+		VALUES (#{projectID},#{groupName},#{parentGroupID},#{isChild})
+	</insert>
+	
+	<select id="checkStatusCodeGroupPermission" resultType="java.lang.Integer">
+		SELECT eo_conn_project.projectID FROM eo_conn_project INNER JOIN eo_project_status_code_group ON eo_conn_project.projectID = eo_project_status_code_group.projectID 
+		WHERE groupID = #{groupID} AND userID = #{userID};
+	</select>
+	
+	<delete id="deleteGroup">
+		DELETE FROM eo_project_status_code_group WHERE eo_project_status_code_group.groupID = #{groupID};
+	</delete>
+	
+	<select id="getParentList" resultType="StatusCodeGroup">
+		SELECT eo_project_status_code_group.groupID,eo_project_status_code_group.groupName,eo_project_status_code_group.isChild FROM eo_project_status_code_group WHERE projectID = #{projectID} AND isChild = 0 ORDER BY eo_project_status_code_group.groupID DESC
+	</select>
+	
+	<select id="getChildList" resultType="StatusCodeGroup">
+		SELECT eo_project_status_code_group.groupID,eo_project_status_code_group.groupName,eo_project_status_code_group.parentGroupID,eo_project_status_code_group.isChild FROM eo_project_status_code_group 
+		WHERE projectID = #{projectID} AND parentGroupID = #{groupID} ORDER BY eo_project_status_code_group.groupID DESC;
+	</select>
+	
+	<select id="getGroupOrder" resultType="java.lang.String">
+		SELECT eo_api_status_code_group_order.orderList FROM eo_api_status_code_group_order WHERE projectID = #{projectID}
+	</select>
+
+	<update id="editParentalGroup" parameterType="StatusCodeGroup">
+		UPDATE eo_project_status_code_group SET eo_project_status_code_group.groupName = #{groupName},isChild = 0,parentGroupID = 0 WHERE eo_project_status_code_group.groupID = #{groupID};
+	</update>
+	
+	<update id="editChildGroup" parameterType="StatusCodeGroup">
+		UPDATE eo_project_status_code_group SET eo_project_status_code_group.groupName = #{groupName},isChild = #{isChild},parentGroupID = #{parentGroupID} WHERE eo_project_status_code_group.groupID = #{groupID}
+	</update>
+	
+	<insert id="sortGroup">
+		REPLACE INTO eo_api_status_code_group_order(projectID, orderList) VALUES (#{projectID},#{orderList});
+	</insert>
+	
+	<select id="getGroupName" resultType="java.lang.String">
+		SELECT eo_project_status_code_group.groupName FROM eo_project_status_code_group WHERE eo_project_status_code_group.groupID = #{groupID}
+	</select>
+	
+	<select id="getGroupData" resultType="StatusCodeGroup">
+		SELECT eo_project_status_code_group.groupName,eo_project_status_code_group.isChild FROM eo_project_status_code_group 
+		WHERE eo_project_status_code_group.projectID = #{projectID} AND eo_project_status_code_group.groupID = #{groupID}
+	</select>
+	
+	<select id="getChildGroupData" resultType="StatusCodeGroup">
+		SELECT eo_project_status_code_group.groupID,eo_project_status_code_group.groupName,eo_project_status_code_group.isChild FROM eo_project_status_code_group 
+		WHERE eo_project_status_code_group.parentGroupID = #{parentGroupID} AND eo_project_status_code_group.projectID = #{projectID}
+	</select>
+	
+	<select id="getStatusCodeData" resultType="StatusCode">
+		SELECT eo_project_status_code.codeID,eo_project_status_code.code,eo_project_status_code.codeDescription FROM eo_project_status_code WHERE eo_project_status_code.groupID = #{groupID}
+	</select>
+	
+	
+	<insert id="addStatusCodeGroup" parameterType="StatusCodeGroup" useGeneratedKeys="true" keyProperty="codeID">
+		INSERT INTO
+		eo_project_status_code_group(groupID,projectID,groupName,parentGroupID,isChild)VALUES(#{groupID},#{projectID},#{groupName},#{parentGroupID},#{isChild})
+	</insert>
+	
+	<select id="getParentGroupID" resultType="Integer">
+		SELECT eo_project_status_code_group.parentGroupID FROM eo_project_status_code_group WHERE eo_project_status_code_group.groupID = #{groupID}
+	</select>
+</mapper>

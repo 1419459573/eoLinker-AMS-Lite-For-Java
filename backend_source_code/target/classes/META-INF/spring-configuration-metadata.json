@@ -1,0 +1,62 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "",
+      "type": "com.eolinker.config.Config"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "allow-register",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "allow-update",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "db-password",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "db-url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "db-user",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "language",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "path",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "port",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "version",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.eolinker.config.Config",
+      "name": "web-sitename",
+      "type": "java.lang.String"
+    }
+  ]
+}

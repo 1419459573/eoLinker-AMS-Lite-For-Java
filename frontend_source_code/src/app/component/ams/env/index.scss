@@ -1,0 +1,103 @@
+env-ams-component {
+    .en-v-li {
+        display: inline-block;
+        .child-input-li {
+            display: flex;
+            .iconfont {
+                height: 30px;
+                line-height: 30px;
+            }
+        }
+    }
+    .eo-env {
+        margin-right: 5px;
+        .default-btn {
+            @include eo-line(30px, 31px);
+            display: inline-flex;
+            width: auto;
+            padding: 0 10px;
+            text-align: center;
+            text-indent: 0;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            color: #333;
+            .iconfont {
+                margin-right: 5px;
+                font-size: 14px;
+                color: #333;
+            }
+            &:disabled {
+                border: 1px solid #ddd;
+                color: #ddd;
+                .iconfont {
+                    color: #ddd;
+                }
+            }
+        }
+        .active-btn {
+            border: 1px solid $buttonSuccessFocusBorderColor;
+            color: $buttonSuccessFocusBorderColor;
+            .iconfont {
+                color: $buttonSuccessFocusBorderColor;
+            }
+        }
+        .message-ul {
+            .list-li {
+                @include eo-line(30px);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+        .en-v-li {
+            .iconfont {
+                color: #333;
+            }
+            .child-input-li {
+                input[type="text"] {
+                    cursor: pointer;
+                    width: 182px;
+                    height: 30px;
+                    float: left;
+                }
+                .iconfont {
+                    position: absolute;
+                    right: 0;
+                    cursor: pointer;
+                    width: 31px;
+                }
+            }
+            .enV-child-li {
+                z-index: 1;
+            }
+            .message-ul {
+                background-color: #fff;
+                width: 182px;
+                border-radius: 3px;
+                border: 1px solid #e5e5e5;
+                margin-top: 5px;
+                li {
+                    font-size: 14px;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                }
+                .list-li {
+                    &:hover {
+                        background-color: #f0f0f0;
+                    }
+                }
+                .center-li {
+                    border-bottom: 1px solid #e5e5e5;
+                }
+                .admin-li {
+                    height: 40px;
+                    line-height: 40px;
+                    border-top: 1px dashed #e5e5e5;
+                    &:hover {
+                        color: #2196F3;
+                    }
+                }
+            }
+        }
+    }
+}

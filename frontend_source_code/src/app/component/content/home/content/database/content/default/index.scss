@@ -1,0 +1,72 @@
+home-database-list {
+    .common-table-div {
+        padding: 0 10px 10px 10px;
+        header {
+            .title-ul {
+                @extend %COMMON-TITLE-UL;
+            }
+        }
+        .first-level-article {
+            margin-top: 10px;
+            border: 1px solid #e5e5e5;
+            border-radius: 3px;
+            .product-type-span {
+                width: 40px;
+                display: inline-block;
+                @include eo-line(20px);
+                text-align: center;
+                text-indent: 0;
+                margin-right: 5px;
+            }
+            table {
+                width: 100%;
+                background: #fff;
+                font-size: 14px;
+                border-spacing: 0;
+                text-align: left;
+                text-indent: 15px;
+                border-radius: 3px;
+                thead {
+                    font-weight: bold;
+                    @include eo-line(40px);
+                    .first-th {
+                        min-width: 400px
+                    }
+                    .second-th {
+                        min-width: 90px
+                    }
+                    .third-th {
+                        min-width: 150px
+                    }
+                    .forth-th {
+                        min-width: 134px
+                    }
+                }
+                tbody {
+                    tr {
+                        @include eo-line(40px);
+                        th,
+                        td {
+                            cursor: pointer;
+                        }
+                        th {
+                            font-weight: initial;
+                        }
+                        td {
+                            color: #999;
+                        }
+                        &:hover {
+                            background-color: #efefef;
+                        }
+                        &:first-child {
+                            td,
+                            th {
+                                border-top: 1px solid #e5e5e5;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

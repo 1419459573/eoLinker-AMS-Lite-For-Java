@@ -1,0 +1,13 @@
+<div>
+    <!-- <home-project-inside-tab></home-project-inside-tab> -->
+    <home-project-inside-api-sidebar power-object="$ctrl.powerObject"></home-project-inside-api-sidebar>
+    <header ng-show="$ctrl.data.info.status!=-1">
+        <ul> 
+            <li class="env-li">
+                <env-ams-component env-model="$ctrl.data.service.home.envObject.object.model" env-query-init="$ctrl.data.service.home.envObject.object.fun" env-param="$ctrl.data.service.home.envObject.object.param" total-env></env-ams-component>
+            </li>
+        </ul>
+    </header>
+    <div ui-view>
+    </div>
+</div>

@@ -1,0 +1,201 @@
+report-ams-component {
+    .report-ams-component-article {
+        position: absolute;
+        top: 100px;
+        @include eo-left(20%, 10px);
+        background-color: #fff;
+        border-radius: 3px;
+        border: 1px solid #e5e5e5;
+        z-index: 11;
+        width: 60%;
+        min-height: 60%;
+        padding: 0 10px;
+        font-size: 14px;
+        margin-bottom: 20px;
+        >p {
+            line-height: 50px;
+            .close-btn {
+                margin-top: 8px;
+                padding: 0 10px;
+                min-width: 40px;
+                text-align: center;
+                &:nth-child(n+1) {
+                    margin-left: 10px;
+                }
+            }
+        }
+        >ul {
+            padding: 10px 0;
+            .icon-loading1 {
+                @include eo-animation(load 1.7s infinite ease);
+                display: inline-block;
+            }
+            .title-li {
+                line-height: 30px;
+            }
+            .first-second-title-li {
+                margin-bottom: 10px;
+            }
+            .second-title-li {
+                padding: 15px 0 10px 0;
+                border-top: 1px dashed #e5e5e5;
+                font-weight: bold;
+                margin-top: 10px;
+            }
+            .item-li {
+                line-height: 30px;
+                .tips-p {
+                    color: #999;
+                }
+                span {
+                    word-break: break-all;
+                    display: inline-block;
+                }
+            }
+            .boundary-item-li {
+                margin-bottom: 15px;
+                border-bottom: 1px dashed #e5e5e5;
+            }
+            .response-article-li {
+                padding: 10px 15px;
+                border-radius: 3px;
+                color: #666;
+                max-height: 400px;
+                overflow: auto;
+            }
+            .content-container {
+                white-space: pre-wrap;
+            }
+            .divide-li {
+                border-top: 1px dashed #e5e5e5;
+                padding-top: 10px;
+                margin-top: 20px;
+            }
+            .match-json-li {
+                border: 1px solid #e5e5e5;
+                border-radius: 3px;
+                table {
+                    width: 100%;
+                    border-spacing: 0;
+                    table-layout: fixed;
+                    td,
+                    th {
+                        font-size: 14px;
+                        height: 40px;
+                        line-height: 20px;
+                        padding-left: 10px;
+                        cursor: default;
+                    }
+                    .name-td {
+                        width: 30%;
+                    }
+                    .rule-td {
+                        width: 200px;
+                    }
+                    thead {
+                        background-color: #fafafa;
+                    }
+                    tbody {
+                        tr {
+                            td {
+                                overflow: hidden;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                height: 40px;
+                            }
+                            &:nth-last-child(n+2) {
+                                td,
+                                th {
+                                    border-bottom: 1px dashed #e5e5e5;
+                                }
+                            }
+                            &:first-child {
+                                td,
+                                th {
+                                    border-top: 1px solid #e5e5e5;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .match-response-li {
+                background-color: #f7f7f7;
+            }
+            .success-response-li {
+                background-color: #F1F8E9;
+            }
+            .error-response-li {
+                background-color: #fae4e6;
+            }
+            .default-response-li {
+                background-color: rgba(0, 0, 0, .03);
+            }
+        }
+        .automated-pro-ul {
+            .response-item-li {
+                border: 1px solid #e5e5e5;
+                margin: 10px 0;
+                border-radius: 3px;
+                .item-p {
+                    @include eo-line(43px);
+                    background-color: #f7f7f7;
+                    cursor: pointer;
+                    .name-span {
+                        padding-left: 10px;
+                        color: #666;
+                        margin-right: 10px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        @include eo-max-width(100%, 280px);
+                        display: inline-block;
+                        text-overflow: ellipsis;
+                    }
+                    .tips-span {
+                        font-size: 12px;
+                        color: #999;
+                    }
+                    .more-span {
+                        color: #666;
+                        font-size: 12px;
+                    }
+                    .pull-right {
+                        margin-right: 10px;
+                    }
+                }
+                .item-report-ul {
+                    padding: 10px 20px;
+                    border-top: 1px solid #e5e5e5;
+                    .child-item-p {
+                        line-height: 1.5em;
+                        margin-bottom: 5px;
+                    }
+                    .item-li,
+                    .child-item-p {
+                        .tips-p {
+                            white-space: nowrap;
+                        }
+                        >span {
+                            display: table-cell;
+                        }
+                    }
+                }
+            }
+        }
+        .automated-global-all {
+            .response-item-li .item-p {
+                cursor: default;
+            }
+        }
+    }
+    .report-ams-mask {
+        position: fixed;
+        z-index: -1;
+        background-color: rgba(12, 12, 12, 0.2);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 10;
+    }
+}

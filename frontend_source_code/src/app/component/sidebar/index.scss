@@ -1,0 +1,267 @@
+%SHRINK-ITEM {
+    width: 50px;
+    border-left: none;
+}
+
+%ITEM {
+    @include eo-line(50px);
+    width: 240px;
+    text-indent: 15px;
+    span {
+        font-size: 14px;
+    }
+    .iconfont {
+        margin-right: 12px;
+        font-size: 20px;
+        width: 35px;
+    }
+}
+
+%SECOND-ITEM {
+    @include eo-line(50px);
+    width: 190px;
+    text-indent: 8px;
+    span {
+        font-size: 14px;
+    }
+    .iconfont {
+        margin-right: 10px;
+        font-size: 16px;
+    }
+}
+
+%ITEM-ACTIVE {
+    background-color: #ecf8ee;
+    span {
+        color: #4CAF50;
+    }
+}
+
+%TITLE {
+    @include eo-line(25px, 24px);
+    border-bottom: 1px solid #e5e5e5;
+    background-color: #f5f5f5;
+    * {
+        font-size: 12px;
+    }
+}
+
+.eo-sidebar,
+.inside-sidebar {
+    background-color: #fff;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    z-index: 5;
+    top: 51px;
+    .common-sidebar {
+        .shrink-a {
+            position: absolute;
+            left: 229px;
+            margin-top: 40px;
+            z-index: 2;
+            visibility: hidden;
+            .title-li {
+                @include eo-line(25px, 24px);
+                width: auto;
+                .iconfont {
+                    font-size: 24px;
+                    color: #999;
+                    border-radius: 50%;
+                    background-color: #fff;
+                    &:hover {
+                        color: #333;
+                    }
+                }
+            }
+        }
+        .item-li {
+            @extend %ITEM;
+            .un-read-span {
+                margin-left: 5px;
+            }
+            &:hover {
+                background-color: #e3f1e5;
+            }
+        }
+        .divide-li {
+            border-top: 1px solid #e5e5e5;
+            @include eo-line(50px, 50px);
+        }
+        .divide-bottom-li {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .elem-active {
+            @extend %ITEM-ACTIVE;
+        }
+        .disable-menu-li {
+            background-color: #fafafa;
+            cursor: default;
+            span {
+                color: #999;
+                cursor: default;
+            }
+            &:hover {
+                background-color: #fafafa;
+            }
+        }
+        .had-child-ul {
+            .item-li {
+                .group-name,
+                .link-span {
+                    display: none;
+                }
+                &:hover {
+                    .triangle-left {
+                        width: 0;
+                        height: 0;
+                        border-top: 5px solid transparent;
+                        border-right: 6px solid #000;
+                        border-bottom: 5px solid transparent;
+                        position: absolute;
+                        left: 55px;
+                        margin-top: 20px;
+                        z-index: 3;
+                    }
+                    .group-name {
+                        position: absolute;
+                        left: 60px;
+                        z-index: 3;
+                        background-color: #000;
+                        height: 30px;
+                        line-height: 30px;
+                        display: inline-block;
+                        padding: 0 10px;
+                        white-space: nowrap;
+                        border-radius: 3px;
+                        text-indent: 0;
+                        color: #fff;
+                        margin-top: 10px;
+                        span,
+                        p {
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &:hover {
+        .common-sidebar {
+            .shrink-a {
+                visibility: visible;
+            }
+        }
+    }
+    .no-child-div {
+        border-right: 1px solid #e5e5e5;
+        height: 100%;
+    }
+}
+
+.second-sidebar {
+    //二级菜单样式
+    background-color: #fff;
+    border-right: 1px solid #e5e5e5;
+    position: fixed;
+    height: 100%;
+    left: 50px;
+    z-index: 1;
+    top: 51px;
+    border-left: 1px solid #e5e5e5;
+    header {
+        .back-li,
+        .ui-sref-li {
+            @extend %SECOND-ITEM;
+            font-size: 12px;
+            span {
+                font-size: 14px;
+            }
+            .iconfont {
+                margin-right: 3px;
+                font-size: 13px;
+            }
+        }
+        .back-li {
+            border-bottom: 1px solid #f2f2f2;
+            @include eo-line(49px);
+            span {
+                color: #999;
+            }
+        }
+        .ui-sref-li {
+            &:hover {
+                background-color: #e3f1e5;
+            }
+        }
+        .active {
+            .ui-sref-li {
+                @extend %ITEM-ACTIVE;
+            }
+        }
+    }
+}
+
+eo-sidebar {
+    .user-info-ul {
+        padding: 16px 10px;
+        border-bottom: 1px solid #e5e5e5;
+        .user-item-li {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .logo-li {
+            display: inline-block;
+            width: 47px;
+            background-size: contain;
+            border: 1px solid #e5e5e5;
+            border-radius: 50%;
+            @include eo-line(47px);
+            margin-right: 10px;
+        }
+        .nickname-li {
+            font-size: 14px;
+            line-height: 28px;
+            max-width: 110px;
+        }
+        .login-call-li {
+            font-size: 12px;
+            color: #999;
+            line-height: 20px;
+            margin-bottom: 8px;
+            max-width: 110px;
+        }
+        .status-li {
+            display: inline-block;
+            width: 100%;
+            padding-top: 10px;
+            .money-label {
+                font-size: 12px;
+                padding-left: 10px;
+                .iconfont {
+                    margin-right: 3px;
+                }
+            }
+            .sign-in-a {
+                font-size: 12px;
+                color: $buttonSuccessBorderColor;
+                border: 1px solid $buttonSuccessBorderColor;
+                border-radius: 3px;
+                padding: 0 5px;
+                margin-right: 5px;
+                background-color: #fff;
+            }
+            .sign-in-label {
+                @include eo-line(19px);
+            }
+            .sign-in-button {
+                @include eo-line(21px);
+            }
+            .had-sign-in-a {
+                border-color: #999;
+                color: #999;
+            }
+        }
+    }
+}

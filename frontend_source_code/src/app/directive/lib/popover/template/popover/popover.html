@@ -1,0 +1,15 @@
+<div class="popover" style="opacity:0;"  tooltip-animation-class="fade" uib-tooltip-classes ng-class="{ in: isOpen() }">
+    <table>
+        <tr>
+            <td>
+                <div class="arrow"></div>
+            </td>
+            <td style="border:none">
+                <div class="popover-inner">
+                    <h3 class="popover-title" ng-bind="title" ng-if="title"></h3>
+                    <div class="popover-content" ng-bind="content"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

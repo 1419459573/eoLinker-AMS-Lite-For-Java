@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.MessageMapper">
+
+	<select id="getMessageList" resultType="java.util.Map">
+		SELECT eo_message.msgID,eo_message.msgType,eo_message.msg,eo_message.summary,eo_message.msgSendTime,eo_message.isRead FROM eo_message WHERE eo_message.toUserID = #{userID} ORDER BY eo_message.msgSendTime DESC LIMIT #{page},15;
+	</select>
+	
+	<select id="getMessageListCount" resultType="java.lang.Integer">
+		SELECT COUNT(eo_message.msgID) AS msgCount FROM eo_message WHERE eo_message.toUserID = #{userID}
+	</select>
+	
+	<update id="readMessage">
+		UPDATE eo_message SET eo_message.isRead = 1 WHERE eo_message.msgID = #{msgID}
+	</update>
+	
+	<delete id="delMessage">
+		DELETE FROM eo_message WHERE eo_message.msgID = #{msgID}
+	</delete>
+	
+	<delete id="cleanMessage">
+		DELETE FROM eo_message WHERE eo_message.toUserID = #{userID}
+	</delete>
+	
+	<insert id="sendMessage" parameterType="Message">
+		INSERT INTO eo_message (eo_message.fromUserID,eo_message.toUserID,eo_message.msgType,eo_message.summary,eo_message.msg) 
+		VALUES (#{fromUserID},#{toUserID},#{msgType},#{summary},#{msg})
+	</insert>
+
+
+	<select id="getUnreadMessageNum" resultType="java.lang.Integer">
+		SELECT COUNT(eo_message.msgID) AS unreadMsgNum FROM eo_message WHERE eo_message.toUserID = #{toUserID} AND eo_message.isRead = 0
+	</select>
+
+</mapper>

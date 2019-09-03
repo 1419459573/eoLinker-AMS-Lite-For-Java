@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.AutomatedTestCaseGroupMapper">
+	<insert id="addGroup" parameterType="AutomatedTestCaseGroup"
+		useGeneratedKeys="true" keyProperty="groupID">
+		INSERT INTO
+		eo_project_test_case_group(projectID,groupName,parentGroupID,isChild)VALUES(#{projectID},#{groupName},#{parentGroupID},#{isChild})
+	</insert>
+
+	<delete id="deleteGroup">
+		DELETE FROM eo_project_test_case_group
+		WHERE eo_project_test_case_group.projectID = #{projectID} AND eo_project_test_case_group.groupID IN
+		<foreach collection="groupIDS" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<select id="getParentGroupList" parameterType="Integer"
+		resultType="java.util.Map">
+		SELECT eo_project_test_case_group.groupID,eo_project_test_case_group.groupName,eo_project_test_case_group.isChild FROM eo_project_test_case_group WHERE eo_project_test_case_group.projectID = #{projectID} AND eo_project_test_case_group.isChild = 0 ORDER BY  eo_project_test_case_group.groupName ASC
+	</select>
+
+	<select id="getChildGroupList" parameterType="Integer"
+		resultType="java.util.Map">
+	SELECT eo_project_test_case_group.groupID,eo_project_test_case_group.groupName,eo_project_test_case_group.parentGroupID,eo_project_test_case_group.isChild FROM eo_project_test_case_group WHERE eo_project_test_case_group.projectID = #{projectID} AND eo_project_test_case_group.parentGroupID = #{parentGroupID} ORDER BY eo_project_test_case_group.groupName ASC
+	</select>
+
+	<select id="getGroupOrderList" parameterType="Integer"
+		resultType="String">
+		SELECT eo_project_test_case_group_order.orderList FROM eo_project_test_case_group_order WHERE eo_project_test_case_group_order.projectID = #{projectID}
+	</select>
+
+	<update id="editGroup" parameterType="AutomatedTestCaseGroup">
+		UPDATE eo_project_test_case_group 
+		<set>
+			<if test="parentGroupID != null">eo_project_test_case_group.groupName = #{groupName},eo_project_test_case_group.parentGroupID =
+				#{parentGroupID},eo_project_test_case_group.isChild = #{isChild}</if>
+			<if test="parentGroupID == null">eo_project_test_case_group.groupName = #{groupName},eo_project_test_case_group.parentGroupID = 0, eo_project_test_case_group.isChild = 0</if>
+		</set>
+		WHERE eo_project_test_case_group.groupID = #{groupID} AND eo_project_test_case_group.projectID = #{projectID}
+	</update>
+	<update id ="sortGroup">
+		REPLACE INTO eo_project_test_case_group_order(projectID, orderList) VALUES (#{projectID},#{orderList})
+	</update>
+	
+	<select id="getGroupByID" parameterType="Integer"
+		resultType="AutomatedTestCaseGroup">
+		SELECT * FROM eo_project_test_case_group WHERE groupID = #{groupID}
+	</select>
+	
+	<select id="checkGroupPermission" parameterType="Integer"
+		resultType="Integer">
+		SELECT eo_conn_project.projectID FROM eo_project_test_case_group INNER JOIN eo_conn_project ON eo_project_test_case_group.projectID = eo_conn_project.projectID WHERE eo_project_test_case_group.groupID = #{groupID} AND eo_conn_project.userID = #{userID}
+	</select>
+	
+	<select id="getParentGroupID" resultType="Integer">
+		SELECT eo_project_test_case_group.parentGroupID FROM eo_project_test_case_group WHERE eo_project_test_case_group.groupID = #{groupID}
+	</select>
+	
+</mapper>

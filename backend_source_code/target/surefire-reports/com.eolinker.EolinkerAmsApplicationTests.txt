@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.eolinker.EolinkerAmsApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.9 s - in com.eolinker.EolinkerAmsApplicationTests

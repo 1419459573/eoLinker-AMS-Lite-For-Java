@@ -1,0 +1,134 @@
+<!-- //author：广州银云信息科技有限公司 -->
+<div class="home-project-inside-list home-project-inside-div">
+    <header>
+        <ul class="title-ul">
+            <li class="btn-group-li pull-left" ng-switch="$ctrl.data.interaction.request.groupID==-2" ng-if="$ctrl.powerObject.edit">
+                <a class="eo-button-success common-btn" data-ng-click="$ctrl.data.fun.edit()" ng-switch-when=false>
+                    <span class="iconfont icon-tianjia"></span><span class="btn-name">{{'01210020'|translate}}</span>
+                </a>
+                <a class="eo-button-warning common-btn" data-ng-click="$ctrl.data.fun.clean()" ng-switch-when=true>
+                    <span class="iconfont icon-shanchu"></span><span class="btn-name">{{'01210021'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" ng-click="$ctrl.data.fun.import()" ng-show="!$ctrl.data.info.batch.disable" ng-switch-when=false>
+                    {{'012100257'|translate}}
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.batch.default()" ng-if="!$ctrl.data.info.batch.disable">
+                    {{'01210022'|translate}}
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.info.batch.disable=false" ng-if="$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-close"></span><span class="btn-name">{{'01210023'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" ng-click="$ctrl.data.fun.batch.moveGroup()" ng-if="$ctrl.data.info.batch.disable" ng-switch-when=false>
+                    <span class="iconfont icon-bianji"></span><span class="btn-name">{{'012100252'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" ng-click="$ctrl.data.fun.export()" ng-show="$ctrl.data.info.batch.disable" ng-switch-when=false>
+                    <span class="iconfont icon-xiazai"></span><span class="btn-name">{{'012100258'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.batch.remove()" ng-if="$ctrl.data.info.batch.disable" ng-switch-when=false>
+                    <span class="iconfont icon-shanchu"></span><span class="btn-name">{{'01210024'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.batch.recover()" ng-if="$ctrl.data.info.batch.disable" ng-switch-when=true>
+                    <span class="iconfont icon-shuaxin"></span><span class="btn-name">{{'01210025'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.batch.delete()" ng-if="$ctrl.data.info.batch.disable" ng-switch-when=true>
+                    <span class="iconfont icon-shanchu"></span><span class="btn-name">{{'01210026'|translate}}</span>
+                </a>
+            </li>
+            <li class="divide-li pull-left" ng-if="$ctrl.powerObject.edit"><span></span></li>
+            <li class="search-li pull-left">
+                <form name="searchForm">
+                    <ul class="search-function-ul">
+                        <li class="search-input-li">
+                            <input type="text" placeholder="{{'012100223'|translate}}" data-ng-model="$ctrl.data.interaction.request.tips" required>
+                        </li>
+                        <li class="search-btn-li">
+                            <button class="iconfont icon-sousuo" data-ng-click="$ctrl.data.fun.search()"></button>
+                        </li>
+                    </ul>
+                </form>
+            </li>
+            <li class="divide-li pull-right"><span></span></li>
+            <li class="view-btn-li pull-right ">
+                <p>
+                    <a class="view-common-btn" ng-class="{'elem-active':$ctrl.data.info.more==1}" ng-click="$ctrl.data.fun.setMore({switch:1})">
+                        <span class="iconfont icon-sort"></span>{{'01210027'|translate}}
+                        </a>
+                    <a class="view-common-btn" ng-class="{'elem-active':$ctrl.data.info.more==2}" ng-click="$ctrl.data.fun.setMore({switch:2})">
+                        <span class="iconfont icon-more"></span>{{'01210028'|translate}}
+                        
+                    </a>
+                </p>
+            </li>
+            <li class="btn-li sort-btn-li pull-right">
+                <div class="common-btn default-btn">
+                    <span class="iconfont icon-sort"></span><span class="btn-name">{{'012100251'|translate}}</span>
+                    <div class="list-function-wrap">
+                        <ul class="nav-function">
+                            <li data-ng-click="$ctrl.data.fun.sort({item:item})" ng-repeat="item in $ctrl.data.info.sort.query" ng-class="{'strong-li':item.orderBy==$ctrl.data.info.sort.current.orderBy}" ng-init="item.asc=item.orderBy==$ctrl.data.info.sort.current.orderBy?$ctrl.data.info.sort.current.asc:item.asc">
+                                {{item.name}}[{{item.asc==0?$ctrl.data.info.filter.ascending:$ctrl.data.info.filter.descending}}]
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article">
+        <table freeze-header-directive>
+            <thead style="background-color: #fff;">
+                <tr>
+                    <th class="first-th">
+                        <label class="iconfont icon-favorfill"></label>
+                    </th>
+                    <th class="api-name second-th" >
+                        {{'012100212'|translate}}&nbsp;<span class="count-span">{{$ctrl.data.service.home.envObject.object.model?'['+$ctrl.data.service.home.envObject.object.model.length+']':''}}</span>
+                    </th>
+                    <th class="third-th">{{'012100213'|translate}}</th>
+                    <th class="forth-th" ng-show="$ctrl.data.info.more==1">
+                        {{$ctrl.data.interaction.request.groupID>-2?$ctrl.data.info.filter.updated:$ctrl.data.info.filter.grouped}}
+                    </th>
+                    <th class="api-time fifth-th" ng-show="$ctrl.data.info.more==1">
+                        {{$ctrl.data.interaction.request.groupID>-2?$ctrl.data.info.filter.updatedTime:$ctrl.data.info.filter.deleteTime}}
+                    </th>
+                    <th class="sixth-th" ng-class="{'trash-sixth-th':$ctrl.data.interaction.request.groupID==-2}" ng-if="$ctrl.powerObject.edit">{{'012100218'|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="item in $ctrl.data.service.home.envObject.object.model" data-ng-click="$ctrl.data.fun.enter({item:item,$index:$index})" ng-class="{'elem-active':item.isClick&&$ctrl.data.info.batch.disable}">
+                    <th class="first-th">
+                        <a data-ng-click="$ctrl.data.fun.storage({item:item,$event:$event})" ng-if="!($ctrl.data.info.batch.disable&&item.starred==0)">
+                            <label class="iconfont" ng-class="{'icon-favor':item.starred==0,'icon-favorfill':item.starred==1}"></label>
+                        </a>
+                    </th>
+                    <td class="second-th" title="{{item.apiName}}">
+                        <label class="iconfont icon-circle " ng-class="{'eo-status-success':item.apiStatus==0,'eo-status-warning':item.apiStatus==1,'eo-status-danger':item.apiStatus==2}"></label>
+                        {{item.apiName}}
+                    </td>
+                    <td class="third-th">
+                        <span class="eo-method-label" ng-class="{'eo-color-success':item.apiRequestType==0,'eo-color-default':item.apiRequestType==1,'eo-color-others':item.apiRequestType==2,'eo-color-warning':item.apiRequestType==6,'eo-color-danger':item.apiRequestType==3,'eo-color-info':item.apiRequestType==4,'eo-color-options':item.apiRequestType==5}">
+                        {{item.apiRequestType==0?'POST':item.apiRequestType==1?'GET':item.apiRequestType==2?'PUT':item.apiRequestType==3?'DELETE':item.apiRequestType==4?'HEAD':item.apiRequestType==5?'OPTS':'PATCH'}}
+                        </span> {{$ctrl.data.service.home.envObject.object.fun(item.apiURI)}}
+                    </td>
+                    <td class="forth-th" ng-show="$ctrl.data.info.more==1">
+                        {{$ctrl.data.interaction.request.groupID>-2?(!!item.partnerNickName)?item.partnerNickName:(item.userNickName?item.userNickName:item.userName):item.groupName}}
+                    </td>
+                    <td class="fifth-th" ng-show="$ctrl.data.info.more==1">{{$ctrl.data.interaction.request.groupID>-2?item.apiUpdateTime:item.removeTime}}</td>
+                    <td class="sixth-th" ng-class="{'hidden':$ctrl.data.interaction.request.groupID==-2}" ng-if="$ctrl.powerObject.edit">
+                        <!--edit权限-->
+                        <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.edit({item:item,$event:$event})" ng-if="!$ctrl.data.info.batch.disable"><span class="iconfont icon-bianji" ></span>{{'012100219'|translate}}</a>
+                        <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.delete({item:item,$index:$index,switch:0,$event:$event})" ng-if="!$ctrl.data.info.batch.disable"><span class="iconfont icon-shanchu"></span>{{'012100220'|translate}}</a>
+                    </td>
+                    <td ng-class="{'hidden':$ctrl.data.interaction.request.groupID>-2}" ng-if="$ctrl.powerObject.edit">
+                        <!--edit权限-->
+                        <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.recover({item:item,$index:$index,$event:$event})" ng-if="!$ctrl.data.info.batch.disable"><span class="iconfont icon-shuaxin" ></span>{{'012100221'|translate}}</a>
+                        <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.delete({item:item,$index:$index,switch:1,$event:$event})" ng-if="!$ctrl.data.info.batch.disable"><span class="iconfont icon-close"></span>{{'012100222'|translate}}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>

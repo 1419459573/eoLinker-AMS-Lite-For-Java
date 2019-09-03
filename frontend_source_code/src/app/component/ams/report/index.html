@@ -1,0 +1,99 @@
+<input type="button" id="report-ams-component-js" class="hidden">
+<div ng-show="$ctrl.input.show">
+    <div class="report-ams-component-article" ng-switch="$ctrl.status">
+        <p><b>{{$ctrl.input.object.baseInfo.caseName}}</b>
+            <a class="eo-button-default pull-right close-btn" ng-click="$ctrl.data.fun.cancel()">{{'700'|translate}}</a>
+            <a class="eo-button-info pull-right close-btn batch-test-btn" ng-click="$ctrl.fun()" ng-switch-when='automated-global-all' testing="{{$ctrl.input.testing||false}}">{{$ctrl.input.testing?('0121603'|translate):('0121604'|translate)}}</a>
+        </p>
+        <ul ng-switch-default>
+            <li class="item-li"><span class="tips-p">{{'701'|translate}}</span><span>{{$ctrl.input.object.general.requestUrl}}</span></li>
+            <li class="item-li"><span class="tips-p">{{'702'|translate}}</span><span>{{$ctrl.input.object.general.requestMethod}}</span></li>
+            <li class="item-li"><span class="tips-p">{{'703'|translate}}</span><span>{{$ctrl.input.object.general.statusCode||'unkown'}}</span></li>
+            <li class="second-title-li" ng-show="$ctrl.input.object.requestHeaders">{{'704'|translate}}</li>
+            <li class="item-li" ng-repeat="(key,item) in $ctrl.input.object.requestHeaders track by $index">
+                <span class="tips-p">{{key}}：</span><span>{{item}}</span>
+            </li>
+            <li class="second-title-li" ng-show="$ctrl.input.object.requestBody.body" ng-switch="$ctrl.input.object.requestBody.requestType">{{'705'|translate}}<span ng-switch-when='0'>[form-data]</span><span ng-switch-when='2'>[RESTful]</span><span ng-switch-when='1'>[raw]</span>：</li>
+            <li class="item-li" ng-if="$ctrl.input.object.requestBody.requestType!='1'" ng-repeat="(key,item) in $ctrl.input.object.requestBody.body track by $index">
+                <span class="tips-p">{{key}}：</span><span>{{item}}</span>
+            </li>
+            <li class="response-article-li match-response-li" ng-if="$ctrl.input.object.requestBody.requestType=='1'">{{$ctrl.input.object.requestBody.body||$ctrl.data.info.filter.noContent}}</li>
+            <li class="second-title-li">{{'707'|translate}}</li>
+            <li class="item-li"><span class="tips-p">{{'708'|translate}}</span><span>{{$ctrl.input.object.baseInfo.statusCode}}</span></li>
+            <li class="item-li"><span class="tips-p">{{'709'|translate}}</span><span>{{$ctrl.input.object.baseInfo.matchTypeMessage}}</span></li>
+            <li class="item-li" ng-hide="$ctrl.input.object.baseInfo.matchType==3"><span class="tips-p">{{'7010'|translate}}</span></li>
+            <li class="response-article-li match-response-li" ng-hide="$ctrl.input.object.baseInfo.matchType>1">{{$ctrl.input.object.baseInfo.matchRule||$ctrl.data.info.filter.noRule}}</li>
+            <li class="match-json-li" ng-show="$ctrl.input.object.baseInfo.matchType==2">
+                <table>
+                    <thead>
+                        <tr>
+                            <td class="name-td">{{'7012'|translate}}</td>
+                            <td class="rule-td">{{'7013'|translate}}</td>
+                            <td>{{'7014'|translate}}</td>
+                        </tr>
+                    </thead>
+                </table>
+                <ul>
+                    <li class="item-li" ng-repeat="item in $ctrl.input.object.baseInfo.matchRule | filter:$ctrl.data.fun.filter track by $index" level-init-directive limit-level=4 status="report_jsonMatch">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="name-td">{{item.paramKey}}</td>
+                                    <td class="rule-td" ng-switch="item.matchRule">
+                                        <span ng-switch-when="0">{{'7015'|translate}}</span>
+                                        <span ng-switch-when="1">{{'7016'|translate}} [ = ]</span>
+                                        <span ng-switch-when="2">{{'7017'|translate}} [ != ]</span>
+                                        <span ng-switch-when="3">{{'7018'|translate}} [ > ]</span>
+                                        <span ng-switch-when="4">{{'7019'|translate}} [ < ]</span>
+                                        <span ng-switch-when="5">{{'7020'|translate}} [ Reg= ]</span>
+                                    </td>
+                                    <td>{{item.paramInfo}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
+            </li>
+            <li class="item-li divide-li"><span class="tips-p">{{'7021'|translate}}</span><span>{{$ctrl.input.object.general.statusCode||'unkowwn'}}</span></li>
+            <li class="item-li"><span class="tips-p">{{'7022'|translate}}</span></li>
+            <li class="response-article-li content-container" ng-class="{'success-response-li':$ctrl.input.object.status=='success','error-response-li':$ctrl.input.object.status=='error'}">{{($ctrl.input.object.response.length>10000?($ctrl.input.object.response.slice(0,10000)+'...'):$ctrl.input.object.response)||'target server no answer'}}</li>
+        </ul>
+        <ul class="automated-pro-ul automated-global-all" ng-switch-when='automated-global-all'>
+            <li class="first-second-title-li">
+            <b>{{'7023'|translate}}</b>
+            </li>
+            <li class="item-li" ng-switch="$ctrl.input.object.status">
+                <span class="tips-p">{{'01210018'|translate}}：</span>
+                <span ng-switch-when='codeError'>{{'7024'|translate}}</span>
+                <span ng-switch-when='info'>{{'7025'|translate}}</span>
+                <span ng-switch-when='interrupt'>{{'7026'|translate}}</span>
+                <span ng-switch-when='timeout'>{{'7027'|translate}}</span>
+                <span ng-switch-when='error'>{{'7028'|translate}}</span>
+                <span ng-switch-default>{{$ctrl.input.testing?('7029'|translate):('7030'|translate)}}</span>
+            </li>
+            <li class="item-li">
+                <span class="tips-p">{{'7031'|translate}}：</span>
+                <span>{{$ctrl.input.object.time||('7032'|translate)}}</span>
+            </li>
+            <li class="item-li boundary-item-li">
+                <span class="tips-p">{{'7033'|translate}}：</span>
+                <span ng-hide="$ctrl.input.object.totalCase">{{'7032'|translate}}</span>
+                <span ng-show="$ctrl.input.object.totalCase">{{($ctrl.input.object.successCase/($ctrl.input.object.totalCase||1)*100) | number:2}}%&nbsp;&nbsp;({{'7034'|translate}}{{$ctrl.input.object.totalCase}},{{'7035'|translate}}{{$ctrl.input.object.successCase}},{{'012100138'|translate}}{{$ctrl.input.object.errorCase||($ctrl.input.object.totalCase-$ctrl.input.object.successCase)}})</span>
+            </li>
+            <li class="response-item-li" ng-repeat="item in $ctrl.otherObject" ng-switch="$ctrl.input.object.responseList[$index].reportStatus||$ctrl.input.object.responseList[$index].status">
+                <p class="item-p">
+                    <span class="name-span pull-left">{{item.caseName}}</span>
+                    <span class="pull-right eo-status-success" ng-switch-when="finish">{{'7036'|translate}}，{{$ctrl.input.object.responseList[$index].time}}</span>
+                    <span class="eo-status-error pull-right" ng-switch-when='error'>{{'7028'|translate}}，{{$ctrl.input.object.responseList[$index].time}}</span>
+                    <span class="eo-status-error pull-right" ng-switch-when='codeError'>{{'7024'|translate}}，{{$ctrl.input.object.responseList[$index].time}}</span>
+                    <span class="eo-status-warning pull-right" ng-switch-when='info'>{{'7037'|translate}}，{{$ctrl.input.object.responseList[$index].time}}</span>
+                    <span class="eo-status-error pull-right" ng-switch-when='interrupt'>{{'7038'|translate}}，{{$ctrl.input.object.responseList[$index].time}}</span>
+                    <span class="eo-status-error pull-right" ng-switch-when='timeout'>{{'7027'|translate}}，{{$ctrl.input.object.responseList[$index].time}}</span>
+                    <span class="iconfont icon-loading1 pull-right" ng-show="$ctrl.input.testing" ng-switch-default></span>
+                    <span class="pull-right eo-status-tips" ng-hide="$ctrl.input.testing" ng-switch-default>{{'7039'|translate}}</span>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div class="report-ams-mask" ng-click="$ctrl.data.fun.cancel()"></div>
+</div>

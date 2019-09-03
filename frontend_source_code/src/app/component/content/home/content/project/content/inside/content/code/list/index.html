@@ -1,0 +1,69 @@
+<div class="home-project-inside-list home-project-inside-code-list home-project-inside-div">
+    <header>
+        <ul class="title-ul" >
+            <li class="btn-group-li pull-left" ng-if="$ctrl.powerObject.edit">
+                <a class="eo-button-success common-btn" data-ng-click="$ctrl.data.fun.edit()" ng-show="!$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-tianjia"></span><span class="btn-name">{{'012110'|translate}}</span>
+                </a>
+                <a class="common-btn first-tab-btn" data-ng-click="$ctrl.data.fun.import()" ng-show="!$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-shangchuan"></span><span class="btn-name">{{'01214027'|translate}}</span>
+                </a><a class="common-btn last-tab-btn" href="app/assets/office/statusCode_Import.xls" download="statusCode_template" ng-show="!$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-xiazai"></span><span class="btn-name">{{'0121124'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.batch.default()" ng-if="!$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-check1"></span><span class="btn-name">{{'012111'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.info.batch.disable=false" ng-if="$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-close"></span><span class="btn-name">{{'012112'|translate}}</span>
+                </a>
+                <a class="common-btn default-btn" data-ng-click="$ctrl.data.fun.batch.delete()" ng-if="$ctrl.data.info.batch.disable">
+                    <span class="iconfont icon-shanchu"></span><span class="btn-name">{{'012113'|translate}}</span>
+                </a>
+            </li>
+            <li class="divide-li pull-left" ng-if="$ctrl.powerObject.edit"><span></span></li>
+            <li class="search-li pull-left">
+                <form name="searchForm">
+                    <ul class="search-function-ul">
+                        <li class="search-input-li">
+                            <input class="eo-input" type="text" placeholder="{{'012114'|translate}}" data-ng-model="$ctrl.data.interaction.request.tips" required>
+                        </li>
+                        <li class="search-btn-li">
+                            <button class="iconfont icon-sousuo" data-ng-click="$ctrl.data.fun.search()"></button>
+                        </li>
+                    </ul>
+                </form>
+            </li>
+        </ul>
+    </header>
+    <article class="first-level-article" ng-class="{'only-read-article':!$ctrl.powerObject.edit}">
+        <table>
+            <thead>
+                <tr>
+                    <th class="first-th">{{'012115'|translate}}</th>
+                    <th class="third-th">
+                        {{'012116'|translate}}
+                    </th>
+                    <th class="second-th">{{'012117'|translate}}</th>
+                    <th class="forth-th" ng-if="$ctrl.powerObject.edit">{{'012118'|translate}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-ng-repeat="item in $ctrl.data.interaction.response.query" data-ng-click="$ctrl.data.fun.click({item:item,$index:$index})" ng-class="{'elem-active':item.isClick&&$ctrl.data.info.batch.disable}">
+                    <td>
+                        {{item.code}}
+                    </td>
+                    <td title="{{item.codeDescription}}">{{item.codeDescription}}</td>
+                    <td>{{item.groupName}}</td>
+                    <td ng-if="$ctrl.powerObject.edit">
+                        <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.edit({item:item})" ng-if="!$ctrl.data.info.batch.disable"><span class="iconfont icon-bianji"></span>{{'012119'|translate}}</a>
+                        <a class="eo-operate-btn" data-ng-click="$ctrl.data.fun.delete({item:item,$index:$index})" ng-if="!$ctrl.data.info.batch.disable"><span class="iconfont icon-shanchu"></span>{{'0121110'|translate}}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </article>
+    <footer>
+        <div load-directive="$ctrl.data.fun.init(arg)">
+        </div>
+    </footer>
+</div>

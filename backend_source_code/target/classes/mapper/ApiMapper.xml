@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.ApiMapper">
+	<select id="getApiCount" parameterType="Integer"
+		resultType="Integer">
+		SELECT COUNT(eo_api.apiID) FROM eo_api WHERE
+		eo_api.projectID =
+		#{projectID} AND eo_api.removed = 0
+	</select>
+	<insert id="addApi" parameterType="Api" useGeneratedKeys="true"
+		keyProperty="apiID">
+		INSERT INTO eo_api
+		(eo_api.apiName,eo_api.apiURI,eo_api.apiProtocol,eo_api.apiSuccessMock,eo_api.apiFailureMock,eo_api.apiRequestType,eo_api.apiStatus,eo_api.groupID,eo_api.projectID,eo_api.starred,
+		eo_api.apiNoteType,eo_api.apiNoteRaw,eo_api.apiNote,eo_api.apiRequestParamType,eo_api.apiRequestRaw,eo_api.apiUpdateTime,eo_api.updateUserID,eo_api.mockRule,eo_api.mockResult,eo_api.mockConfig,eo_api.apiSuccessStatusCode,eo_api.apiFailureStatusCode,eo_api.beforeInject,eo_api.afterInject)
+		VALUES
+		(#{apiName},#{apiURI},#{apiProtocol},#{apiSuccessMock},#{apiFailureMock},#{apiRequestType},#{apiStatus},#{groupID},#{projectID},#{starred},#{apiNoteType},#{apiNoteRaw},#{apiNote},#{apiRequestParamType},#{apiRequestRaw},#{apiUpdateTime},#{updateUserID},#{mockRule},#{mockResult},#{mockConfig},#{apiSuccessStatusCode},#{apiFailureStatusCode},#{beforeInject},#{afterInject})
+	</insert>
+	<update id="deleteApiByGroupID">
+		UPDATE eo_api SET
+		eo_api.removed = 1
+		,eo_api.removeTime = #{removeTime}
+		WHERE
+		eo_api.groupID IN
+		<foreach collection="groupIDS" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	<insert id="addApiHeader" parameterType="ApiHeader"
+		useGeneratedKeys="true" keyProperty="headerID">
+		INSERT INTO eo_api_header
+		(eo_api_header.headerName,eo_api_header.headerValue,eo_api_header.apiID)
+		VALUES (#{headerName},#{headerValue},#{apiID});
+	</insert>
+
+	<insert id="addRequestParam" parameterType="ApiRequestParam"
+		useGeneratedKeys="true" keyProperty="paramID">
+		INSERT INTO eo_api_request_param
+		(eo_api_request_param.apiID,eo_api_request_param.paramName,eo_api_request_param.paramKey,eo_api_request_param.paramValue,eo_api_request_param.paramLimit,eo_api_request_param.paramNotNull,eo_api_request_param.paramType)
+		VALUES
+		(#{apiID},#{paramName},#{paramKey},#{paramValue},#{paramLimit},#{paramNotNull},#{paramType});
+	</insert>
+
+	<insert id="addRequestValue" parameterType="ApiRequestValue"
+		useGeneratedKeys="true" keyProperty="valueID">
+		INSERT INTO eo_api_request_value
+		(eo_api_request_value.paramID,eo_api_request_value.`value`,eo_api_request_value.valueDescription)
+		VALUES (#{paramID},#{value},#{valueDescription})
+	</insert>
+
+	<insert id="addResultParam" parameterType="ApiResultParam"
+		useGeneratedKeys="true" keyProperty="paramID">
+		INSERT INTO eo_api_result_param
+		(eo_api_result_param.apiID,eo_api_result_param.paramName,eo_api_result_param.paramKey,eo_api_result_param.paramNotNull)
+		VALUES (#{apiID},#{paramName},#{paramKey},#{paramNotNull})
+	</insert>
+
+	<insert id="addResultValue" parameterType="ApiResultValue"
+		useGeneratedKeys="true" keyProperty="valueID">
+		INSERT INTO eo_api_result_value
+		(paramID,value,valueDescription) VALUES
+		(#{paramID},#{value},#{valueDescription})
+	</insert>
+
+	<update id="updateApi" parameterType="Api">
+		UPDATE eo_api SET
+		eo_api.apiName = #{apiName},eo_api.apiURI =
+		#{apiURI},eo_api.apiProtocol = #{apiProtocol},eo_api.apiSuccessMock =
+		#{apiSuccessMock},eo_api.apiFailureMock =
+		#{apiFailureMock},eo_api.apiRequestType =
+		#{apiRequestType},eo_api.apiStatus = #{apiStatus},eo_api.starred =
+		#{starred},eo_api.groupID = #{groupID},eo_api.apiNoteType =
+		#{apiNoteType},
+		eo_api.apiNoteRaw = #{apiNoteRaw},eo_api.apiNote =
+		#{apiNote},eo_api.apiUpdateTime =
+		#{apiUpdateTime},eo_api.apiRequestParamType =
+		#{apiRequestParamType},eo_api.apiRequestRaw =
+		#{apiRequestRaw},eo_api.updateUserID = #{updateUserID},eo_api.mockRule
+		= #{mockRule},eo_api.mockResult = #{mockResult},eo_api.mockConfig =
+		#{mockConfig}, eo_api.apiSuccessStatusCode =
+		#{apiSuccessStatusCode},eo_api.apiFailureStatusCode =
+		#{apiFailureStatusCode},eo_api.beforeInject =
+		#{beforeInject},eo_api.afterInject = #{afterInject} WHERE eo_api.apiID
+		= #{apiID}
+	</update>
+
+	<delete id="deleteApiHeader" parameterType="Integer">
+		DELETE FROM
+		eo_api_header WHERE eo_api_header.apiID = #{apiID}
+	</delete>
+
+	<delete id="deleteRequestParam" parameterType="Integer">
+		DELETE FROM
+		eo_api_request_param WHERE eo_api_request_param.apiID = #{apiID}
+	</delete>
+
+	<delete id="deleteResultParam" parameterType="Integer">
+		DELETE FROM
+		eo_api_result_param WHERE eo_api_result_param.apiID = #{apiID};
+	</delete>
+
+	<update id="removeApi">
+		UPDATE eo_api SET eo_api.removed = 1, eo_api.removeTime =
+		#{updateTime} WHERE
+		projectID = #{projectID} AND eo_api.apiID IN
+		<foreach collection="apiIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<select id="getApiNameByIDs" resultType="String">
+		SELECT GROUP_CONCAT(DISTINCT eo_api.apiName) AS apiName FROM eo_api
+		WHERE eo_api.apiID IN
+		<foreach collection="apiIDs" item="item" index="index"
+			open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+
+	<update id="recoverApi">
+		UPDATE eo_api SET eo_api.removed = 0, eo_api.groupID = #{groupID}
+		WHERE
+		projectID = #{projectID} AND eo_api.apiID IN
+		<foreach collection="apiIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<delete id="deleteApi">
+		DELETE FROM eo_api WHERE projectID = #{projectID} AND eo_api.apiID IN
+		<foreach collection="apiIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<delete id="batchDeleteApiHeader">
+		DELETE FROM eo_api_header WHERE eo_api_header.apiID IN
+		<foreach collection="apiIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<delete id="batchDeleteRequestParam">
+		DELETE FROM eo_api_request_param WHERE eo_api_request_param.apiID IN
+		<foreach collection="apiIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<delete id="batchDeleteResultParam">
+		DELETE FROM eo_api_result_param WHERE eo_api_result_param.apiID IN
+		<foreach collection="apiIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<delete id="cleanRecyclingStation" parameterType="Integer">
+		DELETE FROM
+		eo_api WHERE eo_api.projectID= #{projectID} AND eo_api.removed =
+		1;
+	</delete>
+
+	<select id="getRecyclingStationApiList"
+		resultType="java.util.Map">
+		SELECT
+		DISTINCT
+		eo_api.apiID,eo_api.apiName,eo_api.apiURI,eo_api.apiStatus,eo_api.apiRequestType,eo_api.apiUpdateTime,eo_api.removeTime,eo_api.starred,eo_conn_project.partnerNickName,eo_user.userNickName,eo_user.userName
+		FROM eo_api LEFT JOIN eo_conn_project ON eo_api.updateUserID =
+		eo_conn_project.userID AND eo_api.projectID =
+		eo_conn_project.projectID
+		LEFT JOIN eo_user ON eo_api.updateUserID =
+		eo_user.userID WHERE
+		eo_api.projectID = #{projectID} AND eo_api.removed
+		= 1 ORDER BY
+		${orderBy}
+	</select>
+	<select id="getApi" resultType="java.util.Map">
+		SELECT
+		eo_api_cache.*,eo_api_group.parentGroupID FROM eo_api_cache LEFT JOIN
+		eo_api_group ON eo_api_cache.groupID = eo_api_group.groupID WHERE
+		eo_api_cache.apiID = #{apiID} AND eo_api_cache.projectID =
+		#{projectID};
+	</select>
+	<select id="getApiList" resultType="java.util.Map">
+		SELECT
+		eo_api.apiID,eo_api.apiName,eo_api.apiURI,eo_api.apiStatus,eo_api.apiRequestType,eo_api.apiUpdateTime,eo_api.starred,eo_api_group.groupID,eo_api_group.parentGroupID,eo_api_group.groupName,eo_api.updateUserID,eo_conn_project.partnerNickName,eo_user.userNickName,eo_user.userName
+		FROM eo_api LEFT JOIN eo_api_group ON eo_api.groupID =
+		eo_api_group.groupID LEFT JOIN eo_conn_project ON eo_api.updateUserID
+		= eo_conn_project.userID AND eo_api.projectID =
+		eo_conn_project.projectID LEFT JOIN eo_user ON eo_api.updateUserID =
+		eo_user.userID WHERE
+		eo_api.projectID = #{projectID} AND eo_api.removed = 0
+		<if test="groupIDS!=null and groupIDS.size > 0">
+			AND eo_api_group.groupID IN
+			<foreach collection="groupIDS" item="item" index="index"
+				open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		 ORDER BY ${orderBy}
+	</select>
+	<select id="searchApi" resultType="java.util.Map">
+		SELECT DISTINCT
+		eo_api.apiID,eo_api.apiName,eo_api.apiURI,eo_api_group.groupID,eo_api_group.parentGroupID,eo_api_group.groupName,eo_api.apiStatus,eo_api.apiRequestType,eo_api.apiUpdateTime
+		FROM eo_api LEFT JOIN eo_api_group ON eo_api.groupID =
+		eo_api_group.groupID WHERE eo_api_group.projectID = #{projectID} AND
+		eo_api.removed = 0 AND (eo_api.apiName LIKE concat('%',#{tips},'%') OR
+		eo_api.apiURI LIKE
+		concat('%',#{tips},'%'))ORDER BY eo_api.apiName;
+	</select>
+
+	<update id="updateStar">
+		UPDATE eo_api SET eo_api.starred = #{starred} WHERE
+		eo_api.apiID = #{apiID}
+		AND eo_api.projectID = #{projectID}
+	</update>
+
+	<select id="getApiInfo" resultType="Api">
+		SELECT * FROM eo_api WHERE
+		eo_api.apiID = #{apiID} AND eo_api.projectID = #{projectID}
+	</select>
+
+	<update id="changeApiGroup">
+		UPDATE eo_api SET eo_api.groupID = #{groupID} WHERE eo_api.apiID IN
+		<foreach collection="apiIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		AND eo_api.projectID = #{projectID}
+	</update>
+	<select id="getApiData" resultType="java.util.Map">
+		SELECT eo_api_cache.apiID,eo_api_cache.apiJson,eo_api_cache.starred
+		FROM eo_api_cache WHERE eo_api_cache.projectID = #{projectID} AND
+		eo_api_cache.apiID in
+		<foreach collection="apiIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<select id="getAllApi" resultType="java.util.Map">
+		SELECT
+		eo_api.apiID,eo_api.apiName,eo_api.apiURI,eo_api_group.groupID,eo_api_group.parentGroupID,eo_api_group.groupName,eo_api.apiStatus,eo_api.apiRequestType,eo_api.apiUpdateTime,eo_api.starred,eo_api_cache.apiJson
+		FROM eo_api INNER JOIN eo_api_group ON eo_api.groupID =
+		eo_api_group.groupID INNER JOIN eo_api_cache ON eo_api.apiID =
+		eo_api_cache.apiID WHERE eo_api_group.projectID = #{projectID} AND
+		eo_api.removed = 0 ORDER BY eo_api.apiName DESC
+	</select>
+	<select id="getApiMockData" resultType="java.util.Map">
+		SELECT
+		eo_api.apiName,eo_api.projectID,eo_api.apiID,eo_api.apiURI,eo_api.mockRule,eo_api.mockResult,eo_api.mockConfig
+		FROM eo_api WHERE eo_api.apiID = #{apiID} AND eo_api.projectID =
+		#{projectID}
+	</select>
+	<update id="editApiMockData">
+		UPDATE eo_api SET eo_api.mockRule =
+		#{mockRule},eo_api.mockResult =
+		#{mockResult},eo_api.mockConfig =
+		#{mockConfig} WHERE eo_api.apiID =
+		#{apiID} AND eo_api.projectID =
+		#{projectID}
+	</update>
+	<select id="getProjectID" resultType="Integer">
+		SELECT eo_api.projectID
+		FROM eo_api WHERE eo_api.apiID = #{apiID}
+	</select>
+</mapper>

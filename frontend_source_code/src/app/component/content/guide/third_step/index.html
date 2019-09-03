@@ -1,0 +1,34 @@
+<div class="guide-third-step">
+    <div class="pro-install" ng-class="{'hidden':$ctrl.data.info.installing}">
+        <div class="install-head">
+            <p>{{'0040'|translate}}<span ng-class="{'error':!$ctrl.data.interaction.response.query.fileWrite,'ok':!!$ctrl.data.interaction.response.query.fileWrite}">{{$ctrl.data.info.check.fileWrite}}</span></p>
+            <p ng-class="{'hidden':!!$ctrl.data.interaction.response.query.fileWrite}" class="errorTips">{{'0041'|translate}}</p>
+            <p ng-class="{'hidden':!!$ctrl.data.interaction.response.query.fileWrite}" class="errorTips">{{'00415'|translate}}{{$ctrl.data.interaction.response.query.fileWriteError}}</p>
+
+            <p>{{'0042'|translate}}<span ng-class="{'error':!$ctrl.data.interaction.response.query.db,'ok':!!$ctrl.data.interaction.response.query.db}">{{$ctrl.data.info.check.db}}</span></p>
+            <p ng-class="{'hidden':!!$ctrl.data.interaction.response.query.db}" class="errorTips">{{'0043'|translate}}</p>
+            <p ng-class="{'hidden':!!$ctrl.data.interaction.response.query.db}" class="errorTips">{{'00415'|translate}}{{$ctrl.data.interaction.response.query.dbError}}</p>
+        </div>
+        <div ng-class="{'hidden':!$ctrl.data.interaction.response.query.db||!$ctrl.data.interaction.response.query.fileWrite}">
+            <button class="eo-button-success guide-button" data-ng-click='$ctrl.data.fun.install()'>{{'0046'|translate}}
+                <span class="iconfont icon-xiangyou pull-right"></span>
+            </button>
+        </div>
+        <div class="failCheck" ng-class="{'hidden':$ctrl.data.interaction.response.query.db&&$ctrl.data.interaction.response.query.fileWrite}">
+            <button class="eo-button-success" data-ng-click='$ctrl.data.fun.checkConfig()'>{{'0047'|translate}}
+                <span class="iconfont icon-shuaxin pull-right"></span>
+            </button>
+            <a ui-sref="guide.second_step"><button class="eo-button-success">{{'0048'|translate}}
+                <span class="iconfont icon-xiangzuo pull-right"></span>
+            </button></a>
+        </div>
+    </div>
+    <div class="installing" ng-class="{'hidden':!$ctrl.data.info.installing}">
+        <div class="installing-wrap">
+            <div class="icon-wrap">
+                <span class="iconfont icon-loading1"></span>
+            </div>
+            <p>{{'0049'|translate}}</p>
+        </div>
+    </div>
+</div>

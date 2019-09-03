@@ -1,0 +1,156 @@
+home-project-inside-test-default {
+    .home-project-inside-default {
+        z-index: 0;
+        header {
+            .title-ul {
+                @extend %COMMON-TITLE-UL;
+                .batch-test-btn{
+                    margin-left: 5px;
+                    @include eo-line(32px,30px);
+                    &:disabled{
+                        background-color:#fafafa;
+                        color:#999;
+                        cursor: not-allowed;
+                    }
+                }
+            }
+            .search-li {
+                @extend %SEARCH-UL;
+                margin-left:0;
+            }
+        }
+        .first-level-article {
+            background-color: #fff;
+            border: 1px solid #dcdcdc;
+            overflow-y: auto;
+    position: absolute;
+    background-color: #fff;
+    margin-right: 10px;
+    border-radius: 0 3px 3px 0;
+    border: 1px solid #e5e5e5;
+    margin-top: 10px;
+    overflow-x: hidden;
+    @include eo-height(100%, $HOME-NAVBAR-HEIGHT + 72px + 126px);
+    table {
+        width: 100%;
+        background: #fff;
+        font-size: 14px;
+        border-spacing: 0;
+        text-align: left;
+        text-indent: 10px;
+        table-layout: fixed;
+        .hover-tr {
+            td,
+            th,
+            label,
+            span {
+                cursor: pointer;
+            }
+        }
+    }
+            .tips-ul {
+                padding: 0 10px;
+                @include eo-line(32px);
+                margin-bottom: 10px;
+                li {
+                    font-size: 12px;
+                }
+                .title-li {
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                }
+            }
+            .warning-ul {
+                @include eo-color(#fffbf5, #e3d6c5);
+                li {
+                    color: #eaa244;
+                }
+            }
+            .common-ul {
+                @include eo-color(#F1F8E9, #DCEDC8);
+                * {
+                    color: #4caf50;
+                }
+            }
+            table {
+                .iconfont {
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+                thead {
+                    font-weight: bold;
+                    @include eo-line(40px);
+                    .first-th {
+                        text-align: left;
+                        text-indent: 10px;
+                    }
+                    .second-th {
+                        width: 220px;
+                    }
+                    .third-th {
+                        width: 220px;
+                    }
+                    .forth-th {
+                        min-width: 115px;
+                        width: 144px;
+                    }
+                }
+                tbody {
+                    tr:nth-child(odd) {
+                        background: #fafafa;
+                    }
+                    tr:nth-child(even) {
+                        background: #fff;
+                    }
+                    tr {
+                        @include eo-line(41px,40px);
+                        td {
+                            color: #666;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            cursor: pointer;
+                        }
+                        td:nth-child(2) {
+                            .icon-circle {
+                                font-size: 12px;
+                                margin-right: 5px;
+                            }
+                            span {
+                                padding: 2px;
+                                border: 1px solid rgb(39, 107, 225);
+                                background-color: rgb(72, 128, 224);
+                                color: #fff;
+                                border-radius: 5px;
+                            }
+                        }
+                        &:hover {
+                            background: #f0f0f0;
+                        }
+                    }
+                    .elem-active {
+                        @extend %BATCH-OPERATION;
+                    }
+                }
+            }
+        }
+    }
+    .introduce-common-div{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        @include eo-width(100%,293px);
+    }
+}
+
+home-project-inside-test-sidebar{
+    group-common-component .home-project-inside-group, database-sidebar .database-sidebar{
+        @include eo-height(100%,50px + 126px);
+    }
+}
+
+.shrink-inside-div{
+    .introduce-common-div{
+        @include eo-width(100%,103px);
+    }
+}

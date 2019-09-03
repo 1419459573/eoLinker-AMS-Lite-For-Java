@@ -1,0 +1,1182 @@
+<div class="modal">
+    <!-- 上传文件输入弹窗 -->
+    <script type="text/ng-template" id="Common_UploadFile">
+        <div class="common-modal common-modal-upload-file eo-modal">
+            <header>
+                <ul>
+                    <li ng-bind="::data.input.title"></li>
+                </ul>
+            </header>
+            <article>
+                <form name="editForm">
+                    <ul>
+                        <li class="container-li">
+                            <ul class="group-inherit  group-ul">
+                                <li upload-file-directive="data.fun.import(arg)" input-id="import-input-js"></li>
+                                <li ng-if="data.input.secondTitle">{{data.input.secondTitle}}：</li>
+                                <li>
+                                    <label for="import-input-js" class="eo-input" ng-class="{'eo-input-error':!data.output.file.name&&data.info.submitted}">{{data.output.file.name||data.info.clickSelectFile}}</label>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="container-li">
+                            <ul class="group-select group-ul pull-left">
+                                <li>一级分组：</li>
+                                <li>
+                                    <select class="eo-input " ng-model="data.output.groupID" ng-options="group.groupID as group.groupName for group in data.input.group.parent"
+                                        ng-change="data.fun.change('first-level')">
+                                    </select>
+                                </li>
+                            </ul>
+                            <ul class="group-select  group-ul pull-left">
+                                <li>二级分组：</li>
+                                <li>
+                                    <select class="eo-input" ng-model="data.output.childGroupID" ng-options="group.groupID as group.groupName for group in data.input.group.child"
+                                        ng-change="data.fun.change('second-level')">
+                                    </select>
+                                </li>
+                            </ul>
+                            <ul class="group-select  group-ul">
+                                <li>三级分组：</li>
+                                <li>
+                                    <select class="eo-input" ng-model="data.output.grandSonGroupID" ng-options="group.groupID as group.groupName for group in data.input.group.grandson">
+                                    </select>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                            <button class="eo-button-success " ng-click="data.fun.confirm()">{{'414'|translate}}</button>
+                            <input type="button" class="eo-button-default " value="{{'415'|translate}}" ng-click="data.fun.cancel()">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 请求参数详情弹窗 -->
+    <script type="text/ng-template" id="RequestParamDetailModal">
+        <div class="modal-request-param-detail eo-modal" style="{{info.background}}">
+            <div class="second-level-div">
+                <header>
+                    <ul>
+                        <li class="pull-left">{{'400'|translate}}</li>
+                        <li class="pull-right">
+                            <a class="iconfont icon-close" data-ng-click="data.fun.close()"></a>
+                        </li>
+                    </ul>
+                </header>
+                <div class="article">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="param-name">{{'401'|translate}}</td>
+                                <td class="param-desc">{{'402'|translate}}</td>
+                                <td class="require-label">{{'403'|translate}}</td>
+                                <td class="type-label">{{'404'|translate}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>{{data.input.item.paramKey}}</th>
+                                <td>{{data.input.item.paramName}}</td>
+                                <td>{{data.input.item.paramNotNull==0?data.info.yes:''}}</td>
+                                <td>{{data.input.item.paramType==0?"[string]":data.input.item.paramType==1?"[file]":data.input.item.paramType==2?"[json]":data.input.item.paramType==3?"[int]":data.input.item.paramType==4?"[float]":data.input.item.paramType==5?"[double]":data.input.item.paramType==6?"[date]":data.input.item.paramType==7?"[datetime]":data.input.item.paramType==8?"[boolean]":data.input.item.paramType==9?"[byte]":data.input.item.paramType==10?"[short]":data.input.item.paramType==11?"[long]":data.input.item.paramType==12?"[array]":"[object]"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>{{'406'|translate}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{data.input.item.paramLimit}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="num-td">{{'407'|translate}}</td>
+                                <td class="param-name">{{'408'|translate}}</td>
+                                <td>{{'409'|translate}}</td>
+                                <td>{{'4010'|translate}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="item in data.input.item.paramValueList">
+                                <td>
+                                    <label class="number-label">{{$index+1}}</label>
+                                </td>
+                                <td>{{item.value}}</td>
+                                <td>{{item.valueDescription}}</td>
+                                <td>{{$index==data.input.item.default?data.info.yes:''}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>{{'4011'|translate}}</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="request-param-raw-form" arrange-format="request-param-limit-div-js" interaction="{request:{onlyOneTime:true}}"
+                        ng-model="data.input.item.paramValue">
+                        <pre class="request-param-raw-content" id="request-param-limit-div-js"></pre>
+                    </div>
+                </div>
+                <footer></footer>
+            </div>
+        </div>
+        <div class="mask" ng-click="data.fun.close()"></div>
+    </script>
+    <!-- 请求参数详情编辑弹窗 -->
+    <script type="text/ng-template" id="RequestParamEditModal">
+        <div class="modal-request-param-edit eo-modal" style="{{info.background}}">
+            <div class="second-level-div">
+                <header>
+                    <ul>
+                        <li class="pull-left">{{'410'|translate}}</li>
+                    </ul>
+                </header>
+                <div class="article">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="param-name">{{'401'|translate}}</td>
+                                <td class="param-desc">{{'402'|translate}}</td>
+                                <td class="require-label">{{'403'|translate}}</td>
+                                <td class="type-label">{{'404'|translate}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    {{data.input.item.paramKey}}
+                                </th>
+                                <td>{{data.input.item.paramName}}</td>
+                                <td>{{data.input.item.paramNotNull?data.info.yes:''}}</td>
+                                <td>{{data.input.item.paramType==0?"[string]":data.input.item.paramType==1?"[file]":data.input.item.paramType==2?"[json]":data.input.item.paramType==3?"[int]":data.input.item.paramType==4?"[float]":data.input.item.paramType==5?"[double]":data.input.item.paramType==6?"[date]":data.input.item.paramType==7?"[datetime]":data.input.item.paramType==8?"[boolean]":data.input.item.paramType==9?"[byte]":data.input.item.paramType==10?"[short]":data.input.item.paramType==11?"[long]":data.input.item.paramType==12?"[array]":"[object]"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>{{'406'|translate}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="limit-td">
+                                    <auto-complete-ams-component model="data.input.item.paramLimit" array="data.input.constant" placeholder="{{'410'|translate}}"></auto-complete-ams-component>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="param-value-table">
+                        <thead>
+                            <tr>
+                                <td class="num-td">{{'411'|translate}}</td>
+                                <td class="param-name">{{'408'|translate}}</td>
+                                <td>{{'409'|translate}}</td>
+                                <td class="operation-td">{{'412'|translate}}</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <ul class="request-param-form-ul" sv-root sv-part="data.input.item.paramValueList">
+                        <li style="background-color: #fff;" data-ng-repeat="item in data.input.item.paramValueList" sv-element="data.input.sort.requestParamForm">
+                            <table ng-switch="$last">
+                                <tbody>
+                                    <td class="num-td">
+                                        <input class="hidden" type="radio" name="request-param-form-default-{{data.input.item.$index}}" id="request-param-form-default-{{data.input.item.$index}}-{{$index}}"
+                                            data-ng-model="data.input.item.default" value="{{$index}}" data-ng-change="data.input.fun.paramAdd({$last:$last,item:data.input.item})">
+                                        <label for="request-param-form-default-{{data.input.item.$index}}-{{$index}}" class="eo-checkbox iconfont" data-ng-class="{'icon-check':data.input.item.default==$index}">{{data.input.item.default==$index?'':'&nbsp;'}}</label>
+                                    </td>
+                                    <td class="param-name">
+                                        <input class="eo-input" type="text" name="" data-ng-model="item.value" data-ng-change="data.input.fun.paramAdd({$last:$last,item:data.input.item})"
+                                            data-ng-class="{'eo-input-error':(!item.value&&item.valueDescription)}" placeholder="{{'408'|translate}}">
+                                    </td>
+                                    <td>
+                                        <input class="eo-input" type="text" data-ng-model="item.valueDescription" maxlength="255" data-ng-change="data.input.fun.paramAdd({$last:$last,item:data.input.item})"
+                                            placeholder="{{'409'|translate}}">
+                                    </td>
+                                    <td class="operation-td">
+                                        <label class="eo-sv-handle iconfont icon-111zhuanhuan number-label" sv-handle></label>
+                                        <label ng-switch-when=false>
+                                            <a class="iconfont icon-shanchu number-label" data-ng-click="data.input.fun.delete({item:data.input.item,$index:$index})"></a>
+                                        </label>
+                                    </td>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>{{'4011'|translate}}</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div class="raw-div">
+                        <textarea class="back-result-content" data-ng-model="data.input.item.paramValue" maxlength="65530" placeholder="{{'413'|translate}}">
+                        </textarea>
+                    </div>
+                </div>
+                <footer style="border-top: 1px solid #e5e5e5;">
+                    <div class="btn-group">
+                        <button class="eo-button-success save-change-btn pull-left" ng-click="data.fun.ok()">{{'414'|translate}}</button>
+                        <a class="eo-button-default " ng-click="data.fun.close()">{{'415'|translate}}</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 返回参数详情弹窗 -->
+    <script type="text/ng-template" id="ResponseParamDetailModal">
+        <div class="modal-response-param-detail eo-modal" style="{{info.background}}">
+            <div class="second-level-div">
+                <header>
+                    <ul>
+                        <li class="pull-left">{{'420'|translate}}</li>
+                        <li class="pull-right">
+                            <a class="iconfont icon-close" data-ng-click="data.fun.close()"></a>
+                        </li>
+                    </ul>
+                </header>
+                <div class="article">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="param-name">{{'401'|translate}}</td>
+                                <td class="param-desc">{{'402'|translate}}</td>
+                                <td class="require-label">{{'421'|translate}}</td>
+                                <td class="type-label">{{'404'|translate}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>{{data.input.item.paramKey}}</th>
+                                <td>{{data.input.item.paramName}}</td>
+                                <td>{{data.input.item.paramNotNull==0?data.info.yes:''}}</td>
+                                <td>{{data.input.item.paramType==0?"[string]":data.input.item.paramType==1?"[file]":data.input.item.paramType==2?"[json]":data.input.item.paramType==3?"[int]":data.input.item.paramType==4?"[float]":data.input.item.paramType==5?"[double]":data.input.item.paramType==6?"[date]":data.input.item.paramType==7?"[datetime]":data.input.item.paramType==8?"[boolean]":data.input.item.paramType==9?"[byte]":data.input.item.paramType==10?"[short]":data.input.item.paramType==11?"[long]":data.input.item.paramType==12?"[array]":"[object]"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="num-td">{{'407'|translate}}</td>
+                                <td class="param-name">{{'422'|translate}}</td>
+                                <td>{{'409'|translate}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="item in data.input.item.paramValueList">
+                                <td>
+                                    <label class="number-label">{{$index+1}}</label>
+                                </td>
+                                <td>{{item.value}}</td>
+                                <td>{{item.valueDescription}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <footer></footer>
+            </div>
+        </div>
+        <div class="mask" ng-click="data.fun.close()"></div>
+    </script>
+    <!-- 返回参数详情编辑弹窗 -->
+    <script type="text/ng-template" id="ResponseParamEditModal">
+        <div class="modal-response-param-edit eo-modal" style="{{info.background}}">
+            <div class="second-level-div">
+                <header>
+                    <ul>
+                        <li class="pull-left">{{'420'|translate}}</li>
+                    </ul>
+                </header>
+                <div class="article">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td class="param-name">{{'401'|translate}}</td>
+                                <td class="param-desc">{{'402'|translate}}</td>
+                                <td class="require-label">{{'421'|translate}}</td>
+                                <td class="type-label">{{'404'|translate}}</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>
+                                    {{data.input.item.paramKey}}
+                                </th>
+                                <td>{{data.input.item.paramName}}</td>
+                                <td>{{data.input.item.paramNotNull?data.info.yes:''}}</td>
+                                <td>{{data.input.item.paramType==0?"[string]":data.input.item.paramType==1?"[file]":data.input.item.paramType==2?"[json]":data.input.item.paramType==3?"[int]":data.input.item.paramType==4?"[float]":data.input.item.paramType==5?"[double]":data.input.item.paramType==6?"[date]":data.input.item.paramType==7?"[datetime]":data.input.item.paramType==8?"[boolean]":data.input.item.paramType==9?"[byte]":data.input.item.paramType==10?"[short]":data.input.item.paramType==11?"[long]":data.input.item.paramType==12?"[array]":"[object]"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="param-value-table">
+                        <thead>
+                            <tr>
+                                <td class="param-name">{{'408'|translate}}</td>
+                                <td>{{'409'|translate}}</td>
+                                <td class="operation-td">{{'412'|translate}}</td>
+                            </tr>
+                        </thead>
+                    </table>
+                    <ul class="response-param-form-ul" sv-root sv-part="data.input.item.paramValueList">
+                        <li style="background-color: #fff;" data-ng-repeat="item in data.input.item.paramValueList" sv-element="data.input.sort.responseParamForm">
+                            <table ng-switch="$last">
+                                <tbody>
+                                    <td class="param-name">
+                                        <input class="eo-input" type="text" name="" data-ng-model="item.value" data-ng-change="data.input.fun.paramAdd({$last:$last,item:data.input.item})"
+                                            data-ng-class="{'eo-input-error':(!item.value&&item.valueDescription)}" placeholder="{{'422'|translate}}">
+                                    </td>
+                                    <td>
+                                        <input class="eo-input" type="text" name="" data-ng-model="item.valueDescription" maxlength="255" data-ng-change="data.input.fun.paramAdd({$last:$last,item:data.input.item})"
+                                            placeholder="{{'402'|translate}}">
+                                    </td>
+                                    <td class="operation-td">
+                                        <label class="eo-sv-handle iconfont icon-111zhuanhuan number-label" sv-handle></label>
+                                        <label ng-switch-when=false>
+                                            <a class="iconfont icon-shanchu number-label" data-ng-click="data.input.fun.delete({item:data.input.item,$index:$index})"></a>
+                                        </label>
+                                    </td>
+                                </tbody>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+                <footer style="border-top: 1px solid #e5e5e5;">
+                    <div class="btn-group">
+                        <button class="eo-button-success save-change-btn pull-left" ng-click="data.fun.ok()">{{'414'|translate}}</button>
+                        <a class="eo-button-default " ng-click="data.fun.close()">{{'415'|translate}}</a>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <script type="text/ng-template" id="ExpressionBuilderModal">
+        <div class="modal-expression-builder eo-modal" expression-builder-directive="data.fun.callback(callback)" interaction="data.interaction.request.expressionBuilderObject">
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- Info弹窗 -->
+    <script type="text/ng-template" id="InfoModal">
+        <div class="modal-info eo-modal" data-ng-class="{'error':type=='error','success':type=='success','info':type=='info'}">
+            <ul>
+                <li>
+                    <span>
+                        <i class="iconfont" data-ng-class="{'icon-close':type=='error','icon-check':type=='success','icon-shanchu':type=='info'}"></i>
+                    </span>
+                    <span class="text-center modal-title" data-ng-bind="::info"></span>
+                </li>
+            </ul>
+        </div>
+    </script>
+    <!-- tips弹窗 -->
+    <script type="text/ng-template" id="TipsModal">
+        <div class="modal-tips eo-modal" style="{{info.background}}">
+            <header>
+                <ul>
+                    <li class="pull-left header-title"></li>
+                    <li class="btn-group pull-right" ng-switch="info.type">
+                        <a class="iconfont icon-close" ng-click="cancel()" ng-switch-when=1></a>
+                        <a class="eo-button-default " ng-click="cancel()" ng-switch-when=0>关闭</a>
+                    </li>
+                </ul>
+            </header>
+            <article style="height:100%;" data-ng-bind-html="::info.html">
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 信息弹窗 -->
+    <script type="text/ng-template" id="MessageModal">
+        <div class="modal-message eo-modal">
+            <header>
+                <ul>
+                    <li class="pull-left header-title" data-ng-bind="::title"></li>
+                    <li class="btn-group pull-right">
+                        <a class="eo-button-default " ng-click="cancel()">{{'430'|translate}}</a>
+                    </li>
+                </ul>
+            </header>
+            <article>
+                <form name="Form">
+                    <ul>
+                        <li class="modal-message-info" data-ng-bind-html="::info"></li>
+                        <li class="btn-group">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask" ng-click="cancel()"></div>
+    </script>
+    <!-- 导入Project弹窗 -->
+    <script type="text/ng-template" id="ImportModal">
+        <div class="modal-import eo-modal" ng-class="{'modal-import-api':data.input.status==1}">
+            <header>
+                <ul>
+                    <li class="pull-left header-title" data-ng-bind="::data.input.title"></li>
+                    <li class="btn-group pull-right">
+                        <a class="eo-button-default " ng-click="cancel()">{{'430'|translate}}</a>
+                    </li>
+                </ul>
+            </header>
+            <article>
+                <form name="Form">
+                    <ul ng-switch="data.input.status">
+                        <li class="modal-import-info" ng-switch-when='1'>
+                            <ul class="modal-btn-group-ul">
+                                <li class="pull-left first-li">
+                                    <input id="eolinker-js" type="file" name="" onchange="angular.element(this).scope().importFile({status:6,$file:this.files})"
+                                        required>
+                                    <a class="postman-1-a">
+                                        <p>eolinker</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="modal-import-info" ng-switch-default>
+                            <ul class="modal-btn-group-ul">
+                                <li class="pull-left first-li">
+                                    <input id="eolinker-js" type="file" name="" onchange="angular.element(this).scope().importFile({status:0,$file:this.files})"
+                                        required>
+                                    <a class="postman-1-a">
+                                        <p>eolinker</p>
+                                    </a>
+                                </li>
+                                <li class="pull-left center-li">
+                                    <input id="postman-1-js" type="file" name="" onchange="angular.element(this).scope().importFile({status:1,$file:this.files})"
+                                        required>
+                                    <a class="postman-1-a">
+                                        <p>postman v1</p>
+                                    </a>
+                                </li>
+                                <li class="center-li pull-left">
+                                    <input id="postman-2-js" type="file" name="" onchange="angular.element(this).scope().importFile({status:2,$file:this.files})">
+                                    <a class="postman-2-a">
+                                        <p>postman v2</p>
+                                    </a>
+                                </li>
+                                <li class="dhc-li pull-left">
+                                    <input id="dhc-js" type="file" name="" onchange="angular.element(this).scope().importFile({status:3,$file:this.files})">
+                                    <a class="dhc-a">
+                                        <p>DHC</p>
+                                    </a>
+                                </li>
+                                <li class="pull-left rap-li">
+                                    <input id="rap-js" type="file" name="" onchange="angular.element(this).scope().importFile({status:4,$file:this.files})">
+                                    <a class="rap-a">
+                                        <p>RAP</p>
+                                    </a>
+                                </li>
+                                <li class="last-li">
+                                    <input id="rap-js" type="file" name="" onchange="angular.element(this).scope().importFile({status:5,$file:this.files})">
+                                    <a class="rap-a">
+                                        <p>swagger</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer>
+                <div load-directive="data.fun.import(arg)" interaction="{request:{delay:true}}">
+                </div>
+            </footer>
+        </div>
+        <div class="mask" ng-click="cancel()"></div>
+    </script>
+    <!-- 导入数据库表弹窗 -->
+    <script type="text/ng-template" id="ImportDatabaseModal">
+        <div class="modal-import-database eo-modal">
+            <header>
+                <ul>
+                    <li class="pull-left header-title" ng-bind="::title"></li>
+                    <li class="btn-group pull-right">
+                        <a class="eo-button-default " ng-click="cancel()">关闭</a>
+                    </li>
+                </ul>
+            </header>
+            <article>
+                <form name="Form">
+                    <ul>
+                        <li class="modal-import-info">
+                            <ul class="modal-btn-group-ul">
+                                <li class="database-li">
+                                    <input id="mysql-js" type="file" onchange="angular.element(this).scope().importFile({status:1,$file:this.files})">
+                                    <a class="postman-1-a">
+                                        <p>eolinker</p>
+                                    </a>
+                                </li>
+                                <li class="table-li">
+                                    <input id="mysql-js" type="file" onchange="angular.element(this).scope().importFile({status:0,$file:this.files})">
+                                    <a class="postman-1-a">
+                                        <p>mysql</p>
+                                    </a>
+                                </li>
+                                <li class="mysql-li">
+                                    <input id="mysql-js" type="file" onchange="angular.element(this).scope().importFile({status:2,$file:this.files})">
+                                    <a class="oracle-a">
+                                        <p>oracle</p>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <div load-directive="data.fun.import(arg)" interaction="{request:{delay:true}}"></div>
+        </div>
+        <div class="mask" ng-click="cancel()"></div>
+    </script>
+    <!-- 导出弹窗 -->
+    <script type="text/ng-template" id="ExportModal">
+        <a id="dump-directive_js" class="hidden"></a>
+        <div class=" eo-modal" ng-class="{'project-modal-export':!data.input.status,'modal-export':data.input.status}">
+            <header>
+                <ul>
+                    <li class="pull-left header-title" data-ng-bind="::data.input.title"></li>
+                    <li class="btn-group pull-right">
+                        <a class="eo-button-default " ng-click="cancel()">{{'430'|translate}}</a>
+                    </li>
+                </ul>
+            </header>
+            <article>
+                <form name="Form">
+                    <ul>
+                        <li class="modal-export-info" ng-if="data.input.status">
+                            <ul class="modal-btn-group-ul">
+                                <li class="pull-left first-li" dump-directive='data.fun.dumpDirective(arg)' interaction='{request:{text:"eolinker",switch:"export-"+data.input.status}}'>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="modal-export-info" ng-if="!data.input.status">
+                            <ul class="modal-btn-group-ul">
+                                <li class="pull-left first-li" dump-directive='data.fun.dumpDirective(arg)' interaction='{request:{text:"eolinker",switch:"0"}}'>
+                                </li>
+                                <li class="pull-left disable-li center-li" ng-click="data.fun.tips()">
+                                    <span class="pro-label">HTML</span>
+                                    <a>
+                                        <p>HTML</p>
+                                    </a>
+                                </li>
+                                <li class="pull-left disable-li pdf-li" ng-click="data.fun.tips()">
+                                    <span class="pro-label">PRO</span>
+                                    <a>
+                                        <p>PDF</p>
+                                    </a>
+                                </li>
+                                <li class="word-li disable-li pull-left" ng-click="data.fun.tips()">
+                                    <span class="pro-label">PRO</span>
+                                    <a>
+                                        <p>WORD</p>
+                                    </a>
+                                </li>
+                                <li class="last-li disable-li pull-right" ng-click="data.fun.tips()">
+                                    <span class="pro-label">PRO</span>
+                                    <a>
+                                        <p>MARKDOWN</p>
+                                    </a>></li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+        </div>
+        <div class="mask" ng-click="cancel()"></div>
+    </script>
+    <!-- 导出数据字典弹窗 -->
+    <script type="text/ng-template" id="ExportDatabaseModal">
+        <a id="dump-directive_js" class="hidden"></a>
+        <div class="modal-database-export eo-modal">
+            <header>
+                <ul>
+                    <li class="pull-left header-title" data-ng-bind="::title"></li>
+                    <li class="btn-group pull-right">
+                        <a class="eo-button-default " ng-click="cancel()">{{'430'|translate}}</a>
+                    </li>
+                </ul>
+            </header>
+            <article>
+                <form name="Form">
+                    <ul>
+                        <li class="modal-export-info">
+                            <ul class="modal-btn-group-ul">
+                                <li class="pull-left first-li" dump-directive='data.fun.dumpDirective(arg)' interaction='{request:{text:"eolinker",switch:"0"}}'>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+        </div>
+        <div class="mask" ng-click="cancel()"></div>
+    </script>
+    <!-- JSON转param输入弹窗 -->
+    <script type="text/ng-template" id="JsonToParamInputModal">
+        <div class="modal-sure eo-modal modal-json-to-param">
+            <header>
+                <ul ng-switch="data.input.method">
+                    <li ng-switch-when='1'>{{'440'|translate}}</li>
+                    <li ng-switch-when='2'>{{'441'|translate}}</li>
+                    <li ng-switch-default>{{'442'|translate}}</li>
+                </ul>
+            </header>
+            <article>
+                <form name="sureForm">
+                    <ul>
+                        <li>
+                            <textarea type="text" name="description" data-ng-model="info.desc" placeholder="{{'443'|translate}}" class="eo-input desc-textarea"
+                                data-ng-class="{'eo-input-error':(submited&&sureForm.description.$invalid)}">
+                            </textarea>
+                        </li>
+                        <li class="btn-group">
+                            <button class="eo-button-info" ng-click="ok(0)">{{'444'|translate}}</button>
+                            <button class="eo-button-info" ng-click="ok(1)">{{'445'|translate}}</button>
+                            <a class="eo-button-default " ng-click="cancel()">{{'446'|translate}}</a>
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 确认弹窗 -->
+    <script type="text/ng-template" id="EnsureModal">
+        <div class="modal-sure eo-modal">
+            <header>
+                <ul>
+                    <li data-ng-bind="::title"></li>
+                </ul>
+            </header>
+            <article>
+                <form name="sureForm">
+                    <ul>
+                        <li data-ng-bind="::info.message"></li>
+                        <li ng-if="necessity">
+                            <input type="text" name="sure" data-ng-model="sure" placeholder="{{'450'|translate}}" class="eo-input " data-ng-class="{'eo-input-error':(submited&&sureForm.sure.$invalid)}"
+                                ng-pattern="/^[y|Y][e|E][s|S]$/" autofocus="true" required>
+                        </li>
+                        <li class="btn-group">
+                            <button data-ng-class="{'eo-button-warning':info.btnType==0,'eo-button-info':info.btnType==1,'eo-button-success':info.btnType==2}"
+                                ng-click="ok()">{{info.btnMessage}}</button>
+                            <a class="eo-button-default " ng-click="cancel()">{{'415'|translate}}</a>
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 编辑数据库表字段弹窗 -->
+    <script type="text/ng-template" id="FieldModal">
+        <div class="modal-project modal-field eo-modal">
+            <header>
+                <ul>
+                    <li data-ng-bind="::title"></li>
+                </ul>
+            </header>
+            <article>
+                <form name="editFieldForm">
+                    <ul>
+                        <li class="message-li">
+                            <ul>
+                                <li class="pull-left">
+                                    <ul class="field-name">
+                                        <li>{{'460'|translate}}:</li>
+                                        <li>
+                                            <input type="text" name="name" data-ng-model="info.fieldName" placeholder="{{'460'|translate}}(2~255位)" class="eo-input "
+                                                data-ng-class="{'eo-input-error':(submited&&editFieldForm.name.$invalid)}" ng-pattern="/^.{2,255}$/"
+                                                maxlength="255" required>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="field-type pull-left">
+                                    <ul>
+                                        <li>{{'404'|translate}}：</li>
+                                        <li class="input-li" ng-class="{'eo-had-input-error':(submited&&!info.fieldType)}">
+                                            <auto-complete-ams-component model="info.fieldType" array="typeList" placeholder="{{'404'|translate}}"></auto-complete-ams-component>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="pull-left">
+                                    <ul class="field-length">
+                                        <li>{{'461'|translate}}:</li>
+                                        <li>
+                                            <input type="text" name="length" data-ng-model="info.fieldLength" placeholder="{{'461'|translate}}" class="eo-input " data-ng-class="{'eo-input-error':(submited&&editFieldForm.length.$invalid)}"
+                                                ng-pattern="/^[1-9]\d{0,12}$/" maxlength="12" required>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="field-key pull-left">
+                                    <ul>
+                                        <li>{{'462'|translate}}：</li>
+                                        <li>
+                                            <input class="hidden" type="checkbox" id="key_checkbox_js" data-ng-model="info.isPrimaryKey" data-ng-change="changeKey()">
+                                            <label for="key_checkbox_js" class="checkbox iconfont" data-ng-class="{'icon-check':info.isPrimaryKey}">
+                                                {{info.isPrimaryKey?'':'&nbsp;'}}
+                                            </label>
+                                            <!-- <select data-ng-model="info.isPrimaryKey" class="eo-input" data-ng-change="changeKey()" required>
+                                                <option value="0">{{'463'|translate}}</option>
+                                                <option value="1">{{'464'|translate}}</option>
+                                            </select> -->
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="field-null">
+                                    <ul>
+                                        <li>{{'465'|translate}}：</li>
+                                        <li>
+                                            <input class="hidden" type="checkbox" id="null_checkbox_js" data-ng-model="info.isNotNull" ng-disabled="info.isPrimaryKey">
+                                            <label for="null_checkbox_js" class="checkbox iconfont" data-ng-class="{'icon-check':info.isNotNull}">{{info.isNotNull?'':'&nbsp;'}}</label>
+                                            <!-- <select data-ng-model="info.isNotNull" class="eo-input" ng-disabled="info.isPrimaryKey=='1'" required>
+                                                <option value="0">{{'463'|translate}}</option>
+                                                <option value="1">{{'464'|translate}}</option>
+                                            </select> -->
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="default-li">
+                            <ul>
+                                <li>
+                                    <ul class="field-description">
+                                        <li>{{'466'|translate}}：</li>
+                                        <li>
+                                            <input class="eo-input" name="defaultValue" data-ng-model="info.defaultValue" maxlength="250" placeholder="{{'467'|translate}}">
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="default-li">
+                            <ul>
+                                <li>
+                                    <ul class="field-description">
+                                        <li>{{'468'|translate}}：</li>
+                                        <li>
+                                            <input class="eo-input" name="description" data-ng-model="info.fieldDescription" maxlength="250" placeholder="{{'469'|translate}}">
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                            <button class="eo-button-success " ng-click="ok()">{{'414'|translate}}</button>
+                            <a class="eo-button-info " ng-if="info.isAdd" ng-click="keep()">{{'4611'|translate}}</a>
+                            <a class="eo-button-default " ng-click="cancel()">{{'415'|translate}}</a>
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 添加编辑project输入弹窗 -->
+    <script type="text/ng-template" id="ProjectModal">
+        <div class="modal-project eo-modal">
+            <header>
+                <ul>
+                    <li data-ng-bind="::title"></li>
+                </ul>
+            </header>
+            <article>
+                <form name="editProjectForm">
+                    <ul>
+                        <li>
+                            <ul class="project-name">
+                                <li>{{'470'|translate}}：</li>
+                                <li>
+                                    <input type="text" name="name" data-ng-model="info.projectName" placeholder="{{'471'|translate}}" class="eo-input " data-ng-class="{'eo-input-error':(submited&&editProjectForm.name.$invalid)}"
+                                        maxlength="32" ng-pattern="/^.{1,32}$/" required>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="pull-left">
+                            <ul class="project-version">
+                                <li>{{'472'|translate}}：</li>
+                                <li>
+                                    <input type="text" name="version" data-ng-model="info.projectVersion" placeholder="{{'473'|translate}}" class="eo-input "
+                                        data-ng-class="{'eo-input-error':(submited&&editProjectForm.version.$invalid)}" ng-pattern="/^[0-9.]{1,6}$/"
+                                        maxlength="5" required>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="project-type">
+                            <ul>
+                                <li>{{'474'|translate}}</li>
+                                <li>
+                                    <select data-ng-model="info.projectType" class="eo-input " required>
+                                        <option value="0">Web</option>
+                                        <option value="1">App</option>
+                                        <option value="2">PC</option>
+                                        <option value="3">{{'475'|translate}}</option>
+                                        <option value="4">{{'476'|translate}}</option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                            <button class="eo-button-success " ng-click="ok()">{{'414'|translate}}</button>
+                            <a class="eo-button-default " ng-click="cancel()">{{'415'|translate}}</a>
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 添加编辑database输入弹窗 -->
+    <script type="text/ng-template" id="DatabaseModal">
+        <div class="modal-project eo-modal">
+            <header>
+                <ul>
+                    <li data-ng-bind="::title"></li>
+                </ul>
+            </header>
+            <article>
+                <form name="editDatabaseForm">
+                    <ul>
+                        <li>
+                            <ul class="project-name">
+                                <li>{{'480'|translate}}：</li>
+                                <li>
+                                    <input type="text" name="name" data-ng-model="info.dbName" placeholder="{{'471'|translate}}" class="eo-input " data-ng-class="{'eo-input-error':(submited&&editDatabaseForm.name.$invalid)}"
+                                        maxlength="32" ng-pattern="/^.{1,32}$/" required>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="project-name">
+                                <li>{{'481'|translate}}：</li>
+                                <li>
+                                    <input type="text" name="version" data-ng-model="info.dbVersion" placeholder="{{'473'|translate}}" class="eo-input " data-ng-class="{'eo-input-error':(submited&&editDatabaseForm.version.$invalid)}"
+                                        ng-pattern="/^[0-9.]{1,6}$/" maxlength="6" required>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                            <button class="eo-button-success " ng-click="ok()">{{'414'|translate}}</button>
+                            <a class="eo-button-default " ng-click="cancel()">{{'415'|translate}}</a>
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- API回收站恢复弹窗 -->
+    <script type="text/ng-template" id="ApiRecoverModal">
+        <div class="common-modal common-modal-recover-api eo-modal">
+            <header>
+                <ul>
+                    <li ng-bind="::data.input.title||'恢复接口所到分组选择'"></li>
+                </ul>
+            </header>
+            <article>
+                <form name="editGroupForm">
+                    <ul>
+                        <li>
+                            <ul class="group-select group-ul pull-left">
+                                <li>一级分组：</li>
+                                <li>
+                                    <select class="eo-input " ng-model="data.output.groupID" ng-options="group.groupID as group.groupName for group in data.input.group.parent"
+                                        ng-change="data.fun.change('first-level')">
+                                    </select>
+                                </li>
+                            </ul>
+                            <ul class="group-select  group-ul pull-left">
+                                <li>二级分组：</li>
+                                <li>
+                                    <select class="eo-input" ng-model="data.output.childGroupID" ng-options="group.groupID as group.groupName for group in data.input.group.child" ng-change="data.fun.change('second-level')">
+                                    </select>
+                                </li>
+                            </ul>
+                            <ul class="group-select  group-ul">
+                                <li>三级分组：</li>
+                                <li>
+                                    <select class="eo-input" ng-model="data.output.grandSonGroupID" ng-options="group.groupID as group.groupName for group in data.input.group.grandson">
+                                    </select>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                            <button class="eo-button-success " ng-click="data.fun.confirm()">确定</button>
+                            <input type="button" class="eo-button-default " value="取消" ng-click="data.fun.cancel()">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 添加编辑分组弹窗 -->
+    <script type="text/ng-template" id="GroupModal">
+        <div class="modal-group eo-modal">
+            <header>
+                <ul>
+                    <li ng-bind="::title"></li>
+                </ul>
+            </header>
+            <article>
+                <form name="editGroupForm">
+                    <ul>
+                        <li>
+                            <ul class="group-select group-ul" ng-if="params.status!='first-level'">
+                                <li>一级分组：</li>
+                                <li>
+                                    <select class="eo-input " ng-model="info.grandParentGroupID" ng-change="fun.change()" ng-options="item.groupID as item.groupName for item in params.query "></select>
+                                </li>
+                            </ul>
+                            <ul class="group-select group-ul " ng-if="params.status=='third-level'">
+                                <li>二级分组：</li>
+                                <li>
+                                    <select class="eo-input " ng-model="info.parentGroupID" ng-options="item.groupID as item.groupName for item in params.secondLevelQuery ">
+                                    </select>
+                                </li>
+                            </ul>
+                            <ul class="group-inherit  group-ul">
+                                <li>{{secondTitle}}：</li>
+                                <li>
+                                    <input type="text" name="name" ng-model="info.groupName" placeholder="1~32位字符串" class="eo-input " ng-class="{'eo-input-error':(submited&&editGroupForm.name.$invalid)}"
+                                        ng-pattern="/^.{1,32}$/" maxlength="32" ng-required="{{!required}}">
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                            <button class="eo-button-success " ng-click="ok()">确定</button>
+                            <input type="button" class="eo-button-default " value="取消" ng-click="cancel()">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 添加编辑数据库表弹窗 -->
+    <script type="text/ng-template" id="TableModal">
+        <div class="modal-table eo-modal">
+            <header>
+                <ul>
+                    <li data-ng-bind="::title"></li>
+                </ul>
+            </header>
+            <article>
+                <form name="editTableForm">
+                    <ul>
+                        <li>
+                            <ul class="table-name">
+                                <li>{{'492'|translate}}：</li>
+                                <li>
+                                    <input type="text" name="name" data-ng-model="info.tableName" placeholder="{{'493'|translate}}" class="eo-input " data-ng-class="{'eo-input-error':(submited&&editTableForm.name.$invalid)}"
+                                        ng-pattern="/^.{2,120}$/" maxlength="120" required>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="table-description">
+                                <li>{{'497'|translate}}：</li>
+                                <li>
+                                    <textarea name="description" data-ng-model="info.tableDescription" maxlength="250"></textarea>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                            <button class="eo-button-success " ng-click="ok()">{{'414'|translate}}</button>
+                            <a class="eo-button-default " ng-click="cancel()">{{'415'|translate}}</a>
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 添加编辑状态码输入弹窗 -->
+    <script type="text/ng-template" id="CodeModal">
+        <div class="modal-project modal-code eo-modal">
+            <header>
+                <ul>
+                    <li data-ng-bind="::title"></li>
+                </ul>
+            </header>
+            <article>
+                <form name="editProjectForm">
+                    <ul>
+                        <li class="code-group">
+                            <ul>
+                                <li>状态码分组：</li>
+                                <li>
+                                    <select ng-model="info.groupID" class="eo-input pull-left" ng-options="group.groupID as group.groupName for group in query"
+                                        ng-change="changeChildGroup('first-level')">
+                                    </select>
+                                    <select ng-model="info.childGroupID" class="eo-input pull-left" ng-options="group.groupID as group.groupName for group in childGroup"
+                                        ng-change="changeChildGroup('second-level')">
+                                    </select>
+                                    <select ng-model="info.grandSonGroupID" class="eo-input" ng-options="group.groupID as group.groupName for group in grandSonGroup">
+                                    </select>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="project-version">
+                                <li>{{'494'|translate}}：</li>
+                                <li>
+                                    <input type="text" name="name" data-ng-model="info.code" placeholder="{{'471'|translate}}" class="eo-input " data-ng-class="{'eo-input-error':(submited&&editProjectForm.name.$invalid)}"
+                                        maxlength="32" ng-pattern="/^.{1,32}$/" required>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="code-desc">
+                            <ul>
+                                <li>{{'496'|translate}}：</li>
+                                <li>
+                                    <input type="text" name="desc" data-ng-model="info.codeDesc" class="eo-input" placeholder="1~255位" data-ng-class="{'eo-input-error':(submited&&editProjectForm.desc.$invalid)}"
+                                        maxlength="255" ng-pattern="/^.{1,255}$/" required>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="btn-group">
+                            <button class="eo-button-success " ng-click="ok()">{{'414'|translate}}</button>
+                            <a class="eo-button-info" ng-if="info.isAdd" ng-click="keep()">{{'4611'|translate}}</a>
+                            <a class="eo-button-default " ng-click="cancel()">{{'415'|translate}}</a>
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+    <!-- 更新弹窗 -->
+    <script type="text/ng-template" id="UpdateModal">
+        <div class="modal-update eo-modal">
+            <header>
+                <ul>
+                    <li class="pull-left header-title">{{'500'|translate}}</li>
+                    <li class="btn-group pull-right" ng-class="{'hidden':info.updating}">
+                        <button class="eo-button-default " ng-click="cancel()">{{'430'|translate}}</button>
+                    </li>
+                </ul>
+            </header>
+            <article>
+                <form name="updateForm">
+                    <ul>
+                        <div ng-class="{'hidden':info.updating||info.updateFail||info.hasNewVersion}" class="content-wrap">
+                            <div>{{'507'|translate}}</div>
+                            <div class="current-version">
+                                {{'5016'|translate}}{{info.latestVersion}}，{{'5017'|translate}}{{info.updateTime}}
+                            </div>
+                            <div>
+                                <b>{{'503'|translate}}</b>{{'504'|translate}}</div>
+                            <div>
+                                {{'505'|translate}}</div>
+                            <li class="btn-group">
+                                <button class="eo-button-info " ng-click="manual()">{{'503'|translate}}</button>
+                                <button class="eo-button-default " ng-click="cancel()">{{'415'|translate}}</button>
+                            </li>
+                        </div>
+                        <div ng-class="{'hidden':!info.updating}">
+                            <div class="updating-wrap">
+                                <div class="icon-wrap">
+                                    <span class="iconfont icon-loading1"></span>
+                                </div>
+                                <p>{{'506'|translate}}...</p>
+                            </div>
+                        </div>
+                        <div ng-class="{'hidden':!info.updateFail}">
+                            <div>{{info.tips}}</div>
+                            <li class="btn-group">
+                                <button class="eo-button-success " ng-click="ok()">{{info.ok}}</button>
+                                <button class="eo-button-default " ng-click="cancel()">{{info.cancel}}</button>
+                            </li>
+                        </div>
+                        <div ng-class="{'hidden':!info.autoUpdateBtn}">
+                            <div>{{info.updateTips}}</div>
+                            <div class="tips">{{info.tips}}</div>
+                            <li class="btn-group">
+                                <button class="eo-button-success" ng-click="autoUpdate()">{{info.ok}}</button>
+                                <button class="eo-button-default " ng-click="cancel()">{{info.cancel}}</button>
+                            </li>
+                        </div>
+                        <div ng-class="{'hidden':!info.manualUpdateBtn}">
+                            <div>{{info.updateTips}}</div>
+                            <div class="tips">{{info.tips}}</div>
+                            <li class="btn-group">
+                                <button class="eo-button-success" ng-click="manualUpdate()">{{info.ok}}</button>
+                                <button class="eo-button-default " ng-click="cancel()">{{info.cancel}}</button>
+                            </li>
+                        </div>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+
+    <!-- 通用单输入弹窗 -->
+    <script type="text/ng-template" id="CommonSingleInputModal">
+        <div class="modal-sure eo-modal">
+            <header>
+                <ul>
+                    <li ng-bind="::title"></li>
+                </ul>
+            </header>
+            <article>
+                <form name="sureForm">
+                    <ul>
+                        <li ng-bind="::data.input.content" ng-if="data.input.content" ng-style="data.input.contentStyle"></li>
+                        <li ng-bind="::info.message" ng-if="info.message"></li>
+                        <li>
+                            <textarea type="text" name="description" ng-model="info.desc" placeholder="{{data.input.placeholder||info.placeholder}}"
+                                class="eo-input desc-textarea" ng-class="{'eo-input-error':(submited&&sureForm.description.$invalid)}"
+                                maxlength="150" ng-required="data.input.required">
+                            </textarea>
+                        </li>
+                        <li class="btn-group">
+                            <button ng-class="{'eo-button-success':info.btnType==2,'eo-button-warning':info.btnType==1,'eo-button-info':info.btnType==0}"
+                                ng-click="ok()">{{info.btnMessage}}</button>
+                            <input type="button" class="eo-button-default " value="{{'415'|translate}}" ng-click="cancel()">
+                        </li>
+                    </ul>
+                </form>
+            </article>
+            <footer></footer>
+        </div>
+        <div class="mask"></div>
+    </script>
+</div>

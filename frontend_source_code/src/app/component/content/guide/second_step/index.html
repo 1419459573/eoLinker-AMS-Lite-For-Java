@@ -1,0 +1,40 @@
+<div class="guide-second-step">
+    <div class="pro-install">
+        <div class="install-head">
+            <p>{{'0030'|translate}}</p>
+        </div>
+        <form class="install-info" name="secondForm">
+            <ul>
+                <li>
+                    <span class="message">{{'0031'|translate}}</span>
+                    <input type="text" name="master" class="eo-input" data-ng-model="$ctrl.info.dbURL" data-ng-class="{'eo-input-error':($ctrl.data.info.submited&&secondForm.master.$invalid)}" required />
+                </li>
+                <li>
+                    <span class="message">{{'0033'|translate}}</span>
+                    <input type="text" name="name" class="eo-input" data-ng-model="$ctrl.info.dbName" data-ng-class="{'eo-input-error':($ctrl.data.info.submited&&secondForm.name.$invalid)}" required />
+                </li>
+                <li>
+                    <span class="message">{{'0035'|translate}}</span>
+                    <input type="text" name="username" placeholder="{{'0035'|translate}}" class="eo-input" data-ng-model="$ctrl.info.dbUser" data-ng-class="{'eo-input-error':($ctrl.data.info.submited&&secondForm.username.$invalid)}" required />
+                </li>
+                <li>
+                    <span class="message">{{'0037'|translate}}</span>
+                    <input type="text" name="password" placeholder="{{'0037'|translate}}" class="eo-input" data-ng-model="$ctrl.info.dbPassword" />
+                    <span class="tips">{{'0038'|translate}}</span>
+                </li>
+                <li>
+                    <span class="message">{{'0039'|translate}}</span>
+                    <input type="text" name="title" placeholder="{{'0039'|translate}}" class="eo-input" data-ng-model="$ctrl.info.pageTitle" data-ng-class="{'eo-input-error':($ctrl.data.info.submited&&secondForm.title.$invalid)}" required />
+                </li>
+            </ul>
+        </form>
+        <div class="install-tips">
+            <p>{{'00311'|translate}}<a href="http://blog.eolinker.com/#/" target="_blank">{{'00312'|translate}}</a>{{'00313'|translate}}</p>
+        </div>
+        <div>
+            <button class="eo-button-success guide-button" data-ng-click='$ctrl.data.fun.enterThird()'>{{'00314'|translate}}
+                <span class="iconfont icon-xiangyou pull-right"></span>
+            </button>
+        </div>
+    </div>
+</div>

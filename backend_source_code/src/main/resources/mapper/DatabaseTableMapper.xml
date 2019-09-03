@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eolinker.mapper.DatabaseTableMapper">
+	
+	<insert id="importDBTable" parameterType="DatabaseTable" useGeneratedKeys="true" keyProperty="tableID">
+		INSERT INTO eo_database_table (eo_database_table.dbID,eo_database_table.tableName,eo_database_table.tableDescription) VALUES (#{dbID},#{tableName},null);
+	</insert>
+	
+	<select id="getDatabaseTableInfo" resultType="DatabaseTable">
+		SELECT tableID,tableName AS tableName, tableDescription AS tableDesc FROM eo_database_table WHERE eo_database_table.dbID = #{dbID};
+	</select>
+	
+	<insert id="addTable" parameterType="DatabaseTable" useGeneratedKeys="true" keyProperty="tableID">
+		INSERT INTO eo_database_table (eo_database_table.dbID,eo_database_table.tableName,eo_database_table.tableDescription) 
+		VALUES (#{dbID},#{tableName},#{tableDescription});
+	</insert>
+	
+	<select id="checkTablePermission" resultType="java.lang.Integer">
+		SELECT eo_database.dbID FROM eo_database_table INNER JOIN eo_database ON eo_database_table.dbID = eo_database.dbID INNER JOIN eo_conn_database ON eo_database.dbID = eo_conn_database.dbID 
+		WHERE eo_database_table.tableID = #{tableID} AND eo_conn_database.userID = #{userID};
+	</select>
+	
+	<delete id="deleteTable">
+		DELETE FROM eo_database_table WHERE eo_database_table.tableID = #{tableID};
+	</delete>
+	
+	
+	<select id="getTable" resultType="DatabaseTable">
+		SELECT eo_database_table.dbID,eo_database_table.tableID,eo_database_table.tableName,eo_database_table.tableDescription FROM eo_database_table 
+		WHERE eo_database_table.dbID = #{dbID};
+	</select>
+	
+	
+	<update id="editTable" parameterType="DatabaseTable">
+		UPDATE eo_database_table SET tableID = #{tableID}
+		<if test="tableName != null">
+			,eo_database_table.tableName = #{tableName}
+		</if>
+		<if test="tableDescription != null">
+			,eo_database_table.tableDescription = #{tableDescription}
+		</if>
+		WHERE eo_database_table.tableID = #{tableID};
+	</update>
+	
+	<select id="getTableCount" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(0) AS count FROM eo_database_table WHERE eo_database_table.dbID = #{dbID}
+	</select>
+	
+</mapper>

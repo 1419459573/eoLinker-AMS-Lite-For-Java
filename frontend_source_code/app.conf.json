@@ -1,0 +1,27 @@
+{
+  "development": {
+    "serverUrl": "/eolinker_os/",
+    "isDebug":true,
+    "assetUrl":"app/",
+    "COOKIE_CONFIG":{
+      "path":"/",
+      "domain":"localhost"
+    }
+  },
+  "production": {
+    "serverUrl": "./",
+    "isDebug":false,
+    "assetUrl":"",
+    "COOKIE_CONFIG":{
+      "path":"/",
+      "domain":".eolinker.com"
+    }
+  },
+  "test": {
+    "serverUrl": "http://localhost:8080",
+    "isDebug":false,
+    "COOKIE_CONFIG":{
+      "domain":"./"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.ApiHistoryMapper">
+	<insert id="addApiHistory" parameterType="ApiHistory" useGeneratedKeys="true"
+		keyProperty="valueID">
+		INSERT INTO eo_api_history (eo_api_history.projectID,eo_api_history.groupID,eo_api_history.apiID,eo_api_history.historyJson,eo_api_history.updateDesc,eo_api_history.updateUserID,eo_api_history.updateTime,eo_api_history.isNow) 
+		VALUES (#{projectID},#{groupID},#{apiID},#{historyJson},#{updateDesc},#{updateUserID},#{updateTime},#{isNow});
+	</insert>
+	
+	<update id="updateApiHistory" parameterType="Integer">
+	UPDATE eo_api_history SET eo_api_history.isNow = 0 WHERE eo_api_history.apiID = #{apiID}
+	</update>
+	
+	<select id="getApiHistoryList" resultType="java.util.Map">
+		SELECT
+		eo_api_history.historyID,eo_api_history.apiID,eo_api_history.groupID,eo_api_history.projectID,eo_api_history.updateDesc,eo_user.userNickName,eo_api_history.updateTime,eo_api_history.isNow
+		FROM eo_api_history INNER JOIN eo_user ON eo_api_history.updateUserID
+		= eo_user.userID WHERE eo_api_history.apiID = #{apiID} AND
+		eo_api_history.projectID = #{projectID} ORDER BY
+		eo_api_history.updateTime DESC LIMIT #{count}
+	</select>
+	
+	<delete id="deleteApiHistory">
+		DELETE FROM eo_api_history WHERE eo_api_history.historyID = #{historyID} AND eo_api_history.isNow = 0 AND eo_api_history.apiID = #{apiID} AND eo_api_history.projectID = #{projectID}
+	</delete>
+	
+	<select id="getApiHistory" resultType="ApiHistory">
+		SELECT * FROM eo_api_history WHERE eo_api_history.apiID = #{apiID} AND eo_api_history.historyID = #{historyID} AND eo_api_history.projectID = #{projectID}
+	</select>
+	
+	<update id="updateApiHistoryByApiID">
+		UPDATE eo_api_history SET eo_api_history.isNow = 0 WHERE eo_api_history.apiID = #{apiID}
+	</update>
+	
+	<update id="updateApiHistoryByApiHistoryID">
+		UPDATE eo_api_history SET eo_api_history.isNow = 1 WHERE eo_api_history.historyID = #{historyID}
+	</update>
+</mapper>

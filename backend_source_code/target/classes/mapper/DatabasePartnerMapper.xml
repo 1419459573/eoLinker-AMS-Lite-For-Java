@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.DatabasePartnerMapper">
+
+	<insert id="invitePartner" parameterType="ConnDatabase" useGeneratedKeys="true" keyProperty="connID">
+		INSERT INTO eo_conn_database (eo_conn_database.dbID,eo_conn_database.userID,eo_conn_database.userType,eo_conn_database.inviteUserID) 
+		VALUES (#{dbID},#{userID},2,#{inviteUserID});
+	</insert>
+
+	<delete id="removePartner">
+		DELETE FROM eo_conn_database WHERE eo_conn_database.dbID = #{dbID} AND eo_conn_database.connID = #{connID} AND eo_conn_database.userType != 0
+	</delete>
+
+	<select id="getPartnerList" resultType="com.eolinker.dto.PartnerListDTO">
+		SELECT eo_conn_database.userID,eo_conn_database.connID,eo_conn_database.userType,eo_user.userName,eo_user.userNickName,eo_conn_database.partnerNickName FROM eo_conn_database INNER JOIN eo_user ON eo_conn_database.userID = eo_user.userID WHERE eo_conn_database.dbID = #{dbID} ORDER BY eo_conn_database.userType ASC
+	</select>
+	
+	<delete id="quitPartner">
+		DELETE FROM eo_conn_database WHERE eo_conn_database.dbID = #{dbID} AND eo_conn_database.userID = #{userID} AND eo_conn_database.userType != 0
+	</delete>
+	
+	<select id="checkIsInvited" resultType="java.lang.Integer">
+		SELECT eo_conn_database.connID FROM eo_conn_database INNER JOIN eo_user ON eo_user.userID = eo_conn_database.userID 
+		WHERE eo_conn_database.dbID = #{dbID} AND eo_user.userName = #{userName};
+	</select>
+
+	<select id="getUserID" resultType="java.lang.Integer">
+		SELECT eo_conn_database.userID FROM eo_conn_database WHERE eo_conn_database.connID = #{connID}
+	</select>
+
+	<update id="editPartnerNickName" parameterType="ConnDatabase">
+		UPDATE eo_conn_database SET eo_conn_database.partnerNickName = #{partnerNickName} WHERE eo_conn_database.connID = #{connID} AND eo_conn_database.dbID = #{dbID};
+	</update>
+
+	<update id="editPartnerType" parameterType="ConnDatabase">
+		UPDATE eo_conn_database SET eo_conn_database.userType = #{userType} WHERE eo_conn_database.connID = #{connID} AND eo_conn_database.dbID = #{dbID};
+	</update>
+
+
+
+
+</mapper>

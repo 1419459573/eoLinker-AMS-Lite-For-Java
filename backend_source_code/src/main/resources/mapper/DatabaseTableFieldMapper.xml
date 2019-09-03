@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eolinker.mapper.DatabaseTableFieldMapper">
+
+	<insert id="importTableField" parameterType="DatabaseTableField">
+		INSERT INTO eo_database_table_field (eo_database_table_field.tableID,eo_database_table_field.fieldName,eo_database_table_field.fieldType,eo_database_table_field.fieldLength,eo_database_table_field.isNotNull,eo_database_table_field.isPrimaryKey,eo_database_table_field.fieldDescription) 
+		VALUES (#{tableID},#{fieldName},#{fieldType},#{fieldLength},#{isNotNull},#{isPrimaryKey},#{fieldDescription});
+	</insert>
+	
+	<select id="getDatabaseTableFieldInfo" resultType="DatabaseTableField">
+		SELECT fieldName,fieldType,fieldLength,isNotNull,isPrimaryKey,fieldDescription AS fieldDesc,defaultValue FROM eo_database_table_field WHERE eo_database_table_field.tableID = #{tableID};
+	</select>
+
+	<insert id="addField" parameterType="DatabaseTableField" useGeneratedKeys="true" keyProperty="fieldID">
+		INSERT INTO eo_database_table_field (eo_database_table_field.tableID,eo_database_table_field.fieldName,eo_database_table_field.fieldType,eo_database_table_field.fieldLength,eo_database_table_field.isNotNull,eo_database_table_field.isPrimaryKey,eo_database_table_field.fieldDescription,eo_database_table_field.defaultValue) 
+		VALUES (#{tableID},#{fieldName},#{fieldType},#{fieldLength},#{isNotNull},#{isPrimaryKey},#{fieldDescription},#{defaultValue});
+	</insert>
+
+	<select id="checkFieldPermission" resultType="java.lang.Integer">
+		SELECT eo_database_table.dbID FROM eo_database_table INNER JOIN eo_database_table_field ON eo_database_table.tableID = eo_database_table_field.tableID INNER JOIN eo_conn_database ON eo_database_table.dbID = eo_conn_database.dbID WHERE eo_database_table_field.fieldID = #{fieldID} AND eo_conn_database.userID = #{userID};
+	</select>
+	
+	<delete id="deleteField">
+		DELETE FROM eo_database_table_field WHERE eo_database_table_field.fieldID = #{fieldID}
+	</delete>
+
+	<select id="getField" resultType="DatabaseTableField">
+		SELECT eo_database_table_field.tableID,eo_database_table_field.fieldID,eo_database_table_field.fieldName,eo_database_table_field.fieldType,eo_database_table_field.fieldLength,eo_database_table_field.isNotNull,eo_database_table_field.isPrimaryKey,eo_database_table_field.fieldDescription,eo_database_table_field.defaultValue 
+		FROM eo_database_table_field WHERE eo_database_table_field.tableID = #{tableID};
+	</select>
+
+
+	<update id="editField" parameterType="DatabaseTableField">
+		UPDATE eo_database_table_field
+		<set>
+			fieldID = #{fieldID}
+			<if test="fieldName != null">
+				,eo_database_table_field.fieldName = #{fieldName}
+			</if>
+			<if test="fieldType != null">
+				,eo_database_table_field.fieldType = #{fieldType}
+			</if>
+			<if test="fieldLength != null">
+				,eo_database_table_field.fieldLength = #{fieldLength}
+			</if>
+			<if test="isNotNull != null">
+				,eo_database_table_field.isNotNull = #{isNotNull}
+			</if>
+			<if test="isPrimaryKey != null">
+				,eo_database_table_field.isPrimaryKey = #{isPrimaryKey}
+			</if>
+			<if test="fieldDescription != null">
+				,eo_database_table_field.fieldDescription = #{fieldDescription}
+			</if>
+			<if test="defaultValue != null">
+				,eo_database_table_field.defaultValue = #{defaultValue}
+			</if>
+		</set>	
+		<where>
+			eo_database_table_field.fieldID = #{fieldID};
+		</where>
+	</update>
+	
+	<select id="getFieldCount" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(0) AS count FROM eo_database_table_field WHERE eo_database_table_field.tableID IN (SELECT eo_database_table.tableID FROM eo_database_table WHERE eo_database_table.dbID = #{dbID})
+	</select>
+
+</mapper>

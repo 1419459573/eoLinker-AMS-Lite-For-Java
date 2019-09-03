@@ -1,0 +1,10 @@
+<div ng-mouseover="$ctrl.mouseLeave=false" ng-mouseleave="$ctrl.mouseLeave=true">
+    <input placeholder="{{$ctrl.placeholder || ''}}" id="{{$ctrl.data.info.hashCode}}-js" class="eo-input {{$ctrl.addClass || ''}}" ng-model="$ctrl.model" ng-change="$ctrl.data.fun.modelChange()" ng-blur="$ctrl.data.fun.modelBlur({focus:$ctrl.data.info})" ng-focus="$ctrl.data.fun.focus($event)" ng-keydown="$ctrl.data.fun.keydown($event)">
+    <a></a>
+    <label for="{{$ctrl.data.info.hashCode}}-js" class="iconfont icon-xiangxia" ng-click="$ctrl.data.fun.changeSwitch()"></label>
+    <div class="auto-complete-message" ng-show="$ctrl.data.info.view.isShow" style=" width:{{$ctrl.data.info.elem.clientWidth}}px">
+        <ul>
+            <li class="auto-complete-li" ng-repeat="item in $ctrl.data.info.array.filter track by $index" ng-click="$ctrl.data.fun.changeText(item)">{{item}}</li>
+        </ul>
+    </div>
+</div>

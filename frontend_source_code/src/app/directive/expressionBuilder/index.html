@@ -1,0 +1,166 @@
+<div class="expression-builder-directive">
+    <div class="expression-builder-view">
+        <ul class="first-level-ul header-ul" >
+            <li class="first-level-li">
+                <p class="title-p">
+                    <span class="iconfont icon-index-magicwand"></span>
+                    <span>{{'300'|translate}}</span>
+                </p>
+            </li>
+        </ul>
+        <div class="auto-view-div">
+            <ul class="first-level-ul method-ul">
+                <li class="first-level-li " ng-if="data.interaction.request.methodList.length<3||(data.info.method.currentShowItem>=0&&data.info.method.currentShowItem<2)" ng-class="{'only-li':data.interaction.request.methodList.length==0}">
+                    <p class="title-p">
+                        <b class="iconfont icon-zhuyeset0204"></b>
+                        <b>{{'301'|translate}}</b>
+                    </p>
+                    <ul class="second-level-ul">
+                        <a data-ng-click="data.fun.methodSelect({'$index':0,'itemIndex':4,key:'constantFilter: \''+data.interaction.request.constant+'\''})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[0]==4}">
+                                <p>origin&nbsp;<span class="tips-span">[{{'302'|translate}}]</span></p>
+                                <p>
+                                    <label>value</label><input style="cursor:pointer;" class="eo-input" type="text" name="paramValue" data-ng-model="data.interaction.request.constant" readonly>
+                                </p>
+                            </li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':0,'itemIndex':3,key:'constantFilter: \''+data.interaction.request.staticItem.constant.value+'\''})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[0]==3}">
+                                <p>constant&nbsp;<span class="tips-span">[{{'303'|translate}}]</span></p>
+                                <p>
+                                    <label>value</label><input class="eo-input" type="text" name="constantValue" data-ng-model="data.interaction.request.staticItem.constant.value" data-ng-change="data.fun.methodSelect({'$index':0,'itemIndex':3,key:'constantFilter: \''+data.interaction.request.staticItem.constant.value+'\''})">
+                                </p>
+                            </li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':0,'itemIndex':0,key:'timestampFilter'})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[0]==0}">timestamp&nbsp;<span class="tips-span">[{{'304'|translate}}]</span></li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':0,'itemIndex':1,key:'uuidFilter'})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[0]==1}">uuid</li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':0,'itemIndex':2,key:'randomFilter: \''+data.interaction.request.staticItem.random.min+'\' :\''+data.interaction.request.staticItem.random.max+'\''})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[0]==2}" class="random-li">
+                                <p>random&nbsp;<span class="tips-span">[{{'305'|translate}}]</span></p>
+                                <p>
+                                    <label>min-max</label><input class="eo-input" type="text" name="randomMin" data-ng-model="data.interaction.request.staticItem.random.min" data-ng-change="data.fun.methodSelect({'$index':0,'itemIndex':2,key:'randomFilter: \''+data.interaction.request.staticItem.random.min+'\' :\''+data.interaction.request.staticItem.random.max+'\''})">&nbsp;-&nbsp;
+                                    <input class="eo-input" type="text" name="randomMax" data-ng-model="data.interaction.request.staticItem.random.max" data-ng-change="data.fun.methodSelect({'$index':0,'itemIndex':2,key:'randomFilter: \''+data.interaction.request.staticItem.random.min+'\' :\''+data.interaction.request.staticItem.random.max+'\''})">
+                                </p>
+                            </li>
+                        </a>
+                    </ul>
+                </li>
+                <li class="first-level-li" data-ng-repeat="item in data.interaction.request.methodList track by $index" ng-if="(($index>=data.interaction.request.methodList.length-3||data.interaction.request.methodList.length<3)&&data.info.method.currentShowItem<0)||(($index==data.info.method.currentShowItem-2||$index==data.info.method.currentShowItem-1||$index==data.info.method.currentShowItem||($index==data.info.method.currentShowItem+1&&data.info.method.currentShowItem==0))&&data.info.method.currentShowItem>-1)" ng-class="{'only-two-li':data.interaction.request.methodList.length==1}">
+                    <p class="title-p">
+                        <b class="iconfont icon-zhuyeset0204"></b>
+                        <b>{{'306'|translate}}</b>
+                    </p>
+                    <ul class="second-level-ul">
+                        <a data-ng-click="data.fun.methodSelect({'$index':$index+1,'itemIndex':0,key:'base64Filter'})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[$index+1]==0}">base64</li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':$index+1,'itemIndex':1,key:'md5Filter'})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[$index+1]==1}">md5</li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':$index+1,'itemIndex':2,key:'upperFilter'})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[$index+1]==2}">upper</li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':$index+1,'itemIndex':3,key:'lowerFilter'})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[$index+1]==3}">lower</li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':$index+1,'itemIndex':4,key:'lengthFilter'})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[$index+1]==4}">length&nbsp;<span class="tips-span">[{{'307'|translate}}]</span></li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':$index+1,'itemIndex':5,key:'hmacFilter: \''+item.hmac.cipher+'\' :\''+item.hmac.secret+'\' :\''+item.hmac.output+'\''})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[$index+1]==5}">
+                                <p>hmac</p>
+                                <p>
+                                    <label>cipher</label>
+                                    <select class="eo-input" data-ng-model="item.hmac.cipher" data-ng-options="item as item for ($index,item) in data.constant.cipher "></select>
+                                </p>
+                                <p>
+                                    <label>secret</label><input class="eo-input" data-ng-model="item.hmac.secret" type="text" name="hmacSecret" data-ng-change="data.fun.methodSelect({'$index':$index+1,'itemIndex':5,key:'hmacFilter: \''+item.hmac.cipher+'\' :\''+item.hmac.secret+'\' :\''+item.hmac.output+'\''})">
+                                </p>
+                                <p>
+                                    <label>output</label>
+                                    <select class="eo-input" data-ng-model="item.hmac.output" data-ng-options="item as item for ($index,item) in data.constant.output "></select>
+                                </p>
+                            </li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':$index+1,'itemIndex':6,key:'shaFilter: \''+item.sha.cipher+'\' :\''+item.sha.output+'\''})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[$index+1]==6}">
+                                <p>sha</p>
+                                <p>
+                                    <label>cipher</label>
+                                    <select class="eo-input" data-ng-model="item.sha.cipher" data-ng-options="item as item for ($index,item) in data.constant.cipher "></select>
+                                </p>
+                                <p>
+                                    <label>output</label>
+                                    <select class="eo-input" data-ng-model="item.sha.output" data-ng-options="item as item for ($index,item) in data.constant.output "></select>
+                                </p>
+                            </li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':$index+1,'itemIndex':7,key:'stringFilter: \''+item.string.quotes+'\''})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[$index+1]==7}">
+                                <p>string</p>
+                                <p>
+                                    <label>quotes</label>
+                                    <select class="eo-input" data-ng-model="item.string.quotes" data-ng-options="item as item for ($index,item) in data.constant.quotes "></select>
+                                </p>
+                            </li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':$index+1,'itemIndex':8,key:'substringFilter: \''+item.substring.start+'\' :\''+item.substring.end+'\''})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[$index+1]==8}">
+                                <p>substring&nbsp;<span class="tips-span">[{{'308'|translate}}]</span></p>
+                                <p>
+                                    <label>start</label><input class="eo-input" data-ng-model="item.substring.start" type="text" name="substringStart" data-ng-change="data.fun.methodSelect({'$index':$index+1,'itemIndex':8,key:'substringFilter: \''+item.substring.start+'\' :\''+item.substring.end+'\''})">
+                                </p>
+                                <p>
+                                    <label>end</label><input class="eo-input" data-ng-model="item.substring.end" type="text" name="substringEnd" data-ng-change="data.fun.methodSelect({'$index':$index+1,'itemIndex':8,key:'substringFilter: \''+item.substring.start+'\' :\''+item.substring.end+'\''})">
+                                </p>
+                            </li>
+                        </a>
+                        <a data-ng-click="data.fun.methodSelect({'$index':$index+1,'itemIndex':9,key:'concatFilter: \''+item.concat.content+'\''})">
+                            <li ng-class="{'active-li':data.interaction.response.indexList[$index+1]==9}">
+                                <p>concat&nbsp;<span class="tips-span">[{{'309'|translate}}]</span></p>
+                                <p>
+                                    <label>content</label><input class="eo-input" data-ng-model="item.concat.content" type="text" name="concatContent" data-ng-change="data.fun.methodSelect({'$index':$index+1,'itemIndex':9,key:'concatFilter: \''+item.concat.content+'\''})">
+                                </p>
+                            </li>
+                        </a>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="first-level-ul expression-ul">
+                <li class="first-level-li">
+                    <p class="title-p">
+                        <b>{{'3010'|translate}}</b>
+                        <span class="filter-span">${&nbsp;
+                <a class="eo-button-default item-a" ng-repeat="item in data.interaction.response.resultList track by $index" data-ng-click="data.fun.methodShow({'$index':$index})" data-ng-class="{'eo-button-info':data.info.method.currentShowItem==$index}">
+                    <span class="item-detail">{{item.replace('Filter: \'','(\"').replace('\'','\")').replace('Filter','()').replace(') :\'',',\"').replace(':\'',',\"').replace('\'','\")').replace(') ,',',').replace('\'','\")')}}</span>
+                        <span class="iconfont icon-close" ng-if="$index>0" data-ng-click="data.fun.methodDelete({'$index':$index})"></span>
+                        </a>
+                        }</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <ul class="first-level-ul preview-ul">
+            <li class="first-level-li">
+                <div class="title-p">
+                    <b>{{'3011'|translate}}</b><pre class="eo-input result-input" id="expression-builder-directive-result-js"></pre>
+                </div>
+            </li>
+        </ul>
+        <ul class="first-level-ul btn-group-ul">
+            <li class="pull-right">
+                <button class="eo-button-default btn" ng-click="data.fun.cancel()">{{'3012'|translate}}</button>
+            </li>
+            <li class="pull-right">
+                <button class="eo-button-info btn" ng-click="data.fun.concat()">{{'3013'|translate}}</button>
+            </li>
+            <li class="pull-right">
+                <button class="eo-button-info btn" ng-click="data.fun.set()">{{'3014'|translate}}</button>
+            </li>
+        </ul>
+    </div>
+</div>

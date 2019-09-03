@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.eolinker.mapper.AutomatedTestCaseSingleMapper">
+	<delete id="deleteTestCaseSingleByGroupID">
+		DELETE FROM eo_project_test_case_single WHERE
+		eo_project_test_case_single.caseID IN (SELECT
+		eo_project_test_case.caseID FROM eo_project_test_case WHERE
+		eo_project_test_case.groupID IN
+		<foreach collection="groupIDS" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		)
+	</delete>
+
+	<delete id="batchDeleteSingle">
+		DELETE FROM eo_project_test_case_single WHERE
+		eo_project_test_case_single.caseID IN
+		<foreach collection="caseIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<select id="getSingleCaseList" resultType="java.util.Map">
+		SELECT * FROM
+		eo_project_test_case_single WHERE
+		eo_project_test_case_single.caseID =
+		#{caseID} ORDER BY eo_project_test_case_single.orderNumber ASC
+	</select>
+
+	<insert id="addSingleTestCase"
+		parameterType="AutomatedTestCaseSingle" useGeneratedKeys="true"
+		keyProperty="connID">
+		INSERT INTO
+		eo_project_test_case_single(eo_project_test_case_single.caseID,eo_project_test_case_single.caseData,eo_project_test_case_single.caseCode,eo_project_test_case_single.statusCode,
+		eo_project_test_case_single.matchType,eo_project_test_case_single.matchRule,
+		eo_project_test_case_single.apiName,
+		eo_project_test_case_single.apiURI,
+		eo_project_test_case_single.apiRequestType,eo_project_test_case_single.orderNumber)
+		VALUES
+		(#{caseID},#{caseData},#{caseCode},#{statusCode},#{matchType},#{matchRule},#{apiName},#{apiURI},#{apiRequestType},#{orderNumber})
+	</insert>
+
+	<update id="editSingleTestCase"
+		parameterType="AutomatedTestCaseSingle">
+		UPDATE eo_project_test_case_single SET
+		eo_project_test_case_single.caseData =
+		#{caseData},eo_project_test_case_single.caseCode = #{caseCode},
+		eo_project_test_case_single.statusCode = #{statusCode},
+		eo_project_test_case_single.matchType = #{matchType},
+		eo_project_test_case_single.matchRule = #{matchRule},
+		eo_project_test_case_single.apiName = #{apiName},
+		eo_project_test_case_single.apiURI =
+		#{apiURI},eo_project_test_case_single.apiRequestType =
+		#{apiRequestType} WHERE eo_project_test_case_single.caseID = #{caseID}
+		AND eo_project_test_case_single.connID = #{connID}
+	</update>
+
+	<select id="getAllSingleCase" resultType="java.util.Map">
+		SELECT
+		eo_project_test_case_single.* FROM
+		eo_project_test_case INNER JOIN
+		eo_project_test_case_single ON
+		eo_project_test_case_single.caseID =
+		eo_project_test_case.caseID WHERE
+		eo_project_test_case.projectID =
+		#{projectID} ORDER BY
+		eo_project_test_case_single.orderNumber
+	</select>
+
+	<select id="getSingleTestCaseInfo" resultType="java.util.Map">
+		SELECT
+		eo_project_test_case_single.* FROM
+		eo_project_test_case INNER JOIN
+		eo_project_test_case_single ON
+		eo_project_test_case_single.caseID =
+		eo_project_test_case.caseID WHERE
+		eo_project_test_case.projectID =
+		#{projectID} AND eo_project_test_case_single.connID = #{connID}
+	</select>
+
+	<delete id="deleteSingleTestCase" parameterType="Integer">
+		DELETE FROM eo_project_test_case_single WHERE
+		eo_project_test_case_single.connID IN
+		<foreach collection="connIDs" item="item" index="index"
+			open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		AND eo_project_test_case_single.caseID IN (SELECT
+		eo_project_test_case.caseID FROM eo_project_test_case WHERE
+		eo_project_test_case.projectID = #{projectID})
+	</delete>
+	<select id="getApiNameByIDs" resultType="String">
+		SELECT GROUP_CONCAT(eo_project_test_case_single.apiName) AS apiName
+		FROM
+		eo_project_test_case_single
+		WHERE
+		eo_project_test_case_single.connID IN
+		<foreach collection="connIDs" item="item" index="index"
+			open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</select>
+	<select id="getConnID" resultType="Integer">
+		SELECT eo_project_test_case_single.connID FROM eo_project_test_case_single
+		WHERE eo_project_test_case_single.apiName = #{apiName} AND
+		eo_project_test_case_single.apiURI = #{apiURI} AND
+		eo_project_test_case_single.caseID = #{caseID}
+	</select>
+	<update id="updateOrderNumber">
+		UPDATE eo_project_test_case_single SET orderNumber =
+		orderNumber + 1 WHERE eo_project_test_case_single.caseID = #{caseID}
+		AND eo_project_test_case_single.orderNumber >= #{orderNumber}
+	</update>
+	<select id="getMaxOrderNumber" resultType="Integer">
+	SELECT MAX(eo_project_test_case_single.orderNumber) AS number FROM eo_project_test_case_single WHERE eo_project_test_case_single.caseID = #{caseID}
+	</select>
+</mapper>

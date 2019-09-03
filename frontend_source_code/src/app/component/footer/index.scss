@@ -1,0 +1,20 @@
+/**
+ * footer
+ */
+
+ .eo-footer {
+    border-top: 1px solid #e5e5e5;
+    @include eo-line(50px);
+    width: 100%;
+    background-color: #f1f1f1;
+    position: fixed;
+    bottom: 0;
+    p {
+        text-align: center;
+        font-size: 14px;
+        a {
+            color: $buttonInfoFocusBgColor;
+        }
+    }
+}
+

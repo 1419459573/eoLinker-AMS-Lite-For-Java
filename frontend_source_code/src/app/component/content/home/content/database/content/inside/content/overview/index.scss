@@ -1,0 +1,142 @@
+    //author：广州银云信息科技有限公司
+    home-database-inside-overview {
+        .home-database-inside-overview {
+            margin: $HOME-NAVBAR-HEIGHT 0 20px $HOME-GROUP-SIDEBAR-LEFT;
+            .left-div {
+                width: 918px;
+                display: inline-block;
+                margin-right: 10px;
+                margin-left: 10px;
+                margin-top: 10px;
+                .item-div {
+                    border: 1px solid #e5e5e5;
+                    background-color: #fff;
+                    >ul>li {
+                        display: inline-block;
+                        text-indent: 20px;
+                        @include eo-line(82px);
+                        @include eo-width(25%, 1px);
+                        p {
+                            @include eo-line(30px);
+                        }
+                        .title-p {
+                            font-size: 18px;
+                            margin-top: 10px;
+                            .iconfont {
+                                font-size: 18px;
+                            }
+                        }
+                        .desc-p {
+                            font-size: 12px;
+                            color: #b6b6b6;
+                        }
+                    }
+                    .center-li {
+                        border-left: 1px solid #e5e5e5;
+                    }
+                    .last-li {
+                        border-left: 1px solid #e5e5e5;
+                    }
+                }
+                .first-div {
+                    border: 1px solid #e5e5e5;
+                    background-color: #fff;
+                    border-radius:3px;
+                    @include eo-line(65px);
+                    padding:0 20px;
+                    .title-li {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        b {
+                            font-size: 24px;
+                            color: $buttonSuccessBgColor;
+                        }
+                    }
+                    a {
+                        margin-left: 10px;
+                        padding: 0 15px;
+                        border-radius: 15.5px;
+                        font-size: 12px;
+                        display: inline-block;
+                        @include eo-line(26px);
+                        .iconfont{
+                            font-size: 12px;
+                        }
+                        &:hover {
+                            color: #999;
+                        }
+                    }
+                }
+                .second-div {
+                    border-radius:3px;
+                    margin-top:15px;
+                    width: 75%;
+                    ul>li{
+                        @include eo-width(100% / 3, 1px);
+                    }
+                    .btn-group-div {
+                        .iconfont {
+                            font-size: 14px;
+                            cursor: pointer;
+                        }
+                        a {
+                            margin-right: 10px;
+                            padding: 5px 15px;
+                            border-radius: 15.5px;
+                            font-size: 14px;
+                            &:hover {
+                                color: #999;
+                                .iconfont {
+                                    color: #999;
+                                }
+                            }
+                        }
+                    }
+                }
+                .third-div {
+                    margin: 15px 0;
+                    border-radius: 3px;
+                    @include eo-width(50%, 2px);
+                    >ul>li {
+                        @include eo-width(100% / 2, 1px);
+                    }
+                }
+                .forth-div {
+                    border: none;
+                    background: none;
+                    display: inline-block;
+                    width: 100%;
+                    >ul li {
+                        background-color: #fff;
+                        border: 1px solid #e5e5e5;
+                        cursor: pointer;
+                        * {
+                            cursor: pointer;
+                        }
+                        &:hover {
+                            background-color: #fafafa;
+                        }
+                    }
+                    .first-li {
+                        border-radius: 3px 0 0 3px;
+                    }
+                    .center-li {
+                        border-left: none;
+                    }
+                    .last-li {
+                        border-left: none;
+                        border-radius: 0 3px 3px 0;
+                    }
+                    .only-li {
+                        border-radius: 3px;
+                    }
+                }
+                .item-p {
+                    @include eo-line(44px);
+                    font-size: 14px;
+                    color: #555;
+                }
+            }
+        }
+    }

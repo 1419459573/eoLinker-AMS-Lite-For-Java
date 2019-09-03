@@ -1,0 +1,73 @@
+<article class="first-level-article" check-plug-directive input="$ctrl.data.info.query[0]">
+    <table ng-switch="$ctrl.data.info.status">
+        <thead>
+            <tr>
+                <th class="first-th">插件</th>
+                <th class="second-th">价格</th>
+                <th class="third-th">期限</th>
+                <th class="forth-th">操作</th>
+            </tr>
+        </thead>
+        <tbody ng-switch-when='-1'>
+            <tr ng-repeat='item in $ctrl.data.info.query' ng-class="{'disable-tr':item.disable==2||(item.disable==1)}" ng-switch="item.disable==1">
+                <td class="key-td">
+                    <label class="iconfont pull-left {{item.icon}}"></label>
+                    <div>
+                        <p class="name-p">{{item.name}}<span class="pro-label" ng-switch-when=true>PRO</span></p>
+                        <p class="desc-p">{{item.desc}}</p>
+                    </div>
+                </td>
+                <td>{{item.price||'免费'}}</td>
+                <td>{{item.time||'永久'}}</td>
+                <td class="home-function-delete" ng-switch="item.useStatus" ng-switch-when=false>
+                    <span class="eo-status-success" ng-switch-when=1 ng-if="item.href||$ctrl.data.service.pro.info.userType==2">已启用</span>
+                    <a class="eo-status-error" ng-switch-when=1 ng-if="(!item.href)&&$ctrl.data.service.pro.info.userType!=2" >停用</a>
+                    <a class="eo-status-success" ng-href="{{item.href}}" ng-switch-when=0 target="_blank" ng-if="item.href||$ctrl.data.service.pro.info.userType!=2">{{item.href?'获取':'启用'}}</a>
+                    <span class="eo-status-error" ng-switch-when=0 ng- ng-if="!item.href&&$ctrl.data.service.pro.info.userType==2">已禁用</span>
+                </td>
+                <td class="home-function-delete" ng-switch-when=true>
+                    <span >仅供专业版</span>
+                </td>
+            </tr>
+        </tbody>
+        <tbody ng-switch-when='1'>
+            <tr ng-repeat="item in $ctrl.data.info.query | filter:{useStatus:1}" ng-class="{'disable-tr':item.disable==2||(item.disable==1)}">
+                <td class="key-td">
+                    <label class="iconfont pull-left {{item.icon}}"></label>
+                    <div>
+                        <p class="name-p">{{item.name}}<span class="pro-label" ng-switch-when=true>PRO</span></p>
+                        <p class="desc-p">{{item.desc}}</p>
+                    </div>
+                </td>
+                <td>{{item.price||'免费'}}</td>
+                <td>{{item.time||'永久'}}</td>
+                <td class="home-function-delete">
+                    <span class="eo-status-success" ng-if="item.href||$ctrl.data.service.pro.info.userType==2">已启用</span>
+                    <a class="eo-status-error" ng-if="(!item.href)&&$ctrl.data.service.pro.info.userType!=2">停用</a>
+                </td>
+                
+            </tr>
+        </tbody>
+        <tbody ng-switch-when='0'>
+            <tr ng-repeat="item in $ctrl.data.info.query | filter:{useStatus:0}" ng-class="{'disable-tr':item.disable==2||(item.disable==1)}"  ng-switch="item.disable==1">
+                <td class="key-td">
+                    <label class="iconfont pull-left {{item.icon}}"></label>
+                    <div>
+                        <p class="name-p">{{item.name}}<span class="pro-label" ng-switch-when=true>PRO</span></p>
+                        <p class="desc-p">{{item.desc}}</p>
+                    </div>
+                </td>
+                <td>{{item.price||'免费'}}</td>
+                <td>{{item.time||'永久'}}</td>
+                <td class="home-function-delete" ng-switch-when=false>
+                    <span class="eo-status-error" ng-if="!item.href&&$ctrl.data.service.pro.info.userType==2">已禁用</span>
+                    <a class="eo-status-success" ng-if="item.href||$ctrl.data.service.pro.info.userType!=2" ng-href="{{item.href}}" target="_blank" >{{item.href?'获取':'启用'}}</a>
+                </td>
+                <td class="home-function-delete" ng-switch-when=true>
+                    <span >仅供专业版</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</article>
+<loading-common-component fun="$ctrl.data.fun.init(arg)" interaction="{request:{delay:true}}"></loading-common-component>

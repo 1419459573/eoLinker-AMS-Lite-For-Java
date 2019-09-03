@@ -1,0 +1,6 @@
+[
+    "bower_components/particles.js/demo/particles.json",
+    "bower_components/mockjs/dist/mock.js",
+    "bower_components/wangEditor/dist/js/lib/jquery-2.2.1.js",
+    "bower_components/clipboard/dist/clipboard.min.js"
+]
